@@ -2,7 +2,12 @@
 <resources>
 
     <string name="app_name">Duckworth Lewis Calculator</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="first_innings_label">1st Innings</string>
+    <string name="second_innings_label">2nd Innings</string>
+    <string name="runs_label">Runs:</string>
+    <string name="wickets_label">Wickets:</string>
+    <string name="overs_label">Overs:</string>
+    <string name="balls_label">Balls:</string>
 
 </resources>

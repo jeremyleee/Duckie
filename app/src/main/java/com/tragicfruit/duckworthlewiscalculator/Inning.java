@@ -18,7 +18,7 @@ public class Inning {
 
     public Inning(boolean isFirstInning) {
         mIsFirstInning = isFirstInning;
-        // Placeholder
+        // Temporary
         mTotalOvers = 50;
         mTotalBalls = 0;
         mTotalWickets = 10;
@@ -61,14 +61,15 @@ public class Inning {
         return mResources;
     }
 
-    private void updateResources(Interruption interruption) {
-        mResources -= interruption.getResourcesLost();
+    public void updateResources() {
+        mResources = Resources.getPercentage(mTotalOvers, mTotalBalls, mTotalWickets);
     }
 
     public void addInterruption(int initialOvers, int initialBalls, int restartOvers, int restartBalls, int wicketsRemaining) {
         Interruption i = new Interruption(initialOvers, initialBalls, restartOvers, restartBalls, wicketsRemaining);
         mInterruptions.add(i);
-        updateResources(i);
+        mResources -= i.getResourcesLost();
+        updateResources();
     }
 
     class Interruption {

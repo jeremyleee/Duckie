@@ -9,8 +9,8 @@ public class Match {
     private static final int proG50 = 245;
     private static final int amateurG50 = 200;
 
-    private Inning firstInning;
-    private Inning secondInning;
+    public Inning firstInning;
+    public Inning secondInning;
 
     public Match(boolean isProMatch) {
         mIsProMatch = isProMatch;
@@ -27,7 +27,7 @@ public class Match {
         return true;
     }
 
-    private int getTargetScore() {
+    public int getTargetScore() {
         if (isValidMatch()) {
             return calculateTargetScore(firstInning.getScore(), firstInning.getResources(), secondInning.getResources());
         } else {
