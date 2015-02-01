@@ -11,12 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Created by Jeremy on 1/02/2015.
  * Main fragment for user input and displaying data
+ * TODO: Simplify input data from user
+ * TODO: Allow for viewing and editing interruptions
+ * TODO: Add ability to change total wickets?
+ * TODO: Allow changing format (50 overs, 45 overs, T20 etc)
+ * TODO: Allow changing G50
+ * TODO: Implement invalid matches (not enough overs played)
+ * TODO: Multiple matches
+ * TODO: Save to JSON
+ * TODO: Swipe between innings
+ * TODO: Redesign UI (Vincent)
+ * TODO: fix set overs, add interrupting, change overs
  */
 public class CalculatorFragment extends Fragment {
     private static final String TAG = "CalculatorFragment";
@@ -31,6 +43,9 @@ public class CalculatorFragment extends Fragment {
     private EditText mFirstInningsOversField;
     private EditText mFirstInningsRunsField;
     private EditText mSecondInningsOversField;
+
+    private NumberPicker mFirstInningsOvers;
+    private NumberPicker mSecondInningsOvers;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,15 +65,21 @@ public class CalculatorFragment extends Fragment {
         mFirstInningsRunsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
         //mFirstInningsRunsField.setText("" + mMatch.firstInning.getRuns());
 
-        mFirstInningsOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
+        //mFirstInningsOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
         //mFirstInningsOversField.setText("" + mMatch.firstInning.getOvers());
+
+        mFirstInningsOvers = (NumberPicker) v.findViewById(R.id.first_innings_overs);
+        mFirstInningsOvers.setMaxValue(50);
+        mFirstInningsOvers.setValue(50);
+        mFirstInningsOvers.setMinValue(0);
 
         Button firstInningInterruption = (Button) v.findViewById(R.id.first_inning_interruption_button);
         firstInningInterruption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setOvers();
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = new InterruptionFragment();
+                InterruptionFragment dialog = InterruptionFragment.newInstance(mMatch.firstInning.getOvers());
                 dialog.setTargetFragment(CalculatorFragment.this, REQUEST_FIRST_INNING_INTERRUPTION);
                 dialog.show(fm, DIALOG_FIRST_INNING_INTERRUPTION);
             }
@@ -68,15 +89,20 @@ public class CalculatorFragment extends Fragment {
          * Set up second innings EditText widgets
          */
 
-        mSecondInningsOversField = (EditText) v.findViewById(R.id.second_innings_overs_editText);
+        //mSecondInningsOversField = (EditText) v.findViewById(R.id.second_innings_overs_editText);
         //mSecondInningsOversField.setText("" + mMatch.secondInning.getOvers());
+
+        mSecondInningsOvers = (NumberPicker) v.findViewById(R.id.second_innings_overs);
+        mSecondInningsOvers.setMaxValue(50);
+        mSecondInningsOvers.setValue(50);
 
         Button secondInningInterruption = (Button) v.findViewById(R.id.second_inning_interruption_button);
         secondInningInterruption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setOvers();
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = new InterruptionFragment();
+                InterruptionFragment dialog = InterruptionFragment.newInstance(mMatch.secondInning.getOvers());
                 dialog.setTargetFragment(CalculatorFragment.this, REQUEST_SECOND_INNING_INTERRUPTION);
                 dialog.show(fm, DIALOG_SECOND_INNING_INTERRUPTION);
             }
@@ -92,8 +118,14 @@ public class CalculatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isValidInput()) {
-                    targetScoreTextView.setText("" + mMatch.getTargetScore());
-                    tieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+                    try {
+                        setOvers();
+                        targetScoreTextView.setText("" + mMatch.getTargetScore());
+                        tieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error calculating target score", e);
+                        Toast.makeText(getActivity(), "Error calculating target score.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getActivity(), "Invalid input, try again.", Toast.LENGTH_SHORT).show();
                 }
@@ -103,39 +135,34 @@ public class CalculatorFragment extends Fragment {
         return v;
     }
 
+    private void setOvers() {
+        int input = mFirstInningsOvers.getValue();
+        mMatch.firstInning.setOvers(input);
+
+        input = mSecondInningsOvers.getValue();
+        mMatch.secondInning.setOvers(input);
+    }
+
     private boolean isValidInput() {
         try {
-            int input = Integer.parseInt(mFirstInningsOversField.getText().toString());
+            /*int input = Integer.parseInt(mFirstInningsOversField.getText().toString());
             if (input >= 0 && input <= 50)
                 mMatch.firstInning.setOvers(input);
             else
-                throw new Exception();
+                throw new Exception();*/
 
-            input = Integer.parseInt(mFirstInningsRunsField.getText().toString());
+            int input = Integer.parseInt(mFirstInningsRunsField.getText().toString());
             if (input >= 0)
                 mMatch.firstInning.setRuns(input);
             else
                 throw new Exception();
 
-            input = Integer.parseInt(mSecondInningsOversField.getText().toString());
-            if (input >= 0 && input <= 50)
-                mMatch.secondInning.setOvers(input);
-            else
-                throw new Exception();
         } catch (Exception e) {
             Log.e(TAG, "Invalid input");
-            mMatch.firstInning.setOvers(-1);
             mMatch.firstInning.setRuns(-1);
-            mMatch.secondInning.setOvers(-1);
         }
 
-        return mMatch.firstInning.getRuns() >= 0 &&
-                mMatch.firstInning.getWickets() >= 0 &&
-                mMatch.firstInning.getOvers() >= 0 &&
-                mMatch.firstInning.getBalls() >= 0 &&
-                mMatch.secondInning.getWickets() >= 0 &&
-                mMatch.secondInning.getOvers() >= 0 &&
-                mMatch.secondInning.getBalls() >= 0;
+        return mMatch.firstInning.getRuns() >= 0;
     }
 
     @Override
@@ -145,17 +172,13 @@ public class CalculatorFragment extends Fragment {
         if (requestCode == REQUEST_FIRST_INNING_INTERRUPTION) {
             mMatch.firstInning.addInterruption(
                 data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
-                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_BALLS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
-                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_BALLS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
             );
         } else if (requestCode == REQUEST_SECOND_INNING_INTERRUPTION) {
             mMatch.secondInning.addInterruption(
                 data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
-                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_BALLS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
-                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_BALLS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
             );
         }

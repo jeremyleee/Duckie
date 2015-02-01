@@ -8,71 +8,28 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="16dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wickets_label"
+            android:text="@string/interruption_score_label"
             android:textSize="16sp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"/>
 
         <EditText
             android:id="@+id/interruption_wickets_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:ems="2"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:text="Before interruption"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/overs_label"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/before_interruption_overs_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="2"/>
-
-        <TextView
-            android:paddingStart="4dp"
-            android:paddingLeft="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/balls_label"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/before_interruption_balls_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
             android:ems="1"/>
 
     </LinearLayout>
-
-    <TextView
-        android:text="After interruption"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -82,30 +39,35 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/overs_label"
+            android:text="Overs completed:"
             android:textSize="16sp"/>
 
         <EditText
-            android:id="@+id/after_interruption_overs_editText"
+            android:id="@+id/interruption_overs_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="2"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
-            android:paddingStart="4dp"
-            android:paddingLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/balls_label"
+            android:text="Updated total number of overs:"
             android:textSize="16sp"/>
 
         <EditText
-            android:id="@+id/after_interruption_balls_editText"
+            android:id="@+id/interruption_new_total_overs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:ems="1"/>
+            android:ems="2"/>
 
     </LinearLayout>
 

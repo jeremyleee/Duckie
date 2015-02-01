@@ -27,7 +27,7 @@ public class Match {
     }
 
     private boolean isValidMatch() {
-        // IMPLEMENT THIS!
+        // Implement this
         return true;
     }
 
@@ -48,7 +48,7 @@ public class Match {
         } else if (targetResources > baseResources) {
             targetScore = (double) baseScore + getG50() * (targetResources - baseResources) / 100.0;
         } else {
-            return baseScore;
+            targetScore = baseScore;
         }
 
         return (int) targetScore + 1;

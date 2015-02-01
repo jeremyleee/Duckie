@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Inning {
 
     private int mStartingOvers;
-    private int mStartingBalls = 0;
     private int mStartingWickets = 10;
     private double mResources;
     private int mRuns;
@@ -32,12 +31,8 @@ public class Inning {
         return mStartingOvers;
     }
 
-    public int getBalls() {
-        return mStartingBalls;
-    }
-
-    public int getWickets() {
-        return mStartingWickets;
+    public ArrayList<Interruption> getInterruptions() {
+        return mInterruptions;
     }
 
     public double getResources() {
@@ -45,37 +40,33 @@ public class Inning {
     }
 
     public void updateResources() {
-        mResources = Resources.getPercentage(mStartingOvers, mStartingBalls, mStartingWickets);
+        mResources = Resources.getPercentage(mStartingOvers, mStartingWickets);
         // Loop through interruptions to reduce resources
-        for (Interruption i : mInterruptions) {
+        for (Interruption i : getInterruptions()) {
             mResources -= i.getResourcesLost();
         }
     }
 
-    public void addInterruption(int initialOvers, int initialBalls, int restartOvers, int restartBalls, int wicketsRemaining) {
-        Interruption i = new Interruption(initialOvers, initialBalls, restartOvers, restartBalls, wicketsRemaining);
-        mInterruptions.add(i);
+    public void addInterruption(int initialOvers, int restartOvers, int wicketsRemaining) {
+        Interruption i = new Interruption(initialOvers, restartOvers, wicketsRemaining);
+        getInterruptions().add(i);
     }
 
     class Interruption {
 
         private int mInitialOversRemaining;
-        private int mInitialBallsRemaining;
         private int mRestartOversRemaining;
-        private int mRestartBallsRemaining;
         private int mWicketsRemaining;
 
-        public Interruption(int initialOvers, int initialBalls, int restartOvers, int restartBalls, int wicketsRemaining) {
+        public Interruption(int initialOvers, int restartOvers, int wicketsRemaining) {
             mInitialOversRemaining = initialOvers;
-            mInitialBallsRemaining = initialBalls;
             mRestartOversRemaining = restartOvers;
-            mRestartBallsRemaining = restartBalls;
             mWicketsRemaining = wicketsRemaining;
         }
 
         public double getResourcesLost() {
-            double initialResources = Resources.getPercentage(mInitialOversRemaining, mInitialBallsRemaining, mWicketsRemaining);
-            double restartResources = Resources.getPercentage(mRestartOversRemaining, mRestartBallsRemaining, mWicketsRemaining);
+            double initialResources = Resources.getPercentage(mInitialOversRemaining, mWicketsRemaining);
+            double restartResources = Resources.getPercentage(mRestartOversRemaining, mWicketsRemaining);
             return initialResources - restartResources;
         }
 
