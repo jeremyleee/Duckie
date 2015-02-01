@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * Created by Jeremy on 1/02/2015.
+ * Launcher activity hosting a CalculatorFragment
+ */
 public class CalculatorActivity extends ActionBarActivity {
 
     @Override

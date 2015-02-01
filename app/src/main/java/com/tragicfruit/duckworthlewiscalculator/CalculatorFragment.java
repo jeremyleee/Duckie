@@ -1,6 +1,9 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,9 +18,15 @@ import android.widget.Toast;
 
 /**
  * Created by Jeremy on 1/02/2015.
+ * Main fragment for user input and displaying data
  */
 public class CalculatorFragment extends Fragment {
     private static final String TAG = "CalculatorFragment";
+
+    private static final String DIALOG_FIRST_INNING_INTERRUPTION = "interruption1";
+    private static final String DIALOG_SECOND_INNING_INTERRUPTION = "interruption2";
+    private static final int REQUEST_FIRST_INNING_INTERRUPTION = 0;
+    private static final int REQUEST_SECOND_INNING_INTERRUPTION = 1;
 
     private Match mMatch;
 
@@ -63,7 +72,7 @@ public class CalculatorFragment extends Fragment {
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.firstInning.setScore(-1);
                 }
             }
@@ -79,12 +88,12 @@ public class CalculatorFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 10)
+                    if (input >= 1 && input <= 10)
                         mMatch.firstInning.setWickets(input);
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.firstInning.setWickets(-1);
                 }
             }
@@ -105,7 +114,7 @@ public class CalculatorFragment extends Fragment {
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.firstInning.setOvers(-1);
                 }
             }
@@ -126,7 +135,7 @@ public class CalculatorFragment extends Fragment {
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.firstInning.setBalls(-1);
                 }
             }
@@ -137,7 +146,7 @@ public class CalculatorFragment extends Fragment {
          * Set up second innings EditText widgets
          */
         EditText secondInningsWicketsField = (EditText) v.findViewById(R.id.second_innings_wickets_editText);
-        secondInningsWicketsField.setText("" + mMatch.secondInning.getScore());
+        secondInningsWicketsField.setText("" + mMatch.secondInning.getWickets());
         secondInningsWicketsField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void afterTextChanged(Editable s) {}
@@ -145,12 +154,12 @@ public class CalculatorFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 10)
+                    if (input >= 1 && input <= 10)
                         mMatch.secondInning.setWickets(Integer.parseInt(s.toString()));
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.secondInning.setWickets(-1);
                 }
             }
@@ -171,7 +180,7 @@ public class CalculatorFragment extends Fragment {
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.secondInning.setOvers(-1);
                 }
             }
@@ -192,11 +201,32 @@ public class CalculatorFragment extends Fragment {
                     else
                         throw new Exception();
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
+                    Log.e(TAG, "Invalid input");
                     mMatch.secondInning.setBalls(-1);
                 }
             }
 
+        });
+
+        Button firstInningInterruption = (Button) v.findViewById(R.id.first_inning_interruption_button);
+        firstInningInterruption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                InterruptionFragment dialog = new InterruptionFragment();
+                dialog.setTargetFragment(CalculatorFragment.this, REQUEST_FIRST_INNING_INTERRUPTION);
+                dialog.show(fm, DIALOG_FIRST_INNING_INTERRUPTION);
+            }
+        });
+        Button secondInningInterruption = (Button) v.findViewById(R.id.second_inning_interruption_button);
+        secondInningInterruption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                InterruptionFragment dialog = new InterruptionFragment();
+                dialog.setTargetFragment(CalculatorFragment.this, REQUEST_SECOND_INNING_INTERRUPTION);
+                dialog.show(fm, DIALOG_SECOND_INNING_INTERRUPTION);
+            }
         });
 
         /**
@@ -208,8 +238,6 @@ public class CalculatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isValidInput()) {
-                    mMatch.firstInning.updateResources();
-                    mMatch.secondInning.updateResources();
                     targetScoreTextView.setText("" + mMatch.getTargetScore());
                 } else {
                     Toast.makeText(getActivity(), "Invalid input, try again.", Toast.LENGTH_SHORT).show();
@@ -228,6 +256,29 @@ public class CalculatorFragment extends Fragment {
                 mMatch.secondInning.getWickets() >= 0 &&
                 mMatch.secondInning.getOvers() >= 0 &&
                 mMatch.secondInning.getBalls() >= 0;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) return;
+
+        if (requestCode == REQUEST_FIRST_INNING_INTERRUPTION) {
+            mMatch.firstInning.addInterruption(
+                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_BALLS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_BALLS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
+            );
+        } else if (requestCode == REQUEST_SECOND_INNING_INTERRUPTION) {
+            mMatch.secondInning.addInterruption(
+                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_BALLS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_BALLS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
+            );
+        }
     }
 
 }

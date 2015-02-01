@@ -1,9 +1,12 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
  * Created by Jeremy on 1/02/2015.
+ * Represents a single inning within a match
  */
 public class Inning {
 
@@ -22,6 +25,7 @@ public class Inning {
         mTotalOvers = 50;
         mTotalBalls = 0;
         mTotalWickets = 10;
+        mScore = 250;
         mResources = Resources.getPercentage(mTotalOvers, mTotalBalls, mTotalWickets);
     }
 
@@ -63,13 +67,14 @@ public class Inning {
 
     public void updateResources() {
         mResources = Resources.getPercentage(mTotalOvers, mTotalBalls, mTotalWickets);
+        for (Interruption i : mInterruptions) {
+            mResources -= i.getResourcesLost();
+        }
     }
 
     public void addInterruption(int initialOvers, int initialBalls, int restartOvers, int restartBalls, int wicketsRemaining) {
         Interruption i = new Interruption(initialOvers, initialBalls, restartOvers, restartBalls, wicketsRemaining);
         mInterruptions.add(i);
-        mResources -= i.getResourcesLost();
-        updateResources();
     }
 
     class Interruption {

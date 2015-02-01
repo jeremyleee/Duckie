@@ -2,6 +2,7 @@ package com.tragicfruit.duckworthlewiscalculator;
 
 /**
  * Created by Jeremy on 1/02/2015.
+ * References resource table from ICC Playing Handbook 2013-14
  */
 public class Resources {
     public static double getPercentage(int oversRemaining, int ballsRemaining, int wicketsRemaining) {
@@ -9,8 +10,6 @@ public class Resources {
         return percentage[300 - totalBallsRemaining][10 - wicketsRemaining];
     }
 
-
-    // From ICC Playing Handbook 2013-14
     public static double[][] percentage = {
             {100.0, 93.4, 85.1, 74.9, 62.7, 49.0, 34.9, 22.0, 11.9, 4.7}, //50
             {99.8, 93.2, 85.0, 74.8, 62.7, 49.0, 34.9, 22.0, 11.9, 4.7}, //49.5

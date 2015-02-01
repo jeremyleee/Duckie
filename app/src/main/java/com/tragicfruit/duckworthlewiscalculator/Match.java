@@ -1,10 +1,16 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import android.util.Log;
+
 /**
  * Created by Jeremy on 1/02/2015.
+ * Represents a single match
  */
 public class Match {
 
+    /** G50 is the average score expected from the team batting first in an uninterrupted
+     * 50 overs-per-innings match. Current values from ICC Playing Handbook 2013-14.
+     */
     private boolean mIsProMatch;
     private static final int proG50 = 245;
     private static final int amateurG50 = 200;
@@ -29,6 +35,8 @@ public class Match {
 
     public int getTargetScore() {
         if (isValidMatch()) {
+            firstInning.updateResources();
+            secondInning.updateResources();
             return calculateTargetScore(firstInning.getScore(), firstInning.getResources(), secondInning.getResources());
         } else {
             return -1;

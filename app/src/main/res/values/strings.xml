@@ -6,8 +6,10 @@
     <string name="first_innings_label">1st Innings</string>
     <string name="second_innings_label">2nd Innings</string>
     <string name="runs_label">Runs:</string>
-    <string name="wickets_label">Wickets:</string>
+    <string name="wickets_label">Wickets in hand:</string>
     <string name="overs_label">Overs:</string>
     <string name="balls_label">Balls:</string>
+    <string name="start_innings_label">Start of innings</string>
+    <string name="add_interruption_label">Add interruption</string>
 
 </resources>
