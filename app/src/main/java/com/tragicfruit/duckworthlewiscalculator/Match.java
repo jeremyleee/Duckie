@@ -1,7 +1,5 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
-import android.util.Log;
-
 /**
  * Created by Jeremy on 1/02/2015.
  * Represents a single match
@@ -20,8 +18,8 @@ public class Match {
 
     public Match(boolean isProMatch) {
         mIsProMatch = isProMatch;
-        firstInning = new Inning(true);
-        secondInning = new Inning(false);
+        firstInning = new Inning();
+        secondInning = new Inning();
     }
 
     private double getG50() {
@@ -37,7 +35,7 @@ public class Match {
         if (isValidMatch()) {
             firstInning.updateResources();
             secondInning.updateResources();
-            return calculateTargetScore(firstInning.getScore(), firstInning.getResources(), secondInning.getResources());
+            return calculateTargetScore(firstInning.getRuns(), firstInning.getResources(), secondInning.getResources());
         } else {
             return -1;
         }

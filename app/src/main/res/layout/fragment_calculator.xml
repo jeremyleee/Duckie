@@ -33,6 +33,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overs_label"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/first_innings_overs_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="2"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/first_inning_interruption_button"
+                android:text="@string/add_interruption_label"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center">
 
                 <TextView
@@ -48,68 +78,7 @@
                     android:inputType="number"
                     android:ems="3"/>
 
-                <TextView
-                    android:paddingStart="4dp"
-                    android:paddingLeft="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/wickets_label"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:id="@+id/first_innings_wickets_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="2"/>
-
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingBottom="16dp">
-
-                <TextView
-                    android:paddingStart="4dp"
-                    android:paddingLeft="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/overs_label"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:id="@+id/first_innings_overs_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="2"/>
-
-                <TextView
-                    android:paddingStart="4dp"
-                    android:paddingLeft="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/balls_label"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:id="@+id/first_innings_balls_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="1"/>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/first_inning_interruption_button"
-                android:text="@string/add_interruption_label"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
@@ -147,21 +116,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/wickets_label"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:id="@+id/second_innings_wickets_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="2"/>
-
-                <TextView
-                    android:paddingStart="4dp"
-                    android:paddingLeft="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/overs_label"
                     android:textSize="16sp"/>
 
@@ -171,21 +125,6 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="2"/>
-
-                <TextView
-                    android:paddingStart="4dp"
-                    android:paddingLeft="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/balls_label"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:id="@+id/second_innings_balls_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="1"/>
 
             </LinearLayout>
 
@@ -207,13 +146,25 @@
             android:text="Calculate!"/>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Target score:"/>
+
+        <TextView
             android:id="@+id/target_score_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="20dp"
             android:textSize="50sp"
             android:text="0"/>
+
+        <TextView
+            android:id="@+id/tie_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
 </ScrollView>

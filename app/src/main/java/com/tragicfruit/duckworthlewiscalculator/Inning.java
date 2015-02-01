@@ -1,7 +1,5 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -10,55 +8,36 @@ import java.util.ArrayList;
  */
 public class Inning {
 
-    private boolean mIsFirstInning;
-    private int mTotalOvers;
-    private int mTotalBalls;
-    private int mTotalWickets;
+    private int mStartingOvers;
+    private int mStartingBalls = 0;
+    private int mStartingWickets = 10;
     private double mResources;
+    private int mRuns;
 
-    private int mScore;
     private ArrayList<Interruption> mInterruptions = new ArrayList<Interruption>();
 
-    public Inning(boolean isFirstInning) {
-        mIsFirstInning = isFirstInning;
-        // Temporary
-        mTotalOvers = 50;
-        mTotalBalls = 0;
-        mTotalWickets = 10;
-        mScore = 250;
-        mResources = Resources.getPercentage(mTotalOvers, mTotalBalls, mTotalWickets);
+    public void setRuns(int runs) {
+        mRuns = runs;
     }
 
-    public void setScore(int score) {
-        mScore = score;
-    }
-
-    public int getScore() {
-        return mScore;
+    public int getRuns() {
+        return mRuns;
     }
 
     public void setOvers(int overs) {
-        mTotalOvers = overs;
+        mStartingOvers = overs;
     }
 
     public int getOvers() {
-        return mTotalOvers;
-    }
-
-    public void setBalls(int balls) {
-        mTotalBalls = balls;
+        return mStartingOvers;
     }
 
     public int getBalls() {
-        return mTotalBalls;
-    }
-
-    public void setWickets(int wickets) {
-        mTotalWickets = wickets;
+        return mStartingBalls;
     }
 
     public int getWickets() {
-        return mTotalWickets;
+        return mStartingWickets;
     }
 
     public double getResources() {
@@ -66,7 +45,8 @@ public class Inning {
     }
 
     public void updateResources() {
-        mResources = Resources.getPercentage(mTotalOvers, mTotalBalls, mTotalWickets);
+        mResources = Resources.getPercentage(mStartingOvers, mStartingBalls, mStartingWickets);
+        // Loop through interruptions to reduce resources
         for (Interruption i : mInterruptions) {
             mResources -= i.getResourcesLost();
         }

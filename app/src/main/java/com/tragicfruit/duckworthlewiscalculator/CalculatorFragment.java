@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +28,10 @@ public class CalculatorFragment extends Fragment {
 
     private Match mMatch;
 
+    private EditText mFirstInningsOversField;
+    private EditText mFirstInningsRunsField;
+    private EditText mSecondInningsOversField;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,171 +44,14 @@ public class CalculatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calculator, container, false);
 
-        /*TextWatcher inputListener = new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    mInput = Integer.parseInt(s.toString());
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input: ", e);
-                    mInput = -1;
-                }
-            }
-        };*/
-
         /**
          * Set up first innings EditText widgets
          */
-        EditText firstInningsRunsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
-        firstInningsRunsField.setText("" + mMatch.firstInning.getScore());
-        firstInningsRunsField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
+        mFirstInningsRunsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
+        //mFirstInningsRunsField.setText("" + mMatch.firstInning.getRuns());
 
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 0)
-                        mMatch.firstInning.setScore(input);
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.firstInning.setScore(-1);
-                }
-            }
-
-        });
-
-        EditText firstInningsWicketsField = (EditText) v.findViewById(R.id.first_innings_wickets_editText);
-        firstInningsWicketsField.setText("" + mMatch.firstInning.getWickets());
-        firstInningsWicketsField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 1 && input <= 10)
-                        mMatch.firstInning.setWickets(input);
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.firstInning.setWickets(-1);
-                }
-            }
-
-        });
-
-        EditText firstInningsOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
-        firstInningsOversField.setText("" + mMatch.firstInning.getOvers());
-        firstInningsOversField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 50)
-                        mMatch.firstInning.setOvers(Integer.parseInt(s.toString()));
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.firstInning.setOvers(-1);
-                }
-            }
-
-        });
-
-        EditText firstInningsBallsField = (EditText) v.findViewById(R.id.first_innings_balls_editText);
-        firstInningsBallsField.setText("" + mMatch.firstInning.getBalls());
-        firstInningsBallsField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 5)
-                        mMatch.firstInning.setBalls(Integer.parseInt(s.toString()));
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.firstInning.setBalls(-1);
-                }
-            }
-
-        });
-
-        /**
-         * Set up second innings EditText widgets
-         */
-        EditText secondInningsWicketsField = (EditText) v.findViewById(R.id.second_innings_wickets_editText);
-        secondInningsWicketsField.setText("" + mMatch.secondInning.getWickets());
-        secondInningsWicketsField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 1 && input <= 10)
-                        mMatch.secondInning.setWickets(Integer.parseInt(s.toString()));
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.secondInning.setWickets(-1);
-                }
-            }
-
-        });
-
-        EditText secondInningsOversField = (EditText) v.findViewById(R.id.second_innings_overs_editText);
-        secondInningsOversField.setText("" + mMatch.secondInning.getOvers());
-        secondInningsOversField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 50)
-                        mMatch.secondInning.setOvers(Integer.parseInt(s.toString()));
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.secondInning.setOvers(-1);
-                }
-            }
-
-        });
-
-        EditText secondInningsBallsField = (EditText) v.findViewById(R.id.second_innings_balls_editText);
-        secondInningsBallsField.setText("" + mMatch.secondInning.getBalls());
-        secondInningsBallsField.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 5)
-                        mMatch.secondInning.setBalls(Integer.parseInt(s.toString()));
-                    else
-                        throw new Exception();
-                } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
-                    mMatch.secondInning.setBalls(-1);
-                }
-            }
-
-        });
+        mFirstInningsOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
+        //mFirstInningsOversField.setText("" + mMatch.firstInning.getOvers());
 
         Button firstInningInterruption = (Button) v.findViewById(R.id.first_inning_interruption_button);
         firstInningInterruption.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +63,14 @@ public class CalculatorFragment extends Fragment {
                 dialog.show(fm, DIALOG_FIRST_INNING_INTERRUPTION);
             }
         });
+
+        /**
+         * Set up second innings EditText widgets
+         */
+
+        mSecondInningsOversField = (EditText) v.findViewById(R.id.second_innings_overs_editText);
+        //mSecondInningsOversField.setText("" + mMatch.secondInning.getOvers());
+
         Button secondInningInterruption = (Button) v.findViewById(R.id.second_inning_interruption_button);
         secondInningInterruption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,12 +86,14 @@ public class CalculatorFragment extends Fragment {
          * Set up display result widgets
          */
         final TextView targetScoreTextView = (TextView) v.findViewById(R.id.target_score_textView);
+        final TextView tieTextView = (TextView) v.findViewById(R.id.tie_label);
         Button calculateButton = (Button) v.findViewById(R.id.calculate_button);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isValidInput()) {
                     targetScoreTextView.setText("" + mMatch.getTargetScore());
+                    tieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
                 } else {
                     Toast.makeText(getActivity(), "Invalid input, try again.", Toast.LENGTH_SHORT).show();
                 }
@@ -249,7 +104,32 @@ public class CalculatorFragment extends Fragment {
     }
 
     private boolean isValidInput() {
-        return mMatch.firstInning.getScore() >= 0 &&
+        try {
+            int input = Integer.parseInt(mFirstInningsOversField.getText().toString());
+            if (input >= 0 && input <= 50)
+                mMatch.firstInning.setOvers(input);
+            else
+                throw new Exception();
+
+            input = Integer.parseInt(mFirstInningsRunsField.getText().toString());
+            if (input >= 0)
+                mMatch.firstInning.setRuns(input);
+            else
+                throw new Exception();
+
+            input = Integer.parseInt(mSecondInningsOversField.getText().toString());
+            if (input >= 0 && input <= 50)
+                mMatch.secondInning.setOvers(input);
+            else
+                throw new Exception();
+        } catch (Exception e) {
+            Log.e(TAG, "Invalid input");
+            mMatch.firstInning.setOvers(-1);
+            mMatch.firstInning.setRuns(-1);
+            mMatch.secondInning.setOvers(-1);
+        }
+
+        return mMatch.firstInning.getRuns() >= 0 &&
                 mMatch.firstInning.getWickets() >= 0 &&
                 mMatch.firstInning.getOvers() >= 0 &&
                 mMatch.firstInning.getBalls() >= 0 &&
