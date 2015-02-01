@@ -28,7 +28,7 @@ import android.widget.Toast;
  * TODO: Save to JSON
  * TODO: Swipe between innings
  * TODO: Redesign UI (Vincent)
- * TODO: fix set overs, add interrupting, change overs
+ * TODO: fix set overs, add interrupting, change overs (disable changing max overs after interruption added)
  */
 public class CalculatorFragment extends Fragment {
     private static final String TAG = "CalculatorFragment";
@@ -46,6 +46,9 @@ public class CalculatorFragment extends Fragment {
 
     private NumberPicker mFirstInningsOvers;
     private NumberPicker mSecondInningsOvers;
+
+    private int mFirstInningsTotalOvers;
+    private int mSecondInningsTotalOvers;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,16 +73,23 @@ public class CalculatorFragment extends Fragment {
 
         mFirstInningsOvers = (NumberPicker) v.findViewById(R.id.first_innings_overs);
         mFirstInningsOvers.setMaxValue(50);
+
         mFirstInningsOvers.setValue(50);
-        mFirstInningsOvers.setMinValue(0);
+        mFirstInningsTotalOvers = 50;
+
+        mFirstInningsOvers.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                mFirstInningsTotalOvers = newVal;
+            }
+        });
 
         Button firstInningInterruption = (Button) v.findViewById(R.id.first_inning_interruption_button);
         firstInningInterruption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOvers();
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = InterruptionFragment.newInstance(mMatch.firstInning.getOvers());
+                InterruptionFragment dialog = InterruptionFragment.newInstance(mFirstInningsTotalOvers);
                 dialog.setTargetFragment(CalculatorFragment.this, REQUEST_FIRST_INNING_INTERRUPTION);
                 dialog.show(fm, DIALOG_FIRST_INNING_INTERRUPTION);
             }
@@ -94,15 +104,23 @@ public class CalculatorFragment extends Fragment {
 
         mSecondInningsOvers = (NumberPicker) v.findViewById(R.id.second_innings_overs);
         mSecondInningsOvers.setMaxValue(50);
+
         mSecondInningsOvers.setValue(50);
+        mSecondInningsTotalOvers = 50;
+
+        mSecondInningsOvers.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                mSecondInningsTotalOvers = newVal;
+            }
+        });
 
         Button secondInningInterruption = (Button) v.findViewById(R.id.second_inning_interruption_button);
         secondInningInterruption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOvers();
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = InterruptionFragment.newInstance(mMatch.secondInning.getOvers());
+                InterruptionFragment dialog = InterruptionFragment.newInstance(mSecondInningsTotalOvers);
                 dialog.setTargetFragment(CalculatorFragment.this, REQUEST_SECOND_INNING_INTERRUPTION);
                 dialog.show(fm, DIALOG_SECOND_INNING_INTERRUPTION);
             }
@@ -175,12 +193,14 @@ public class CalculatorFragment extends Fragment {
                 data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
             );
+            mFirstInningsTotalOvers = data.getIntExtra(InterruptionFragment.EXTRA_NEW_TOTAL_OVERS, -1);
         } else if (requestCode == REQUEST_SECOND_INNING_INTERRUPTION) {
             mMatch.secondInning.addInterruption(
                 data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
                 data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
             );
+            mSecondInningsTotalOvers = data.getIntExtra(InterruptionFragment.EXTRA_NEW_TOTAL_OVERS, -1);
         }
     }
 

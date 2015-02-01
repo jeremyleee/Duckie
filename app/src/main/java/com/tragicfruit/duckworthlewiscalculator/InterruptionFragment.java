@@ -7,7 +7,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -17,16 +16,18 @@ import android.widget.EditText;
  */
 public class InterruptionFragment extends DialogFragment {
 
-    public static final String EXTRA_TOTAL_OVERS = "com.tragicfruit.duckworthlewiscalculator.total_overs";
+    public static final String EXTRA_MAX_OVERS = "com.tragicfruit.duckworthlewiscalculator.total_overs";
+    public static final String EXTRA_NEW_TOTAL_OVERS = "com.tragicfruit.duckworthlewiscalculator.new_total_overs";
     public static final String EXTRA_WICKETS = "com.tragicfruit.duckworthlewiscalculator.wickets";
     public static final String EXTRA_BEFORE_OVERS = "com.tragicfruit.duckworthlewiscalculator.before_overs";
     public static final String EXTRA_AFTER_OVERS = "com.tragicfruit.duckworthlewiscalculator.after_overs";
 
-    private int mWickets;
-    private int mBeforeOvers;
-    private int mAfterOvers;
+    private int mWicketsRemaining; // wickets in hand after interruption
+    private int mBeforeOvers; // number of overs remaining before interruption
+    private int mAfterOvers; // number of overs remaining after interruption
 
-    private int mTotalOvers;
+    private int mOldTotalOvers; // max overs in innings
+    private int mNewTotalOvers;
 
     private EditText mWicketsField;
     private EditText mOversField;
@@ -34,7 +35,7 @@ public class InterruptionFragment extends DialogFragment {
 
     public static InterruptionFragment newInstance(int totalOvers) {
         Bundle args = new Bundle();
-        args.putInt(EXTRA_TOTAL_OVERS, totalOvers);
+        args.putInt(EXTRA_MAX_OVERS, totalOvers);
 
         InterruptionFragment fragment = new InterruptionFragment();
         fragment.setArguments(args);
@@ -45,7 +46,7 @@ public class InterruptionFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTotalOvers = getArguments().getInt(EXTRA_TOTAL_OVERS);
+        mOldTotalOvers = getArguments().getInt(EXTRA_MAX_OVERS);
     }
 
     @Override
@@ -76,14 +77,10 @@ public class InterruptionFragment extends DialogFragment {
 
     private boolean isValidInput() {
         try {
-            mWickets = 10 - Integer.parseInt(mWicketsField.getText().toString());
-            mBeforeOvers = mTotalOvers - Integer.parseInt(mOversField.getText().toString());
-            mAfterOvers = mBeforeOvers - // number of overs lost
-                    (mTotalOvers - Integer.parseInt(mNewTotalOversField.getText().toString()));
-            Log.d("IFragment", "mTotalOvers " + mTotalOvers);
-            Log.d("IFragment", "mWickets " + mWickets);
-            Log.d("IFragment", "mBeforeOvers " + mBeforeOvers);
-            Log.d("IFragment", "mAfterOvers " + mAfterOvers);
+            mNewTotalOvers = Integer.parseInt(mNewTotalOversField.getText().toString());
+            mWicketsRemaining = 10 - Integer.parseInt(mWicketsField.getText().toString());
+            mBeforeOvers = mOldTotalOvers - Integer.parseInt(mOversField.getText().toString());
+            mAfterOvers = mBeforeOvers - (mOldTotalOvers - mNewTotalOvers);
             return true;
         } catch (Exception e) {
             return false;
@@ -92,9 +89,10 @@ public class InterruptionFragment extends DialogFragment {
 
     private void setResult(int result) {
         Intent data = new Intent();
-        data.putExtra(EXTRA_WICKETS, mWickets);
+        data.putExtra(EXTRA_WICKETS, mWicketsRemaining);
         data.putExtra(EXTRA_BEFORE_OVERS, mBeforeOvers);
         data.putExtra(EXTRA_AFTER_OVERS, mAfterOvers);
+        data.putExtra(EXTRA_NEW_TOTAL_OVERS, mNewTotalOvers);
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
     }

@@ -1,5 +1,7 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -8,8 +10,8 @@ import java.util.ArrayList;
  */
 public class Inning {
 
-    private int mStartingOvers;
-    private int mStartingWickets = 10;
+    private int mMaxOvers;
+    private int mMaxWickets = 10;
     private double mResources;
     private int mRuns;
 
@@ -24,11 +26,11 @@ public class Inning {
     }
 
     public void setOvers(int overs) {
-        mStartingOvers = overs;
+        mMaxOvers = overs;
     }
 
     public int getOvers() {
-        return mStartingOvers;
+        return mMaxOvers;
     }
 
     public ArrayList<Interruption> getInterruptions() {
@@ -40,7 +42,7 @@ public class Inning {
     }
 
     public void updateResources() {
-        mResources = Resources.getPercentage(mStartingOvers, mStartingWickets);
+        mResources = Resources.getPercentage(mMaxOvers, mMaxWickets);
         // Loop through interruptions to reduce resources
         for (Interruption i : getInterruptions()) {
             mResources -= i.getResourcesLost();
