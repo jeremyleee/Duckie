@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Jeremy on 1/02/2015.
@@ -32,6 +33,19 @@ public class CalculatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calculator, container, false);
 
+        /*TextWatcher inputListener = new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    mInput = Integer.parseInt(s.toString());
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mInput = -1;
+                }
+            }
+        };*/
+
         /**
          * Set up first innings EditText widgets
          */
@@ -42,7 +56,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.firstInning.setScore(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0)
+                        mMatch.firstInning.setScore(input);
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.firstInning.setScore(-1);
+                }
             }
 
         });
@@ -54,7 +77,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.firstInning.setWickets(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 10)
+                        mMatch.firstInning.setWickets(input);
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.firstInning.setWickets(-1);
+                }
             }
 
         });
@@ -66,7 +98,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.firstInning.setOvers(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 50)
+                        mMatch.firstInning.setOvers(Integer.parseInt(s.toString()));
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.firstInning.setOvers(-1);
+                }
             }
 
         });
@@ -78,7 +119,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.firstInning.setBalls(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 5)
+                        mMatch.firstInning.setBalls(Integer.parseInt(s.toString()));
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.firstInning.setBalls(-1);
+                }
             }
 
         });
@@ -93,7 +143,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.secondInning.setWickets(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 10)
+                        mMatch.secondInning.setWickets(Integer.parseInt(s.toString()));
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.secondInning.setWickets(-1);
+                }
             }
 
         });
@@ -105,7 +164,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.secondInning.setOvers(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 50)
+                        mMatch.secondInning.setOvers(Integer.parseInt(s.toString()));
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.secondInning.setOvers(-1);
+                }
             }
 
         });
@@ -117,7 +185,16 @@ public class CalculatorFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mMatch.secondInning.setBalls(Integer.parseInt(s.toString()));
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 5)
+                        mMatch.secondInning.setBalls(Integer.parseInt(s.toString()));
+                    else
+                        throw new Exception();
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input: ", e);
+                    mMatch.secondInning.setBalls(-1);
+                }
             }
 
         });
@@ -130,13 +207,27 @@ public class CalculatorFragment extends Fragment {
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMatch.firstInning.updateResources();
-                mMatch.secondInning.updateResources();
-                targetScoreTextView.setText("" + mMatch.getTargetScore());
+                if (isValidInput()) {
+                    mMatch.firstInning.updateResources();
+                    mMatch.secondInning.updateResources();
+                    targetScoreTextView.setText("" + mMatch.getTargetScore());
+                } else {
+                    Toast.makeText(getActivity(), "Invalid input, try again.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         return v;
+    }
+
+    private boolean isValidInput() {
+        return mMatch.firstInning.getScore() >= 0 &&
+                mMatch.firstInning.getWickets() >= 0 &&
+                mMatch.firstInning.getOvers() >= 0 &&
+                mMatch.firstInning.getBalls() >= 0 &&
+                mMatch.secondInning.getWickets() >= 0 &&
+                mMatch.secondInning.getOvers() >= 0 &&
+                mMatch.secondInning.getBalls() >= 0;
     }
 
 }
