@@ -21,19 +21,26 @@
                 android:textStyle="bold"
                 android:padding="16dp"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/starting_overs_label"
-                android:textSize="16sp"/>
+                android:orientation="horizontal">
 
-            <NumberPicker
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/first_innings_overs"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/starting_overs_label"
+                    android:textSize="16sp"/>
 
+                <EditText
+                    android:id="@+id/first_innings_overs_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="2"/>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/first_inning_interruption_button"
@@ -88,18 +95,26 @@
                 android:textStyle="bold"
                 android:padding="16dp"/>
 
-            <TextView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/starting_overs_label"
-                android:textSize="16sp"/>
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <NumberPicker
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/second_innings_overs"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/starting_overs_label"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/second_innings_overs_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="2"/>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/second_inning_interruption_button"

@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,6 @@ import android.widget.Toast;
 /**
  * Created by Jeremy on 1/02/2015.
  * Main fragment for user input and displaying data
- * TODO: Simplify input data from user
  * TODO: Allow for viewing and editing interruptions
  * TODO: Add ability to change total wickets?
  * TODO: Allow changing format (50 overs, 45 overs, T20 etc)
@@ -28,7 +29,7 @@ import android.widget.Toast;
  * TODO: Save to JSON
  * TODO: Swipe between innings
  * TODO: Redesign UI (Vincent)
- * TODO: fix set overs, add interrupting, change overs (disable changing max overs after interruption added)
+ * TODO: fix set overs -> add interruption -> change overs (disable changing max overs after interruption added)
  */
 public class CalculatorFragment extends Fragment {
     private static final String TAG = "CalculatorFragment";
@@ -43,9 +44,6 @@ public class CalculatorFragment extends Fragment {
     private EditText mFirstInningsOversField;
     private EditText mFirstInningsRunsField;
     private EditText mSecondInningsOversField;
-
-    private NumberPicker mFirstInningsOvers;
-    private NumberPicker mSecondInningsOvers;
 
     private int mFirstInningsTotalOvers;
     private int mSecondInningsTotalOvers;
@@ -67,20 +65,42 @@ public class CalculatorFragment extends Fragment {
          */
         mFirstInningsRunsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
         //mFirstInningsRunsField.setText("" + mMatch.firstInning.getRuns());
+        mFirstInningsRunsField.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0) {
+                        mMatch.firstInning.setRuns(input);
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input");
+                    mMatch.firstInning.setRuns(-1);
+                }
+            }
+        });
 
-        //mFirstInningsOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
+        mFirstInningsOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
         //mFirstInningsOversField.setText("" + mMatch.firstInning.getOvers());
-
-        mFirstInningsOvers = (NumberPicker) v.findViewById(R.id.first_innings_overs);
-        mFirstInningsOvers.setMaxValue(50);
-
-        mFirstInningsOvers.setValue(50);
-        mFirstInningsTotalOvers = 50;
-
-        mFirstInningsOvers.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                mFirstInningsTotalOvers = newVal;
+        mFirstInningsOversField.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 50) {
+                        mMatch.firstInning.setOvers(input);
+                        mFirstInningsTotalOvers = input;
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input");
+                    mMatch.firstInning.setOvers(-1);
+                }
             }
         });
 
@@ -99,19 +119,24 @@ public class CalculatorFragment extends Fragment {
          * Set up second innings EditText widgets
          */
 
-        //mSecondInningsOversField = (EditText) v.findViewById(R.id.second_innings_overs_editText);
+        mSecondInningsOversField = (EditText) v.findViewById(R.id.second_innings_overs_editText);
         //mSecondInningsOversField.setText("" + mMatch.secondInning.getOvers());
-
-        mSecondInningsOvers = (NumberPicker) v.findViewById(R.id.second_innings_overs);
-        mSecondInningsOvers.setMaxValue(50);
-
-        mSecondInningsOvers.setValue(50);
-        mSecondInningsTotalOvers = 50;
-
-        mSecondInningsOvers.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                mSecondInningsTotalOvers = newVal;
+        mSecondInningsOversField.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    int input = Integer.parseInt(s.toString());
+                    if (input >= 0 && input <= 50) {
+                        mMatch.secondInning.setOvers(input);
+                        mSecondInningsTotalOvers = input;
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Invalid input");
+                    mMatch.secondInning.setOvers(-1);
+                }
             }
         });
 
@@ -137,7 +162,6 @@ public class CalculatorFragment extends Fragment {
             public void onClick(View v) {
                 if (isValidInput()) {
                     try {
-                        setOvers();
                         targetScoreTextView.setText("" + mMatch.getTargetScore());
                         tieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
                     } catch (Exception e) {
@@ -153,34 +177,10 @@ public class CalculatorFragment extends Fragment {
         return v;
     }
 
-    private void setOvers() {
-        int input = mFirstInningsOvers.getValue();
-        mMatch.firstInning.setOvers(input);
-
-        input = mSecondInningsOvers.getValue();
-        mMatch.secondInning.setOvers(input);
-    }
-
     private boolean isValidInput() {
-        try {
-            /*int input = Integer.parseInt(mFirstInningsOversField.getText().toString());
-            if (input >= 0 && input <= 50)
-                mMatch.firstInning.setOvers(input);
-            else
-                throw new Exception();*/
-
-            int input = Integer.parseInt(mFirstInningsRunsField.getText().toString());
-            if (input >= 0)
-                mMatch.firstInning.setRuns(input);
-            else
-                throw new Exception();
-
-        } catch (Exception e) {
-            Log.e(TAG, "Invalid input");
-            mMatch.firstInning.setRuns(-1);
-        }
-
-        return mMatch.firstInning.getRuns() >= 0;
+        return mMatch.firstInning.getOvers() >= 0
+            && mMatch.firstInning.getRuns() >= 0
+            && mMatch.secondInning.getOvers() >= 0;
     }
 
     @Override
