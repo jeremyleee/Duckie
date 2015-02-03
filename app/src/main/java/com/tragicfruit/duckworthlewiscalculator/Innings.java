@@ -1,7 +1,5 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -14,6 +12,13 @@ public class Innings {
     private int mMaxWickets = 10;
     private double mResources;
     private int mRuns;
+    private int mWickets; // not really required
+
+    public Innings() {
+        mMaxOvers = -1;
+        mRuns = -1;
+        mWickets = -1;
+    }
 
     private ArrayList<Interruption> mInterruptions = new ArrayList<Interruption>();
 
@@ -52,6 +57,14 @@ public class Innings {
     public void addInterruption(int initialOvers, int restartOvers, int wicketsRemaining) {
         Interruption i = new Interruption(initialOvers, restartOvers, wicketsRemaining);
         getInterruptions().add(i);
+    }
+
+    public int getWickets() {
+        return mWickets;
+    }
+
+    public void setWickets(int wickets) {
+        mWickets = wickets;
     }
 
     class Interruption {

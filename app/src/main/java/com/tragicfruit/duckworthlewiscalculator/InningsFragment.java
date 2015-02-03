@@ -35,7 +35,6 @@ public class InningsFragment extends Fragment {
     private boolean mIsFirstInnings;
     private int mTotalOvers;
 
-    private EditText mRunsField;
     private EditText mOversField;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -61,9 +60,10 @@ public class InningsFragment extends Fragment {
             inningsLabel.setText(R.string.first_innings_label);
             firstInningsScoreSection.setVisibility(View.VISIBLE);
 
-            mRunsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
-            //mRunsField.setText("" + mInnings.getRuns());
-            mRunsField.addTextChangedListener(new TextWatcher() {
+            EditText runsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
+            if (mInnings.getRuns() >= 0)
+                runsField.setText("" + mInnings.getRuns());
+            runsField.addTextChangedListener(new TextWatcher() {
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 public void afterTextChanged(Editable s) {}
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -80,13 +80,35 @@ public class InningsFragment extends Fragment {
                     }
                 }
             });
+
+            EditText wicketsField = (EditText) v.findViewById(R.id.first_innings_wickets_editText);
+            if (mInnings.getWickets() >= 0)
+                wicketsField.setText("" + mInnings.getWickets());
+            wicketsField.addTextChangedListener(new TextWatcher() {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void afterTextChanged(Editable s) {}
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    try {
+                        int input = Integer.parseInt(s.toString());
+                        if (input >= 0 && input <= 10) {
+                            mInnings.setWickets(input);
+                        } else {
+                            throw new Exception();
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Invalid input");
+                        mInnings.setWickets(-1);
+                    }
+                }
+            });
         } else {
             inningsLabel.setText(R.string.second_innings_label);
             firstInningsScoreSection.setVisibility(View.GONE);
         }
 
-        mOversField = (EditText) v.findViewById(R.id.first_innings_overs_editText);
-        //mOversField.setText("" + mInnings.getOvers());
+        mOversField = (EditText) v.findViewById(R.id.max_overs_editText);
+        if (mInnings.getOvers() >= 0)
+            mOversField.setText("" + mInnings.getOvers());
         mOversField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void afterTextChanged(Editable s) {}
@@ -106,7 +128,7 @@ public class InningsFragment extends Fragment {
             }
         });
 
-        Button firstInningsInterruption = (Button) v.findViewById(R.id.first_innings_interruption_button);
+        Button firstInningsInterruption = (Button) v.findViewById(R.id.add_interruption_button);
         firstInningsInterruption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

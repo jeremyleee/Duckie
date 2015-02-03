@@ -28,7 +28,7 @@
             android:textSize="16sp"/>
 
         <EditText
-            android:id="@+id/first_innings_overs_editText"
+            android:id="@+id/max_overs_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/first_innings_interruption_button"
+        android:id="@+id/add_interruption_button"
         android:text="@string/add_interruption_label"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -65,6 +65,7 @@
             android:ems="2"/>
 
         <EditText
+            android:id="@+id/first_innings_wickets_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
