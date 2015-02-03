@@ -35,8 +35,6 @@ public class InningsFragment extends Fragment {
     private boolean mIsFirstInnings;
     private int mTotalOvers;
 
-    private EditText mOversField;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -54,6 +52,9 @@ public class InningsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_innings, container, false);
 
+        /**
+         * Set up innings specific widgets
+         */
         TextView inningsLabel = (TextView) v.findViewById(R.id.innings_label);
         View firstInningsScoreSection = v.findViewById(R.id.first_innings_score_section);
         if (mIsFirstInnings) {
@@ -106,10 +107,10 @@ public class InningsFragment extends Fragment {
             firstInningsScoreSection.setVisibility(View.GONE);
         }
 
-        mOversField = (EditText) v.findViewById(R.id.max_overs_editText);
+        EditText oversField = (EditText) v.findViewById(R.id.max_overs_editText);
         if (mInnings.getOvers() >= 0)
-            mOversField.setText("" + mInnings.getOvers());
-        mOversField.addTextChangedListener(new TextWatcher() {
+            oversField.setText("" + mInnings.getOvers());
+        oversField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void afterTextChanged(Editable s) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -156,9 +157,9 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    public static Fragment newInstance(UUID matchUUID, boolean isFirstInnings) {
+    public static Fragment newInstance(UUID matchId, boolean isFirstInnings) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_INNINGS_MATCH_ID, matchUUID);
+        args.putSerializable(EXTRA_INNINGS_MATCH_ID, matchId);
         args.putBoolean(EXTRA_WHICH_INNNGS, isFirstInnings);
 
         InningsFragment fragment = new InningsFragment();

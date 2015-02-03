@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="first_innings_label">1st Innings</string>
     <string name="second_innings_label">2nd Innings</string>
+    <string name="result_label">Result</string>
     <string name="first_innings_score_label">Score after first innings:</string>
     <string name="interruption_score_label">Score at interruption:</string>
     <string name="overs_label">Overs left:</string>
