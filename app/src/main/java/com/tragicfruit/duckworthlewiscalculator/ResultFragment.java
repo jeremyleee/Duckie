@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -21,6 +20,10 @@ public class ResultFragment extends Fragment {
     private static final String TAG = "ResultFragment";
 
     private Match mMatch;
+    private View mGoodResult;
+    private TextView mBadResult;
+    private TextView mTargetScoreTextView;
+    private TextView mTieTextView;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,31 +35,44 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_result, container, false);
 
-        final TextView targetScoreTextView = (TextView) v.findViewById(R.id.target_score_textView);
-        final TextView tieTextView = (TextView) v.findViewById(R.id.tie_label);
+        mGoodResult = v.findViewById(R.id.good_result);
+        mBadResult = (TextView) v.findViewById(R.id.bad_result_textView);
 
-        if (isValidInput()) {
-            try {
-                targetScoreTextView.setText("" + mMatch.getTargetScore());
-                tieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
-            } catch (Exception e) {
-                Log.e(TAG, "Error calculating target score", e);
-                Toast.makeText(getActivity(), "Error calculating target score.", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(getActivity(), "Invalid input, try again.", Toast.LENGTH_SHORT).show();
-        }
+        mTargetScoreTextView = (TextView) v.findViewById(R.id.target_score_textView);
+        mTieTextView = (TextView) v.findViewById(R.id.tie_label);
+
+        updateResult();
 
         return v;
     }
 
     private boolean isValidInput() {
         return mMatch.mFirstInnings.getOvers() >= 0
-                && mMatch.mFirstInnings.getRuns() >= 0
-                && mMatch.mSecondInnings.getOvers() >= 0;
+            && mMatch.mFirstInnings.getRuns() >= 0
+            && mMatch.mSecondInnings.getOvers() >= 0;
     }
 
-    public static Fragment newInstance(UUID matchId) {
+    public void updateResult() {
+        if (isValidInput()) {
+            try {
+                mGoodResult.setVisibility(View.VISIBLE);
+                mBadResult.setVisibility(View.INVISIBLE);
+
+                mTargetScoreTextView.setText("" + mMatch.getTargetScore());
+                mTieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+            } catch (Exception e) {
+                mGoodResult.setVisibility(View.INVISIBLE);
+                mBadResult.setVisibility(View.VISIBLE);
+
+                Log.e(TAG, "Error calculating target score", e);
+            }
+        } else {
+            mGoodResult.setVisibility(View.INVISIBLE);
+            mBadResult.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public static ResultFragment newInstance(UUID matchId) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_RESULT_MATCH_ID, matchId);
 

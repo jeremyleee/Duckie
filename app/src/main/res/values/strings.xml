@@ -12,5 +12,7 @@
     <string name="starting_overs_label">Total overs at beginning of innings:</string>
     <string name="balls_label">Balls left:</string>
     <string name="add_interruption_label">Add interruption</string>
+    <string name="target_score">Target score:</string>
+    <string name="error_message">Error calculating target score.\nPlease check input values.</string>
 
 </resources>

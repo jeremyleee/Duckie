@@ -47,6 +47,7 @@ public class InningsFragment extends Fragment {
         } else {
             mInnings = match.mSecondInnings;
         }
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -157,7 +158,7 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    public static Fragment newInstance(UUID matchId, boolean isFirstInnings) {
+    public static InningsFragment newInstance(UUID matchId, boolean isFirstInnings) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_INNINGS_MATCH_ID, matchId);
         args.putBoolean(EXTRA_WHICH_INNNGS, isFirstInnings);
