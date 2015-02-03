@@ -14,8 +14,8 @@ import java.util.UUID;
  * Created by Jeremy on 3/02/2015.
  */
 public class ResultFragment extends Fragment {
-    private static final String EXTRA_RESULT_MATCH_ID =
-            "com.tragicfruit.duckworthlewiscalculator.result_match_id";
+    private static final String EXTRA_MATCH_ID =
+            "com.tragicfruit.duckworthlewiscalculator.match_id";
 
     private static final String TAG = "ResultFragment";
 
@@ -28,7 +28,7 @@ public class ResultFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UUID matchId = (UUID) getArguments().getSerializable(EXTRA_RESULT_MATCH_ID);
+        UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
         mMatch = MatchLab.get().getMatch(matchId);
     }
 
@@ -67,6 +67,7 @@ public class ResultFragment extends Fragment {
                 Log.e(TAG, "Error calculating target score", e);
             }
         } else {
+            Log.i(TAG, "Invalid input");
             mGoodResult.setVisibility(View.INVISIBLE);
             mBadResult.setVisibility(View.VISIBLE);
         }
@@ -74,7 +75,7 @@ public class ResultFragment extends Fragment {
 
     public static ResultFragment newInstance(UUID matchId) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_RESULT_MATCH_ID, matchId);
+        args.putSerializable(EXTRA_MATCH_ID, matchId);
 
         ResultFragment fragment = new ResultFragment();
         fragment.setArguments(args);

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +20,10 @@ import java.util.UUID;
  * Created by Jeremy on 3/02/2015.
  */
 public class InningsFragment extends Fragment {
-    private static final String EXTRA_INNINGS_MATCH_ID =
-            "com.tragicfruit.duckworthlewiscalculator.innings_match_id";
-    private static final String EXTRA_WHICH_INNNGS =
-            "com.tragicfruit.duckworthlewiscalculator.innings_index";
+    private static final String EXTRA_MATCH_ID =
+            "com.tragicfruit.duckworthlewiscalculator.match_id";
+    private static final String EXTRA_IS_FIRST_INNNGS =
+            "com.tragicfruit.duckworthlewiscalculator.is_first_innings";
 
     private static final String DIALOG_INTERRUPTION = "interruption";
     private static final int REQUEST_INTERRUPTION = 0;
@@ -38,10 +37,10 @@ public class InningsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UUID matchId = (UUID) getArguments().getSerializable(EXTRA_INNINGS_MATCH_ID);
+        UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
         Match match = MatchLab.get().getMatch(matchId);
 
-        mIsFirstInnings = getArguments().getBoolean(EXTRA_WHICH_INNNGS);
+        mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNNGS);
         if (mIsFirstInnings) {
             mInnings = match.mFirstInnings;
         } else {
@@ -77,7 +76,6 @@ public class InningsFragment extends Fragment {
                             throw new Exception();
                         }
                     } catch (Exception e) {
-                        Log.e(TAG, "Invalid input");
                         mInnings.setRuns(-1);
                     }
                 }
@@ -98,7 +96,6 @@ public class InningsFragment extends Fragment {
                             throw new Exception();
                         }
                     } catch (Exception e) {
-                        Log.e(TAG, "Invalid input");
                         mInnings.setWickets(-1);
                     }
                 }
@@ -124,7 +121,6 @@ public class InningsFragment extends Fragment {
                         throw new Exception();
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "Invalid input");
                     mInnings.setOvers(-1);
                 }
             }
@@ -160,8 +156,8 @@ public class InningsFragment extends Fragment {
 
     public static InningsFragment newInstance(UUID matchId, boolean isFirstInnings) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_INNINGS_MATCH_ID, matchId);
-        args.putBoolean(EXTRA_WHICH_INNNGS, isFirstInnings);
+        args.putSerializable(EXTRA_MATCH_ID, matchId);
+        args.putBoolean(EXTRA_IS_FIRST_INNNGS, isFirstInnings);
 
         InningsFragment fragment = new InningsFragment();
         fragment.setArguments(args);
