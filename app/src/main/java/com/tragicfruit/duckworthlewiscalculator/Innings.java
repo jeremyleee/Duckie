@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 /**
  * Created by Jeremy on 1/02/2015.
- * Represents a single inning within a match
+ * Represents a single innings within a match
  */
-public class Inning {
+public class Innings {
 
     private int mMaxOvers;
     private int mMaxWickets = 10;

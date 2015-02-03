@@ -1,10 +1,14 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import java.util.UUID;
+
 /**
  * Created by Jeremy on 1/02/2015.
  * Represents a single match
  */
 public class Match {
+
+    private UUID mId;
 
     /** G50 is the average score expected from the team batting first in an uninterrupted
      * 50 overs-per-innings match. Current values from ICC Playing Handbook 2013-14.
@@ -13,13 +17,15 @@ public class Match {
     private static final int proG50 = 245;
     private static final int amateurG50 = 200;
 
-    public Inning firstInning;
-    public Inning secondInning;
+    public Innings mFirstInnings;
+    public Innings mSecondInnings;
 
     public Match(boolean isProMatch) {
+        mId = UUID.randomUUID();
+
         mIsProMatch = isProMatch;
-        firstInning = new Inning();
-        secondInning = new Inning();
+        mFirstInnings = new Innings();
+        mSecondInnings = new Innings();
     }
 
     private double getG50() {
@@ -33,9 +39,9 @@ public class Match {
 
     public int getTargetScore() {
         if (isValidMatch()) {
-            firstInning.updateResources();
-            secondInning.updateResources();
-            return calculateTargetScore(firstInning.getRuns(), firstInning.getResources(), secondInning.getResources());
+            mFirstInnings.updateResources();
+            mSecondInnings.updateResources();
+            return calculateTargetScore(mFirstInnings.getRuns(), mFirstInnings.getResources(), mSecondInnings.getResources());
         } else {
             return -1;
         }
@@ -54,4 +60,7 @@ public class Match {
         return (int) targetScore + 1;
     }
 
+    public UUID getId() {
+        return mId;
+    }
 }
