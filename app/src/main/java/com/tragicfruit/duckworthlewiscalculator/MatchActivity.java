@@ -74,7 +74,7 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setSelectedIndicatorColors(Color.parseColor("#99CC00"));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.tab_strip_colour));
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
