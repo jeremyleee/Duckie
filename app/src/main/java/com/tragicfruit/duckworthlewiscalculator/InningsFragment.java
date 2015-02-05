@@ -3,7 +3,6 @@ package com.tragicfruit.duckworthlewiscalculator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -68,6 +66,7 @@ public class InningsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_innings, container, false);
 
+        // Initially hides virtual keyboard
         getActivity().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -126,8 +125,8 @@ public class InningsFragment extends Fragment {
         }
 
         mOversField = (EditText) v.findViewById(R.id.max_overs_editText);
-        if (mInnings.getOvers() >= 0)
-            mOversField.setText("" + mInnings.getOvers());
+        if (mInnings.getMaxOvers() >= 0)
+            mOversField.setText("" + mInnings.getMaxOvers());
         mOversField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void afterTextChanged(Editable s) {}
@@ -135,12 +134,12 @@ public class InningsFragment extends Fragment {
                 try {
                     int input = Integer.parseInt(s.toString());
                     if (input >= 0 && input <= 50) {
-                        mInnings.setOvers(input);
+                        mInnings.setMaxOvers(input);
                     } else {
                         throw new Exception();
                     }
                 } catch (Exception e) {
-                    mInnings.setOvers(-1);
+                    mInnings.setMaxOvers(-1);
                 }
             }
         });

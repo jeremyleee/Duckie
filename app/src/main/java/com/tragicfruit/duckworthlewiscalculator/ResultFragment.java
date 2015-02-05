@@ -26,6 +26,7 @@ public class ResultFragment extends Fragment {
     private TextView mTargetScoreTextView;
     private TextView mTieTextView;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -33,6 +34,7 @@ public class ResultFragment extends Fragment {
         mMatch = MatchLab.get().getMatch(matchId);
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_result, container, false);
 
@@ -48,26 +50,39 @@ public class ResultFragment extends Fragment {
     }
 
     private boolean isValidInput() {
-        return mMatch.mFirstInnings.getOvers() >= 0
+        return mMatch.mFirstInnings.getMaxOvers() >= 0
             && mMatch.mFirstInnings.getRuns() >= 0
-            && mMatch.mSecondInnings.getOvers() >= 0;
+            && mMatch.mSecondInnings.getMaxOvers() >= 0;
     }
 
     public void updateResult() {
         if (isValidInput()) {
             try {
-                mGoodResult.setVisibility(View.VISIBLE);
-                mBadResult.setVisibility(View.INVISIBLE);
+                if (mMatch.getTargetScore() >= 0) {
+                    mGoodResult.setVisibility(View.VISIBLE);
+                    mBadResult.setVisibility(View.INVISIBLE);
 
-                mTargetScoreTextView.setText("" + mMatch.getTargetScore());
-                mTieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+                    mTargetScoreTextView.setText("" + mMatch.getTargetScore());
+                    mTieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+                } else {
+                    // No result (not reached minimum required overs)
+                    mGoodResult.setVisibility(View.INVISIBLE);
+                    mBadResult.setVisibility(View.VISIBLE);
+
+                    int minOvers = mMatch.getMatchType() == Match.MatchType.ONEDAY50 ? 20 : 5;
+                    mBadResult.setText(getString(R.string.no_result_message, minOvers));
+                }
             } catch (Exception e) {
+                // Valid inputs, but error with finding resources
+                mBadResult.setText(R.string.calculation_error_message);
+
                 mGoodResult.setVisibility(View.INVISIBLE);
                 mBadResult.setVisibility(View.VISIBLE);
 
                 Log.e(TAG, "Error calculating target score", e);
             }
         } else {
+            // Missing one of the input values
             Log.i(TAG, "Invalid input");
             mGoodResult.setVisibility(View.INVISIBLE);
             mBadResult.setVisibility(View.VISIBLE);

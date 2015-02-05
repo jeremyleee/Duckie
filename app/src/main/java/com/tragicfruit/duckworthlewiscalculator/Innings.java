@@ -32,11 +32,11 @@ public class Innings {
         return mRuns;
     }
 
-    public void setOvers(int overs) {
+    public void setMaxOvers(int overs) {
         mMaxOvers = overs;
     }
 
-    public int getOvers() {
+    public int getMaxOvers() {
         return mMaxOvers;
     }
 

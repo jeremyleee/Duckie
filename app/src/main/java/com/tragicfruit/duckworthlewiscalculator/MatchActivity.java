@@ -9,12 +9,15 @@ import android.support.v7.app.ActionBarActivity;
 /**
  * Created by Jeremy on 1/02/2015.
  * Launcher activity hosting fragments for a match (two innings + result fragments)
- * TODO: Fix orientation change
+ * List of matches: -----
+ * TODO: Multiple matches
+ * Menu/settings: -------
  * TODO: Add ability to change total wickets?
  * TODO: Allow changing format (50 overs, 45 overs, T20 etc)
  * TODO: Allow changing G50
- * TODO: Implement invalid matches (not enough overs played)
- * TODO: Multiple matches
+ * Misc: ----------------
+ * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
+ * TODO: fix orientation change
  * TODO: Save to JSON
  * TODO: Redesign UI (Vincent)
  */
@@ -31,8 +34,7 @@ public class MatchActivity extends ActionBarActivity {
         setContentView(R.layout.activity_match);
 
         // TODO: implement user creating a match
-        mMatch = new Match(true);
-        MatchLab.get().addMatch(mMatch);
+        mMatch = MatchLab.get().getMatches().get(0);
 
         mResultFragment = ResultFragment.newInstance(mMatch.getId());
 
@@ -75,20 +77,11 @@ public class MatchActivity extends ActionBarActivity {
         mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.tab_strip_colour));
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            public void onPageScrollStateChanged(int state) {}
             public void onPageSelected(int position) {
                 if (position == 2)
                     mResultFragment.updateResult();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
     }

@@ -39,7 +39,7 @@
         android:id="@+id/bad_result_textView"
         android:layout_marginTop="48dp"
         android:layout_gravity="center_horizontal"
-        android:text="@string/error_message"
+        android:text="@string/calculation_error_message"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

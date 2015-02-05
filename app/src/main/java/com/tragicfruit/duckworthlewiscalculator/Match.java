@@ -8,7 +8,11 @@ import java.util.UUID;
  */
 public class Match {
 
-    private UUID mId;
+    public enum MatchType {
+        TWENTY20, ONEDAY50
+    }
+
+    private MatchType mMatchType;
 
     /** G50 is the average score expected from the team batting first in an uninterrupted
      * 50 overs-per-innings match. Current values from ICC Playing Handbook 2013-14.
@@ -17,15 +21,23 @@ public class Match {
     private static final int proG50 = 245;
     private static final int amateurG50 = 200;
 
+    private UUID mId;
+
     public Innings mFirstInnings;
     public Innings mSecondInnings;
 
-    public Match(boolean isProMatch) {
+    public Match(boolean isProMatch, MatchType matchType) {
         mId = UUID.randomUUID();
 
         mIsProMatch = isProMatch;
+        mMatchType = matchType;
+
         mFirstInnings = new Innings();
         mSecondInnings = new Innings();
+    }
+
+    public MatchType getMatchType() {
+        return mMatchType;
     }
 
     private double getG50() {
@@ -33,8 +45,31 @@ public class Match {
     }
 
     private boolean isValidMatch() {
-        // TODO: Implement this
-        return true;
+        if (mMatchType == MatchType.ONEDAY50) {
+            if (inningsIsValid(mFirstInnings, 20) && inningsIsValid(mSecondInnings, 20)) {
+                return true;
+            }
+        } else if (mMatchType == MatchType.TWENTY20) {
+            if (inningsIsValid(mFirstInnings, 5) && inningsIsValid(mSecondInnings, 5)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean inningsIsValid(Innings innings, int minRequiredOvers) {
+        boolean allOut = innings.getWickets() >= 10;
+
+        boolean metRequiredOvers;
+        int size;
+        if ((size = innings.getInterruptions().size()) > 0) {
+            Innings.Interruption lastInterruption = innings.getInterruptions().get(size - 1);
+            metRequiredOvers = lastInterruption.getInputNewTotalOvers() >= minRequiredOvers;
+        } else {
+            metRequiredOvers = innings.getMaxOvers() >= minRequiredOvers;
+        }
+
+        return allOut || metRequiredOvers;
     }
 
     public int getTargetScore() {

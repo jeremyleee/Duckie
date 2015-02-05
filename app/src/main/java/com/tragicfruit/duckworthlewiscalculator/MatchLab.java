@@ -21,6 +21,7 @@ public class MatchLab {
 
     private MatchLab() {
         mMatches = new ArrayList<>();
+        mMatches.add(new Match(true, Match.MatchType.ONEDAY50));
     }
 
     public void addMatch(Match m) {
