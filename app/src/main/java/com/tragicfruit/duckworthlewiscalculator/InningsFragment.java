@@ -22,17 +22,16 @@ import java.util.UUID;
 
 /**
  * Created by Jeremy on 3/02/2015.
+ * Fragment for user input and displaying data for a single innings
  */
 public class InningsFragment extends Fragment {
     private static final String EXTRA_MATCH_ID =
             "com.tragicfruit.duckworthlewiscalculator.match_id";
-    private static final String EXTRA_IS_FIRST_INNNGS =
+    private static final String EXTRA_IS_FIRST_INNINGS =
             "com.tragicfruit.duckworthlewiscalculator.is_first_innings";
 
     private static final String DIALOG_INTERRUPTION = "interruption";
     private static final int REQUEST_INTERRUPTION = 0;
-
-    private static final String TAG = "InningsFragment";
 
     private Innings mInnings;
     private boolean mIsFirstInnings;
@@ -40,13 +39,15 @@ public class InningsFragment extends Fragment {
     private LinearLayout mInterruptionList;
     private TextView mInterruptionsLabel;
 
+    private Innings.Interruption mCurrentInterruptionEdited;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
         Match match = MatchLab.get().getMatch(matchId);
 
-        mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNNGS);
+        mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNINGS);
         if (mIsFirstInnings) {
             mInnings = match.mFirstInnings;
         } else {
@@ -57,6 +58,9 @@ public class InningsFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_innings, container, false);
+
+        View inningsFragmentContainer = v.findViewById(R.id.innings_fragmentContainer);
+        inningsFragmentContainer.requestFocus();
 
         /**
          * Set up innings specific widgets
@@ -136,7 +140,7 @@ public class InningsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = InterruptionFragment.newInstance(getOldTotalOvers());
+                InterruptionFragment dialog = new InterruptionFragment();
                 dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
                 dialog.show(fm, DIALOG_INTERRUPTION);
             }
@@ -161,9 +165,11 @@ public class InningsFragment extends Fragment {
         for (final Innings.Interruption i : interruptions) {
 
             RelativeLayout interruptionListItem = (RelativeLayout) getActivity().getLayoutInflater()
-                    .inflate(R.layout.list_item_interruption, null, false);
-            ((TextView) interruptionListItem.findViewById(R.id.interruption_desc_textView))
-                    .setText("Interruption after " + i.getInputOversCompleted() + " overs");
+                    .inflate(R.layout.list_item_interruption, mInterruptionList, false);
+            TextView interruptionTitle = ((TextView) interruptionListItem.findViewById(R.id.interruption_desc_textView));
+            String title = getString(R.string.interruption_title,
+                    i.getInputRuns(), i.getInputWickets(), i.getInputOversCompleted());
+            interruptionTitle.setText(title);
             mInterruptionList.addView(interruptionListItem);
 
             // set listeners on interruption buttons
@@ -172,9 +178,10 @@ public class InningsFragment extends Fragment {
                 interruptionEditButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        mCurrentInterruptionEdited = i;
                         FragmentManager fm = getFragmentManager();
-                        InterruptionFragment dialog = InterruptionFragment.newInstance(getOldTotalOvers(),
-                                i.getInputRuns(), i.getInputWickets(), i.getInputOversCompleted(), i.getInputNewTotalOvers());
+                        InterruptionFragment dialog = InterruptionFragment.newInstance(i.getInputRuns(),
+                                i.getInputWickets(), i.getInputOversCompleted(), i.getInputNewTotalOvers());
                         dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
                         dialog.show(fm, DIALOG_INTERRUPTION);
                     }
@@ -194,26 +201,24 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    // TODO: work this out per interruption
-    private int getOldTotalOvers() {
-        mInnings.getOvers();
-
-        return 0;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) return;
+        if (resultCode != Activity.RESULT_OK) {
+            mCurrentInterruptionEdited = null;
+            return;
+        }
 
         if (requestCode == REQUEST_INTERRUPTION) {
+            if (mCurrentInterruptionEdited != null) {
+                mInnings.getInterruptions().remove(mCurrentInterruptionEdited);
+                mCurrentInterruptionEdited = null;
+            }
+
             mInnings.addInterruption(
                     data.getIntExtra(InterruptionFragment.EXTRA_INPUT_RUNS, -1),
                     data.getIntExtra(InterruptionFragment.EXTRA_INPUT_WICKETS, -1),
                     data.getIntExtra(InterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
+                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
             );
             updateInterruptionList();
         }
@@ -222,7 +227,7 @@ public class InningsFragment extends Fragment {
     public static InningsFragment newInstance(UUID matchId, boolean isFirstInnings) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_MATCH_ID, matchId);
-        args.putBoolean(EXTRA_IS_FIRST_INNNGS, isFirstInnings);
+        args.putBoolean(EXTRA_IS_FIRST_INNINGS, isFirstInnings);
 
         InningsFragment fragment = new InningsFragment();
         fragment.setArguments(args);

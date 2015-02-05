@@ -5,6 +5,7 @@ import java.util.UUID;
 
 /**
  * Created by Jeremy on 3/02/2015.
+ * Stores all matches and handles adding and deleting of them.
  */
 public class MatchLab {
     private static MatchLab sMatchLab;
@@ -19,7 +20,7 @@ public class MatchLab {
     }
 
     private MatchLab() {
-        mMatches = new ArrayList<Match>();
+        mMatches = new ArrayList<>();
     }
 
     public void addMatch(Match m) {

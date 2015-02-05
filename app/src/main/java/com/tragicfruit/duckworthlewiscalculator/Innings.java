@@ -1,6 +1,8 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Jeremy on 1/02/2015.
@@ -20,7 +22,7 @@ public class Innings {
         mWickets = -1;
     }
 
-    private ArrayList<Interruption> mInterruptions = new ArrayList<Interruption>();
+    private ArrayList<Interruption> mInterruptions = new ArrayList<>();
 
     public void setRuns(int runs) {
         mRuns = runs;
@@ -47,18 +49,37 @@ public class Innings {
     }
 
     public void updateResources() {
-        mResources = Resources.getPercentage(mMaxOvers, mMaxWickets);
+        mResources = Resources.getPercentage(mMaxOvers, getMaxWickets());
         // Loop through interruptions to reduce resources
-        for (Interruption i : getInterruptions()) {
-            mResources -= i.getResourcesLost();
+        int totalOvers = mMaxOvers;
+        for (Interruption i : mInterruptions) {
+            mResources -= i.getResourcesLost(totalOvers);
+            totalOvers = i.getInputNewTotalOvers();
         }
     }
 
-    public void addInterruption(int inputRuns, int inputWickets, int inputOversCompleted, int inputNewTotalOvers,
-                                int initialOvers, int restartOvers, int wicketsRemaining) {
-        Interruption i = new Interruption(inputRuns, inputWickets, inputOversCompleted, inputNewTotalOvers,
-                initialOvers, restartOvers, wicketsRemaining);
-        getInterruptions().add(i);
+    public void addInterruption(int inputRuns, int inputWickets, int inputOversCompleted, int inputNewTotalOvers) {
+        Interruption i = new Interruption(this, inputRuns, inputWickets, inputOversCompleted, inputNewTotalOvers);
+        mInterruptions.add(i);
+        sortInterruptions();
+    }
+
+    private void sortInterruptions() {
+        Collections.sort(mInterruptions, new Comparator<Interruption>() {
+            @Override
+            public int compare(Interruption lhs, Interruption rhs) {
+                if (lhs.getInputOversCompleted() < rhs.getInputOversCompleted()) {
+                    return -1;
+                } else if (lhs.getInputOversCompleted() == rhs.getInputOversCompleted()) {
+                    if (lhs.getInputNewTotalOvers() < rhs.getInputNewTotalOvers())
+                        return 1;
+                    else
+                        return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
     }
 
     public int getWickets() {
@@ -69,32 +90,38 @@ public class Innings {
         mWickets = wickets;
     }
 
+    public int getMaxWickets() {
+        return mMaxWickets;
+    }
+
     class Interruption {
+        private Innings mInnings;
 
         private int mInputRuns;
         private int mInputWickets;
         private int mInputOversCompleted;
         private int mInputNewTotalOvers;
 
-        private int mInitialOversRemaining;
-        private int mRestartOversRemaining;
-        private int mWicketsRemaining;
+        private int mBeforeOversRemaining; // number of overs remaining before interruption
+        private int mAfterOversRemaining; // number of overs remaining after interruption
+        private int mWicketsRemaining; // wickets in hand at interruption
 
-        public Interruption(int inputRuns, int inputWickets, int inputOversCompleted, int inputNewTotalOvers,
-                            int initialOvers, int restartOvers, int wicketsRemaining) {
+        public Interruption(Innings innings, int inputRuns, int inputWickets,
+                            int inputOversCompleted, int inputNewTotalOvers) {
+            mInnings = innings;
             mInputRuns = inputRuns;
             mInputWickets = inputWickets;
             mInputOversCompleted = inputOversCompleted;
             mInputNewTotalOvers = inputNewTotalOvers;
-
-            mInitialOversRemaining = initialOvers;
-            mRestartOversRemaining = restartOvers;
-            mWicketsRemaining = wicketsRemaining;
         }
 
-        public double getResourcesLost() {
-            double initialResources = Resources.getPercentage(mInitialOversRemaining, mWicketsRemaining);
-            double restartResources = Resources.getPercentage(mRestartOversRemaining, mWicketsRemaining);
+        public double getResourcesLost(int oldTotalOvers) {
+            mWicketsRemaining = mInnings.getMaxWickets() - mInputWickets;
+            mBeforeOversRemaining = oldTotalOvers - mInputOversCompleted;
+            mAfterOversRemaining = mBeforeOversRemaining - (oldTotalOvers - mInputNewTotalOvers);
+
+            double initialResources = Resources.getPercentage(mBeforeOversRemaining, mWicketsRemaining);
+            double restartResources = Resources.getPercentage(mAfterOversRemaining, mWicketsRemaining);
             return initialResources - restartResources;
         }
 

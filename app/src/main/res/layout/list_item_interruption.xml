@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
 
     <TextView
-        android:paddingLeft="16dp"
         android:id="@+id/interruption_desc_textView"
         android:text="Interruption after 00 overs"
         android:gravity="center"
@@ -13,19 +14,21 @@
 
     <ImageView
         android:src="@android:drawable/ic_menu_delete"
-        android:layout_marginRight="16dp"
         android:id="@+id/interruption_delete_button"
         android:layout_alignParentRight="true"
-        android:text="Delete"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/delete_interruption"
         android:layout_width="wrap_content"
         android:layout_height="48dp"/>
 
     <ImageView
         android:src="@android:drawable/ic_menu_edit"
         android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:id="@+id/interruption_edit_button"
         android:layout_toLeftOf="@id/interruption_delete_button"
-        android:text="Edit"
+        android:layout_toStartOf="@id/interruption_delete_button"
+        android:contentDescription="@string/edit_interruption"
         android:layout_width="wrap_content"
         android:layout_height="48dp"/>
 

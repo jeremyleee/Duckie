@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarActivity;
  * Created by Jeremy on 1/02/2015.
  * Launcher activity hosting fragments for a match (two innings + result fragments)
  * TODO: Fix orientation change
- * TODO: Allow for viewing and editing interruptions
  * TODO: Add ability to change total wickets?
  * TODO: Allow changing format (50 overs, 45 overs, T20 etc)
  * TODO: Allow changing G50
@@ -18,7 +17,6 @@ import android.support.v7.app.ActionBarActivity;
  * TODO: Multiple matches
  * TODO: Save to JSON
  * TODO: Redesign UI (Vincent)
- * TODO: fix set overs -> add interruption -> change overs (disable changing max overs after interruption added)
  */
 public class MatchActivity extends ActionBarActivity {
     private ViewPager mViewPager;
@@ -69,7 +67,7 @@ public class MatchActivity extends ActionBarActivity {
                         return getString(R.string.result_label);
                 }
 
-                return null;
+                return "";
             }
         });
 

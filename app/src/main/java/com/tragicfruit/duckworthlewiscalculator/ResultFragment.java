@@ -12,6 +12,7 @@ import java.util.UUID;
 
 /**
  * Created by Jeremy on 3/02/2015.
+ * Fragment for displaying the results of the Duckworth-Lewis calculation
  */
 public class ResultFragment extends Fragment {
     private static final String EXTRA_MATCH_ID =
