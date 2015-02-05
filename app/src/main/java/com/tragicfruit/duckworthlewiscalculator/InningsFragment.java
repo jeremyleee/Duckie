@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -33,6 +36,9 @@ public class InningsFragment extends Fragment {
     private Innings mInnings;
     private boolean mIsFirstInnings;
     private int mTotalOvers;
+
+    private LinearLayout mInterruptionList;
+    private TextView mInterruptionsLabel;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,7 +143,28 @@ public class InningsFragment extends Fragment {
             }
         });
 
+        mInterruptionsLabel = (TextView) v.findViewById(R.id.interruptions_label);
+        mInterruptionList = (LinearLayout) v.findViewById(R.id.interruption_list_section);
+        updateInterruptionList();
+
         return v;
+    }
+
+    private void updateInterruptionList() {
+        ArrayList<Innings.Interruption> interruptions = mInnings.getInterruptions();
+        if (interruptions.isEmpty()) {
+            mInterruptionsLabel.setVisibility(View.GONE);
+        } else {
+            mInterruptionsLabel.setVisibility(View.VISIBLE);
+        }
+
+        mInterruptionList.removeAllViews();
+        for (Innings.Interruption i : interruptions) {
+            RelativeLayout interruptionListItem = (RelativeLayout) getActivity().getLayoutInflater()
+                    .inflate(R.layout.list_item_interruption, null, false);
+            //((TextView) mInterruptionListItem.getChildAt(0)).setText("Placeholder");
+            mInterruptionList.addView(interruptionListItem);
+        }
     }
 
     @Override
@@ -146,11 +173,12 @@ public class InningsFragment extends Fragment {
 
         if (requestCode == REQUEST_INTERRUPTION) {
             mInnings.addInterruption(
-                data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
-                data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
-                data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
+                    data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
+                    data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
+                    data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
             );
             mTotalOvers = data.getIntExtra(InterruptionFragment.EXTRA_NEW_TOTAL_OVERS, -1);
+            updateInterruptionList();
         }
     }
 
