@@ -3,6 +3,7 @@ package com.tragicfruit.duckworthlewiscalculator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +11,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,9 +41,14 @@ public class InningsFragment extends Fragment {
 
     private LinearLayout mInterruptionList;
     private TextView mInterruptionsLabel;
+    private EditText mWicketsField;
+    private EditText mOversField;
+    private EditText mRunsField;
+    private Button mAddInterruptionButton;
 
     private Innings.Interruption mCurrentInterruptionEdited;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -56,11 +64,13 @@ public class InningsFragment extends Fragment {
 
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_innings, container, false);
 
-        View inningsFragmentContainer = v.findViewById(R.id.innings_fragmentContainer);
-        inningsFragmentContainer.requestFocus();
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
 
         /**
          * Set up innings specific widgets
@@ -71,10 +81,10 @@ public class InningsFragment extends Fragment {
             inningsLabel.setText(R.string.first_innings_label);
             firstInningsScoreSection.setVisibility(View.VISIBLE);
 
-            EditText runsField = (EditText) v.findViewById(R.id.first_innings_runs_editText);
+            mRunsField  = (EditText) v.findViewById(R.id.first_innings_runs_editText);
             if (mInnings.getRuns() >= 0)
-                runsField.setText("" + mInnings.getRuns());
-            runsField.addTextChangedListener(new TextWatcher() {
+                mRunsField.setText("" + mInnings.getRuns());
+            mRunsField.addTextChangedListener(new TextWatcher() {
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 public void afterTextChanged(Editable s) {}
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -91,10 +101,10 @@ public class InningsFragment extends Fragment {
                 }
             });
 
-            EditText wicketsField = (EditText) v.findViewById(R.id.first_innings_wickets_editText);
+            mWicketsField = (EditText) v.findViewById(R.id.first_innings_wickets_editText);
             if (mInnings.getWickets() >= 0)
-                wicketsField.setText("" + mInnings.getWickets());
-            wicketsField.addTextChangedListener(new TextWatcher() {
+                mWicketsField.setText("" + mInnings.getWickets());
+            mWicketsField.addTextChangedListener(new TextWatcher() {
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 public void afterTextChanged(Editable s) {}
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -115,10 +125,10 @@ public class InningsFragment extends Fragment {
             firstInningsScoreSection.setVisibility(View.GONE);
         }
 
-        EditText oversField = (EditText) v.findViewById(R.id.max_overs_editText);
+        mOversField = (EditText) v.findViewById(R.id.max_overs_editText);
         if (mInnings.getOvers() >= 0)
-            oversField.setText("" + mInnings.getOvers());
-        oversField.addTextChangedListener(new TextWatcher() {
+            mOversField.setText("" + mInnings.getOvers());
+        mOversField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void afterTextChanged(Editable s) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -135,8 +145,8 @@ public class InningsFragment extends Fragment {
             }
         });
 
-        Button addInterruptionButton = (Button) v.findViewById(R.id.add_interruption_button);
-        addInterruptionButton.setOnClickListener(new View.OnClickListener() {
+        mAddInterruptionButton  = (Button) v.findViewById(R.id.add_interruption_button);
+        mAddInterruptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
