@@ -1,5 +1,8 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.UUID;
 
 /**
@@ -7,12 +10,16 @@ import java.util.UUID;
  * Represents a single match
  */
 public class Match {
+    private static final String JSON_ID = "id";
+    private static final String JSON_MATCH_TYPE = "match_type";
+    private static final String JSON_IS_PRO_MATCH = "pro_match";
+    private static final String JSON_FIRST_INNINGS = "first_innings";
+    private static final String JSON_SECOND_INNINGS = "second_innings";
 
-    public enum MatchType {
-        TWENTY20, ONEDAY50
-    }
+    public static final int TWENTY20 = 0;
+    public static final int ONEDAY50 = 1;
 
-    private MatchType mMatchType;
+    private int mMatchType;
 
     /** G50 is the average score expected from the team batting first in an uninterrupted
      * 50 overs-per-innings match. Current values from ICC Playing Handbook 2013-14.
@@ -26,7 +33,7 @@ public class Match {
     public Innings mFirstInnings;
     public Innings mSecondInnings;
 
-    public Match(boolean isProMatch, MatchType matchType) {
+    public Match(boolean isProMatch, int matchType) {
         mId = UUID.randomUUID();
 
         mIsProMatch = isProMatch;
@@ -36,7 +43,25 @@ public class Match {
         mSecondInnings = new Innings();
     }
 
-    public MatchType getMatchType() {
+    public Match(JSONObject json) throws JSONException {
+        mId = UUID.fromString(json.getString(JSON_ID));
+        mMatchType = json.getInt(JSON_MATCH_TYPE);
+        mIsProMatch = json.getBoolean(JSON_IS_PRO_MATCH);
+        mFirstInnings = new Innings(json.getJSONObject(JSON_FIRST_INNINGS));
+        mSecondInnings = new Innings(json.getJSONObject(JSON_SECOND_INNINGS));
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put(JSON_ID, mId.toString());
+        json.put(JSON_MATCH_TYPE, mMatchType);
+        json.put(JSON_IS_PRO_MATCH, mIsProMatch);
+        json.put(JSON_FIRST_INNINGS, mFirstInnings.toJSON());
+        json.put(JSON_SECOND_INNINGS, mSecondInnings.toJSON());
+        return json;
+    }
+
+    public int getMatchType() {
         return mMatchType;
     }
 
@@ -45,11 +70,11 @@ public class Match {
     }
 
     private boolean isValidMatch() {
-        if (mMatchType == MatchType.ONEDAY50) {
+        if (mMatchType == ONEDAY50) {
             if (inningsIsValid(mFirstInnings, 20) && inningsIsValid(mSecondInnings, 20)) {
                 return true;
             }
-        } else if (mMatchType == MatchType.TWENTY20) {
+        } else if (mMatchType == TWENTY20) {
             if (inningsIsValid(mFirstInnings, 5) && inningsIsValid(mSecondInnings, 5)) {
                 return true;
             }

@@ -18,7 +18,6 @@ import android.support.v7.app.ActionBarActivity;
  * Misc: ----------------
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
  * TODO: fix orientation change
- * TODO: Save to JSON
  * TODO: Redesign UI (Vincent)
  */
 public class MatchActivity extends ActionBarActivity {
@@ -34,7 +33,12 @@ public class MatchActivity extends ActionBarActivity {
         setContentView(R.layout.activity_match);
 
         // TODO: implement user creating a match
-        mMatch = MatchLab.get().getMatches().get(0);
+        try {
+            mMatch = MatchLab.get(this).getMatches().get(0);
+        } catch (Exception e) {
+            mMatch = new Match(true, Match.ONEDAY50);
+            MatchLab.get(this).addMatch(mMatch);
+        }
 
         mResultFragment = ResultFragment.newInstance(mMatch.getId());
 
@@ -84,6 +88,12 @@ public class MatchActivity extends ActionBarActivity {
                     mResultFragment.updateResult();
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MatchLab.get(this).saveMatches();
     }
 
 }

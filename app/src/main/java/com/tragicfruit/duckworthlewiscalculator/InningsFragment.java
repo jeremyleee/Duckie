@@ -51,7 +51,7 @@ public class InningsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
-        Match match = MatchLab.get().getMatch(matchId);
+        Match match = MatchLab.get(getActivity()).getMatch(matchId);
 
         mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNINGS);
         if (mIsFirstInnings) {

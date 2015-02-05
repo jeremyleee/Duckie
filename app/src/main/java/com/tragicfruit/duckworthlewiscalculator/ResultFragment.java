@@ -31,7 +31,7 @@ public class ResultFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
-        mMatch = MatchLab.get().getMatch(matchId);
+        mMatch = MatchLab.get(getActivity()).getMatch(matchId);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class ResultFragment extends Fragment {
                     mGoodResult.setVisibility(View.INVISIBLE);
                     mBadResult.setVisibility(View.VISIBLE);
 
-                    int minOvers = mMatch.getMatchType() == Match.MatchType.ONEDAY50 ? 20 : 5;
+                    int minOvers = mMatch.getMatchType() == Match.ONEDAY50 ? 20 : 5;
                     mBadResult.setText(getString(R.string.no_result_message, minOvers));
                 }
             } catch (Exception e) {

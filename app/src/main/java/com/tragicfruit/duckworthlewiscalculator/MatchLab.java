@@ -1,5 +1,8 @@
 package com.tragicfruit.duckworthlewiscalculator;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -8,20 +11,32 @@ import java.util.UUID;
  * Stores all matches and handles adding and deleting of them.
  */
 public class MatchLab {
+    private static final String TAG = "MatchLab";
+    private static final String FILENAME = "matches.json";
+
     private static MatchLab sMatchLab;
+    private Context mAppContext;
 
     private ArrayList<Match> mMatches;
+    private DuckworthLewisCalculatorJSONSerializer mSerializer;
 
-    public static MatchLab get() {
+    public static MatchLab get(Context c) {
         if (sMatchLab == null) {
-            sMatchLab = new MatchLab();
+            sMatchLab = new MatchLab(c.getApplicationContext());
         }
         return sMatchLab;
     }
 
-    private MatchLab() {
-        mMatches = new ArrayList<>();
-        mMatches.add(new Match(true, Match.MatchType.ONEDAY50));
+    private MatchLab(Context appContext) {
+        mAppContext = appContext;
+        mSerializer = new DuckworthLewisCalculatorJSONSerializer(mAppContext, FILENAME);
+
+        try {
+            mMatches = mSerializer.loadMatches();
+        } catch (Exception e) {
+            mMatches = new ArrayList<>();
+            Log.e(TAG, "Error loading matches", e);
+        }
     }
 
     public void addMatch(Match m) {
@@ -34,6 +49,17 @@ public class MatchLab {
 
     public ArrayList<Match> getMatches() {
         return mMatches;
+    }
+
+    public boolean saveMatches() {
+        try {
+            mSerializer.saveMatches(mMatches);
+            Log.d(TAG, "Matches saved to file");
+            return true;
+        } catch (Exception e) {
+            Log.d(TAG, "Error saving matchs", e);
+            return false;
+        }
     }
 
     public Match getMatch(UUID id) {
