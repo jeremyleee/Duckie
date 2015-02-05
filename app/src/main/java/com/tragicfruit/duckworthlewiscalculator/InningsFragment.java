@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,7 +36,6 @@ public class InningsFragment extends Fragment {
 
     private Innings mInnings;
     private boolean mIsFirstInnings;
-    private int mTotalOvers;
 
     private LinearLayout mInterruptionList;
     private TextView mInterruptionsLabel;
@@ -122,7 +122,6 @@ public class InningsFragment extends Fragment {
                     int input = Integer.parseInt(s.toString());
                     if (input >= 0 && input <= 50) {
                         mInnings.setOvers(input);
-                        mTotalOvers = input;
                     } else {
                         throw new Exception();
                     }
@@ -132,12 +131,12 @@ public class InningsFragment extends Fragment {
             }
         });
 
-        Button firstInningsInterruption = (Button) v.findViewById(R.id.add_interruption_button);
-        firstInningsInterruption.setOnClickListener(new View.OnClickListener() {
+        Button addInterruptionButton = (Button) v.findViewById(R.id.add_interruption_button);
+        addInterruptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = InterruptionFragment.newInstance(mTotalOvers);
+                InterruptionFragment dialog = InterruptionFragment.newInstance(getOldTotalOvers());
                 dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
                 dialog.show(fm, DIALOG_INTERRUPTION);
             }
@@ -151,7 +150,7 @@ public class InningsFragment extends Fragment {
     }
 
     private void updateInterruptionList() {
-        ArrayList<Innings.Interruption> interruptions = mInnings.getInterruptions();
+        final ArrayList<Innings.Interruption> interruptions = mInnings.getInterruptions();
         if (interruptions.isEmpty()) {
             mInterruptionsLabel.setVisibility(View.GONE);
         } else {
@@ -159,12 +158,47 @@ public class InningsFragment extends Fragment {
         }
 
         mInterruptionList.removeAllViews();
-        for (Innings.Interruption i : interruptions) {
+        for (final Innings.Interruption i : interruptions) {
+
             RelativeLayout interruptionListItem = (RelativeLayout) getActivity().getLayoutInflater()
                     .inflate(R.layout.list_item_interruption, null, false);
-            //((TextView) mInterruptionListItem.getChildAt(0)).setText("Placeholder");
+            ((TextView) interruptionListItem.findViewById(R.id.interruption_desc_textView))
+                    .setText("Interruption after " + i.getInputOversCompleted() + " overs");
             mInterruptionList.addView(interruptionListItem);
+
+            // set listeners on interruption buttons
+            ImageView interruptionEditButton = (ImageView) interruptionListItem.findViewById(R.id.interruption_edit_button);
+            if (interruptionEditButton != null) {
+                interruptionEditButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentManager fm = getFragmentManager();
+                        InterruptionFragment dialog = InterruptionFragment.newInstance(getOldTotalOvers(),
+                                i.getInputRuns(), i.getInputWickets(), i.getInputOversCompleted(), i.getInputNewTotalOvers());
+                        dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
+                        dialog.show(fm, DIALOG_INTERRUPTION);
+                    }
+                });
+            }
+
+            ImageView interruptionDeleteButton = (ImageView) interruptionListItem.findViewById(R.id.interruption_delete_button);
+            if (interruptionDeleteButton != null) {
+                interruptionDeleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        interruptions.remove(i);
+                        updateInterruptionList();
+                    }
+                });
+            }
         }
+    }
+
+    // TODO: work this out per interruption
+    private int getOldTotalOvers() {
+        mInnings.getOvers();
+
+        return 0;
     }
 
     @Override
@@ -173,11 +207,14 @@ public class InningsFragment extends Fragment {
 
         if (requestCode == REQUEST_INTERRUPTION) {
             mInnings.addInterruption(
+                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_RUNS, -1),
+                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_WICKETS, -1),
+                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
+                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1),
                     data.getIntExtra(InterruptionFragment.EXTRA_BEFORE_OVERS, -1),
                     data.getIntExtra(InterruptionFragment.EXTRA_AFTER_OVERS, -1),
                     data.getIntExtra(InterruptionFragment.EXTRA_WICKETS, -1)
             );
-            mTotalOvers = data.getIntExtra(InterruptionFragment.EXTRA_NEW_TOTAL_OVERS, -1);
             updateInterruptionList();
         }
     }

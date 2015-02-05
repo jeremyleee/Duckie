@@ -54,8 +54,10 @@ public class Innings {
         }
     }
 
-    public void addInterruption(int initialOvers, int restartOvers, int wicketsRemaining) {
-        Interruption i = new Interruption(initialOvers, restartOvers, wicketsRemaining);
+    public void addInterruption(int inputRuns, int inputWickets, int inputOversCompleted, int inputNewTotalOvers,
+                                int initialOvers, int restartOvers, int wicketsRemaining) {
+        Interruption i = new Interruption(inputRuns, inputWickets, inputOversCompleted, inputNewTotalOvers,
+                initialOvers, restartOvers, wicketsRemaining);
         getInterruptions().add(i);
     }
 
@@ -69,11 +71,22 @@ public class Innings {
 
     class Interruption {
 
+        private int mInputRuns;
+        private int mInputWickets;
+        private int mInputOversCompleted;
+        private int mInputNewTotalOvers;
+
         private int mInitialOversRemaining;
         private int mRestartOversRemaining;
         private int mWicketsRemaining;
 
-        public Interruption(int initialOvers, int restartOvers, int wicketsRemaining) {
+        public Interruption(int inputRuns, int inputWickets, int inputOversCompleted, int inputNewTotalOvers,
+                            int initialOvers, int restartOvers, int wicketsRemaining) {
+            mInputRuns = inputRuns;
+            mInputWickets = inputWickets;
+            mInputOversCompleted = inputOversCompleted;
+            mInputNewTotalOvers = inputNewTotalOvers;
+
             mInitialOversRemaining = initialOvers;
             mRestartOversRemaining = restartOvers;
             mWicketsRemaining = wicketsRemaining;
@@ -85,6 +98,21 @@ public class Innings {
             return initialResources - restartResources;
         }
 
+        public int getInputRuns() {
+            return mInputRuns;
+        }
+
+        public int getInputWickets() {
+            return mInputWickets;
+        }
+
+        public int getInputOversCompleted() {
+            return mInputOversCompleted;
+        }
+
+        public int getInputNewTotalOvers() {
+            return mInputNewTotalOvers;
+        }
     }
 
 }

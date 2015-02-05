@@ -45,7 +45,7 @@
             android:id="@+id/interruptions_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Interruptions"
+            android:text="@string/interruptions_label"
             android:textStyle="bold"
             android:gravity="center"
             android:textSize="16sp"
