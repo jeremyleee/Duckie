@@ -11,7 +11,7 @@
         android:layout_height="48dp"/>
 
     <ImageView
-        android:src="@android:drawable/ic_menu_delete"
+        android:src="@drawable/ic_menu_delete"
         android:id="@+id/interruption_delete_button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -20,7 +20,7 @@
         android:layout_height="48dp"/>
 
     <ImageView
-        android:src="@android:drawable/ic_menu_edit"
+        android:src="@drawable/ic_menu_edit"
         android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
         android:id="@+id/interruption_edit_button"
