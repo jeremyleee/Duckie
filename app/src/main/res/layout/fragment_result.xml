@@ -36,6 +36,7 @@
     </LinearLayout>
 
     <TextView
+        android:gravity="center"
         android:id="@+id/bad_result_textView"
         android:layout_marginTop="48dp"
         android:layout_gravity="center_horizontal"

@@ -6,9 +6,9 @@
     <string name="first_innings_label">1st Innings</string>
     <string name="second_innings_label">2nd Innings</string>
     <string name="result_label">Result</string>
-    <string name="first_innings_score_label">Score after first innings:</string>
-    <string name="interruption_score_label">Score at interruption:</string>
-    <string name="starting_overs_label">Total overs at beginning of innings:</string>
+    <string name="first_innings_score_label">Score after first innings</string>
+    <string name="interruption_score_label">Score at interruption</string>
+    <string name="starting_overs_label">Total available overs\n(beginning of innings)</string>
     <string name="add_interruption_label">Add interruption</string>
     <string name="target_score">Target score:</string>
     <string name="calculation_error_message">Error calculating target score.\nPlease check input values.</string>
@@ -16,8 +16,8 @@
     <string name="interruptions_label">Interruptions</string>
     <string name="edit_interruption">Edit</string>
     <string name="delete_interruption">Delete</string>
-    <string name="interruption_overs_completed_label">Overs completed:</string>
-    <string name="interruption_new_total_overs">Updated total number of overs:</string>
+    <string name="interruption_overs_completed_label">Overs completed</string>
+    <string name="interruption_new_total_overs">Total available overs\n(reduced figure)</string>
     <string name="interruption_title">Interruption at %1$s/%2$s after %3$s overs</string>
 
 </resources>
