@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 /**
  * Created by Jeremy on 6/02/2015.
- * Explains Duckworth-Lewis method and the app's capabilties
+ * Explains the Duckworth-Lewis method and the app's capabilties
  */
 public class AboutActivity extends ActionBarActivity {
     private Toolbar mToolbar;
@@ -41,9 +41,11 @@ public class AboutActivity extends ActionBarActivity {
         leaveFeedbackLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_SENDTO,
-                        Uri.fromParts("mailto", getString(R.string.feedback_email_address), null));
-                i.putExtra(Intent.EXTRA_SUBJECT, R.string.feedback_email_subject);
+                String uriString = "mailto:"
+                        + getString(R.string.feedback_email_address)
+                        + "?subject=" + getString(R.string.feedback_email_subject);
+                Intent i = new Intent(Intent.ACTION_SENDTO);
+                i.setData(Uri.parse(uriString));
                 startActivity(i);
             }
         });
