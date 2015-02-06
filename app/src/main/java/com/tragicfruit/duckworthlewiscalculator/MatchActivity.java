@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 
 /**
  * Created by Jeremy on 1/02/2015.
@@ -19,8 +20,10 @@ import android.support.v7.app.ActionBarActivity;
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
  * TODO: fix orientation change
  * TODO: Redesign UI (Vincent)
+ * TODO: Overs lost calculator
  */
 public class MatchActivity extends ActionBarActivity {
+    private Toolbar mToolbar;
     private ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
 
@@ -31,6 +34,9 @@ public class MatchActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         // TODO: implement user creating a match
         try {
@@ -78,7 +84,13 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.tab_strip_colour));
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}

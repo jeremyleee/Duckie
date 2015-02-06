@@ -39,8 +39,8 @@ public class Match {
         mIsProMatch = isProMatch;
         mMatchType = matchType;
 
-        mFirstInnings = new Innings();
-        mSecondInnings = new Innings();
+        mFirstInnings = new Innings(mMatchType);
+        mSecondInnings = new Innings(mMatchType);
     }
 
     public Match(JSONObject json) throws JSONException {
