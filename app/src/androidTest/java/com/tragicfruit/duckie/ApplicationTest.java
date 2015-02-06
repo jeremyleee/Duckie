@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

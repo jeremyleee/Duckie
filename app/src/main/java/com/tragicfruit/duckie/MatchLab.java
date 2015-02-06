@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,7 +18,7 @@ public class MatchLab {
     private Context mAppContext;
 
     private ArrayList<Match> mMatches;
-    private DuckworthLewisCalculatorJSONSerializer mSerializer;
+    private DuckieJSONSerializer mSerializer;
 
     public static MatchLab get(Context c) {
         if (sMatchLab == null) {
@@ -29,7 +29,7 @@ public class MatchLab {
 
     private MatchLab(Context appContext) {
         mAppContext = appContext;
-        mSerializer = new DuckworthLewisCalculatorJSONSerializer(mAppContext, FILENAME);
+        mSerializer = new DuckieJSONSerializer(mAppContext, FILENAME);
 
         try {
             mMatches = mSerializer.loadMatches();

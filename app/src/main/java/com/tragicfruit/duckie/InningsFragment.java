@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -27,9 +27,9 @@ import java.util.UUID;
  */
 public class InningsFragment extends Fragment {
     private static final String EXTRA_MATCH_ID =
-            "com.tragicfruit.duckworthlewiscalculator.match_id";
+            "com.tragicfruit.duckie.match_id";
     private static final String EXTRA_IS_FIRST_INNINGS =
-            "com.tragicfruit.duckworthlewiscalculator.is_first_innings";
+            "com.tragicfruit.duckie.is_first_innings";
 
     private static final String DIALOG_INTERRUPTION = "interruption";
     private static final int REQUEST_INTERRUPTION = 0;

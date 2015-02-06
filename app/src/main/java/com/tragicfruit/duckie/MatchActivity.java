@@ -1,13 +1,14 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 
 /**
  * Created by Jeremy on 1/02/2015.
@@ -104,11 +105,23 @@ public class MatchActivity extends ActionBarActivity {
         });
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_match, menu);
         return true;
-    }*/
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.menu_about):
+                Intent i = new Intent(this, AboutActivity.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onPause() {

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DuckworthLewisCalculator.iml" filepath="$PROJECT_DIR$/DuckworthLewisCalculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Duckie.iml" filepath="$PROJECT_DIR$/Duckie.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

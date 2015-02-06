@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import org.json.JSONException;
 import org.json.JSONObject;

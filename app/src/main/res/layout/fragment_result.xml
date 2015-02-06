@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="60sp"
+        android:textStyle="bold"
         android:text="0"/>
 
     <TextView

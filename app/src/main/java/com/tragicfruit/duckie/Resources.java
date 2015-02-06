@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 /**
  * Created by Jeremy on 1/02/2015.

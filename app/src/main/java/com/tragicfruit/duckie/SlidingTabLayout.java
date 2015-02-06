@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.content.Context;
 import android.graphics.Typeface;

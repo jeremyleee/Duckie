@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,10 +16,10 @@ import android.widget.Toast;
  * TODO: Simplify interruptions dialog
  */
 public class InterruptionFragment extends DialogFragment {
-    public static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckworthlewiscalculator.input_runs";
-    public static final String EXTRA_INPUT_WICKETS = "com.tragicfruit.duckworthlewiscalculator.input_wickets";
-    public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckworthlewiscalculator.input_overs_completed";
-    public static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckworthlewiscalculator.input_new_total_overs";
+    public static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckie.input_runs";
+    public static final String EXTRA_INPUT_WICKETS = "com.tragicfruit.duckie.input_wickets";
+    public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
+    public static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckie.input_new_total_overs";
 
     private int mInputRuns;
     private int mInputWickets;

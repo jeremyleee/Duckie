@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.content.Context;
 
@@ -20,12 +20,12 @@ import java.util.ArrayList;
  * Created by Jeremy on 6/02/2015.
  * Saves and loads matches to JSON file
  */
-public class DuckworthLewisCalculatorJSONSerializer {
+public class DuckieJSONSerializer {
 
     private Context mContext;
     private String mFileName;
 
-    public DuckworthLewisCalculatorJSONSerializer(Context c, String f) {
+    public DuckieJSONSerializer(Context c, String f) {
         mContext = c;
         mFileName = f;
     }

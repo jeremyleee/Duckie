@@ -1,4 +1,4 @@
-package com.tragicfruit.duckworthlewiscalculator;
+package com.tragicfruit.duckie;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class ResultFragment extends Fragment {
     private static final String EXTRA_MATCH_ID =
-            "com.tragicfruit.duckworthlewiscalculator.match_id";
+            "com.tragicfruit.duckie.match_id";
 
     private static final String TAG = "ResultFragment";
 
