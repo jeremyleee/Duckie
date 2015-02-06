@@ -11,8 +11,10 @@
     <string name="starting_overs_label">Total available overs\n(beginning of innings)</string>
     <string name="add_interruption_label">Add interruption</string>
     <string name="target_score">Target score:</string>
-    <string name="calculation_error_message">Error calculating target score.\nPlease check input values.</string>
-    <string name="no_result_message">No result\n(minimum of %s overs\nrequired per side)</string>
+    <string name="calculation_error_label">Error</string>
+    <string name="calculation_error_detail">Error calculating target score.\nPlease check input values.</string>
+    <string name="no_result_label">No result</string>
+    <string name="no_result_detail">(minimum of %s overs\nrequired per side)</string>
     <string name="interruptions_label">Interruptions</string>
     <string name="edit_interruption">Edit</string>
     <string name="delete_interruption">Delete</string>

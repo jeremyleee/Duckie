@@ -21,10 +21,9 @@ public class ResultFragment extends Fragment {
     private static final String TAG = "ResultFragment";
 
     private Match mMatch;
-    private View mGoodResult;
-    private TextView mBadResult;
     private TextView mTargetScoreTextView;
-    private TextView mTieTextView;
+    private TextView mResultTextView;
+    private TextView mResultDetailTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,11 +37,9 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_result, container, false);
 
-        mGoodResult = v.findViewById(R.id.good_result);
-        mBadResult = (TextView) v.findViewById(R.id.bad_result_textView);
-
         mTargetScoreTextView = (TextView) v.findViewById(R.id.target_score_textView);
-        mTieTextView = (TextView) v.findViewById(R.id.tie_label);
+        mResultTextView = (TextView) v.findViewById(R.id.result_textView);
+        mResultDetailTextView = (TextView) v.findViewById(R.id.result_detail_textView);
 
         updateResult();
 
@@ -59,33 +56,35 @@ public class ResultFragment extends Fragment {
         if (isValidInput()) {
             try {
                 if (mMatch.getTargetScore() >= 0) {
-                    mGoodResult.setVisibility(View.VISIBLE);
-                    mBadResult.setVisibility(View.INVISIBLE);
+                    mTargetScoreTextView.setVisibility(View.VISIBLE);
 
-                    mTargetScoreTextView.setText("" + mMatch.getTargetScore());
-                    mTieTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+                    mResultTextView.setText("" + mMatch.getTargetScore());
+                    mResultDetailTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
                 } else {
                     // No result (not reached minimum required overs)
-                    mGoodResult.setVisibility(View.INVISIBLE);
-                    mBadResult.setVisibility(View.VISIBLE);
+                    mTargetScoreTextView.setVisibility(View.GONE);
 
+                    mResultTextView.setText(R.string.no_result_label);
                     int minOvers = mMatch.getMatchType() == Match.ONEDAY50 ? 20 : 5;
-                    mBadResult.setText(getString(R.string.no_result_message, minOvers));
+                    mResultDetailTextView.setText(getString(R.string.no_result_detail, minOvers));
                 }
             } catch (Exception e) {
                 // Valid inputs, but error with finding resources
-                mBadResult.setText(R.string.calculation_error_message);
+                mTargetScoreTextView.setVisibility(View.GONE);
 
-                mGoodResult.setVisibility(View.INVISIBLE);
-                mBadResult.setVisibility(View.VISIBLE);
+                mResultTextView.setText(R.string.calculation_error_label);
+                mResultDetailTextView.setText(R.string.calculation_error_detail);
 
                 Log.e(TAG, "Error calculating target score", e);
             }
         } else {
             // Missing one of the input values
+            mTargetScoreTextView.setVisibility(View.GONE);
+
+            mResultTextView.setText(R.string.calculation_error_label);
+            mResultDetailTextView.setText(R.string.calculation_error_detail);
+
             Log.i(TAG, "Invalid input");
-            mGoodResult.setVisibility(View.INVISIBLE);
-            mBadResult.setVisibility(View.VISIBLE);
         }
     }
 
