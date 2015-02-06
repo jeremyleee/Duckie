@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.tragicfruit.duckie.MatchActivity"
+            android:name=".MatchActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -18,12 +18,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tragicfruit.duckie.AboutActivity"
+            android:name=".AboutActivity"
             android:label="@string/menu_about"
             android:screenOrientation="portrait"
-            android:parentActivityName="com.tragicfruit.duckie.MatchActivity">
+            android:parentActivityName=".MatchActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value="com.tragicfruit.duckie.MatchActivity"/>
+                       android:value=".MatchActivity"/>
         </activity>
     </application>
 
