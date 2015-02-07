@@ -4,5 +4,6 @@
     <color name="ColorPrimary">#8BC34A</color>
     <color name="ColorPrimaryDark">#689F38</color>
     <color name="tabsScrollColor">#FFFFFF</color>
+    <color name="editText">#616161</color>
 
 </resources>

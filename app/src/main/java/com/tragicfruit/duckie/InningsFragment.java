@@ -71,6 +71,10 @@ public class InningsFragment extends Fragment {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        // Prevents focus on EditText when opening fragment
+        View focusHere = v.findViewById(R.id.focus_here);
+        focusHere.requestFocus();
+
         /**
          * Set up innings specific widgets
          */

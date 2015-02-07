@@ -51,6 +51,10 @@ public class InterruptionFragment extends DialogFragment {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_interruption, null);
 
+        // Prevents focus on EditText when opening dialog
+        View focusHere = v.findViewById(R.id.focus_here);
+        focusHere.requestFocus();
+
         mRunsField = (EditText) v.findViewById(R.id.interruption_runs_editText);
         mWicketsField = (EditText) v.findViewById(R.id.interruption_wickets_editText);
         mOversField = (EditText) v.findViewById(R.id.interruption_overs_completed);
