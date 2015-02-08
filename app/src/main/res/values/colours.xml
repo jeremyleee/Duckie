@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="ColorPrimary">#8BC34A</color>
-    <color name="ColorPrimaryDark">#689F38</color>
+    <color name="ColorPrimary">#BE4238</color>
+    <color name="ColorPrimaryDark">#A5362C</color>
     <color name="tabsScrollColor">#FFFFFF</color>
+    <color name="notSelectedTab">#EF9A9A</color>
     <color name="editText">#616161</color>
 
 </resources>
