@@ -37,6 +37,6 @@
     <string name="leave_feedback_label">Leave feedback</string>
     <string name="app_version_label">Version %s</string>
     <string name="feedback_email_subject">Duckie Feedback</string>
-    <string name="feedback_email_address">jeremy@jeremylee.co.nz</string>
+    <string name="feedback_email_address">support@tragicfruit.com</string>
 
 </resources>
