@@ -37,8 +37,28 @@ public class AboutActivity extends ActionBarActivity {
             Log.e("AboutActivity", "Error reporting version number", e);
         }
 
-        Button leaveFeedbackLabel = (Button) findViewById(R.id.leave_feedback_label);
-        leaveFeedbackLabel.setOnClickListener(new View.OnClickListener() {
+        Button rateAppButton = (Button) findViewById(R.id.rate_app_button);
+        rateAppButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String appPackageName = getPackageName();
+                try {
+                    Uri playStoreLink = Uri.parse("market://details?id=" + appPackageName);
+                    Intent i = new Intent(Intent.ACTION_VIEW, playStoreLink);
+                    startActivity(i);
+                } catch (android.content.ActivityNotFoundException e) {
+                    // Devices without Play Store
+                    Uri playStoreLink = Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName);
+                    Intent i = new Intent(Intent.ACTION_VIEW, playStoreLink);
+                    startActivity(i);
+                }
+
+
+            }
+        });
+
+        Button sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
+        sendFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String uriString = "mailto:"

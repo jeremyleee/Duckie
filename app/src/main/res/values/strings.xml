@@ -34,7 +34,8 @@
         first class cricket. The ability to change G50 to a custom number is planned for a future
         version of the app. This app is intended to be used for 50 over matches, but support for
         Twenty20 matches is also planned for a future version.</string>
-    <string name="leave_feedback_label">Leave feedback</string>
+    <string name="rate_app_button">Rate App</string>
+    <string name="send_feedback_button">Send Feedback</string>
     <string name="app_version_label">Version %s</string>
     <string name="feedback_email_subject">Duckie Feedback</string>
     <string name="feedback_email_address">support@tragicfruit.com</string>

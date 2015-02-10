@@ -31,13 +31,26 @@
             android:layout_marginBottom="16dp"
             android:text="@string/about_page_second_paragraph"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
         <Button
-            android:id="@+id/leave_feedback_label"
-            android:layout_marginBottom="16dp"
+            android:id="@+id/rate_app_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rate_app_button"/>
+
+        <Button
+            android:id="@+id/send_feedback_button"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/leave_feedback_label"/>
+            android:text="@string/send_feedback_button"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/version_label"
