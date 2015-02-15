@@ -1,6 +1,7 @@
 package com.tragicfruit.duckie;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -17,15 +18,18 @@ import android.view.MenuItem;
  * TODO: Multiple matches
  * Menu/settings: -------
  * TODO: Add ability to change total wickets?
- * TODO: Allow changing format (50 overs, 45 overs, T20 etc)
- * TODO: Allow changing G50
+ * TODO: Allow changing format (50 overs, T20)
+ * TODO: Tidy up change G50 fragment
  * Misc: ----------------
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
  * TODO: fix orientation change
  * TODO: Redesign UI (Vincent)
  * TODO: Overs lost calculator
+ * TODO: Net run rate Calculator
  */
 public class MatchActivity extends ActionBarActivity {
+    private static final String DIALOG_CHANGE_G50 = "change_g50";
+
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
@@ -100,9 +104,13 @@ public class MatchActivity extends ActionBarActivity {
             public void onPageScrollStateChanged(int state) {}
             public void onPageSelected(int position) {
                 if (position == 2)
-                    mResultFragment.updateResult();
+                    updateResult();
             }
         });
+    }
+
+    public void updateResult() {
+        mResultFragment.updateResult();
     }
 
     @Override
@@ -118,6 +126,10 @@ public class MatchActivity extends ActionBarActivity {
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
                 return true;
+            case (R.id.menu_change_g50):
+                ChangeG50Fragment fragment = ChangeG50Fragment.newInstance(mMatch.getId(), mMatch.getG50());
+                FragmentManager fm = getFragmentManager();
+                fragment.show(fm, DIALOG_CHANGE_G50);
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 /**
  * Created by Jeremy on 1/02/2015.
- * TODO: Simplify interruptions dialog
+ * Displays details of an interruption
  */
 public class InterruptionFragment extends DialogFragment {
     public static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckie.input_runs";
@@ -78,7 +78,10 @@ public class InterruptionFragment extends DialogFragment {
                             setResult(Activity.RESULT_OK);
                         } else {
                             setResult(Activity.RESULT_CANCELED);
-                            Toast.makeText(getActivity(), "Invalid input", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),
+                                    R.string.invalid_interruption_toast,
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                         }
                     }
                 })

@@ -13,6 +13,7 @@ public class Match {
     private static final String JSON_ID = "id";
     private static final String JSON_MATCH_TYPE = "match_type";
     private static final String JSON_IS_PRO_MATCH = "pro_match";
+    private static final String JSON_G50 = "g50";
     private static final String JSON_FIRST_INNINGS = "first_innings";
     private static final String JSON_SECOND_INNINGS = "second_innings";
 
@@ -25,6 +26,7 @@ public class Match {
      * 50 overs-per-innings match. Current values from ICC Playing Handbook 2013-14.
      */
     private boolean mIsProMatch;
+    private int mG50;
     private static final int proG50 = 245;
     private static final int amateurG50 = 200;
 
@@ -39,6 +41,12 @@ public class Match {
         mIsProMatch = isProMatch;
         mMatchType = matchType;
 
+       if (mIsProMatch) {
+           mG50 = proG50;
+       } else {
+           mG50 = amateurG50;
+       }
+
         mFirstInnings = new Innings(mMatchType);
         mSecondInnings = new Innings(mMatchType);
     }
@@ -47,6 +55,7 @@ public class Match {
         mId = UUID.fromString(json.getString(JSON_ID));
         mMatchType = json.getInt(JSON_MATCH_TYPE);
         mIsProMatch = json.getBoolean(JSON_IS_PRO_MATCH);
+        mG50 = json.getInt(JSON_G50);
         mFirstInnings = new Innings(json.getJSONObject(JSON_FIRST_INNINGS));
         mSecondInnings = new Innings(json.getJSONObject(JSON_SECOND_INNINGS));
     }
@@ -56,6 +65,7 @@ public class Match {
         json.put(JSON_ID, mId.toString());
         json.put(JSON_MATCH_TYPE, mMatchType);
         json.put(JSON_IS_PRO_MATCH, mIsProMatch);
+        json.put(JSON_G50, mG50);
         json.put(JSON_FIRST_INNINGS, mFirstInnings.toJSON());
         json.put(JSON_SECOND_INNINGS, mSecondInnings.toJSON());
         return json;
@@ -65,8 +75,12 @@ public class Match {
         return mMatchType;
     }
 
-    private double getG50() {
-        return (double) (mIsProMatch ? proG50 : amateurG50);
+    public int getG50() {
+        return mG50;
+    }
+
+    public void setG50(int g50) {
+        mG50 = g50;
     }
 
     private boolean isValidMatch() {

@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Duckie</string>
-    <string name="menu_about">About</string>
+    <string name="change_g50_label">Change G50</string>
+    <string name="about_label">About</string>
     <string name="first_innings_label">1st Innings</string>
     <string name="second_innings_label">2nd Innings</string>
     <string name="result_label">Result</string>
@@ -21,6 +22,9 @@
     <string name="interruption_overs_completed_label">Overs completed</string>
     <string name="interruption_new_total_overs">Total available overs\n(reduced figure)</string>
     <string name="interruption_title">Interruption at %1$s/%2$s after %3$s overs</string>
+    <string name="invalid_interruption_toast">Invalid interruption</string>
+    <string name="g50_changed_toast">G50 changed to %s.</string>
+    <string name="invalid_g50_toast">Invalid G50</string>
     <string name="about_page_first_paragraph">This app calculates target scores in weather affected
         cricket matches using the Duckworth-Lewis method. It uses the Standard Edition which was
         used for all matches prior to 2003. The current method used for all international matches
@@ -37,7 +41,7 @@
     <string name="rate_app_button">Rate App</string>
     <string name="send_feedback_button">Send Feedback</string>
     <string name="app_version_label">Version %s</string>
-    <string name="feedback_email_subject">Duckie Feedback</string>
+    <string name="feedback_email_subject">Duckie Feedback (%s)</string>
     <string name="feedback_email_address">support@tragicfruit.com</string>
 
 </resources>

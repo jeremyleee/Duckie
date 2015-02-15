@@ -44,7 +44,7 @@ public class InningsFragment extends Fragment {
     private EditText mRunsField;
     private Button mAddInterruptionButton;
 
-    private Innings.Interruption mCurrentInterruptionEdited;
+    private Innings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

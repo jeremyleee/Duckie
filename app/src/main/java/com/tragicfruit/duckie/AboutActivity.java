@@ -61,9 +61,15 @@ public class AboutActivity extends ActionBarActivity {
         sendFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String version;
+                try {
+                    version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                } catch (Exception e) {
+                    version = "no version";
+                }
                 String uriString = "mailto:"
                         + getString(R.string.feedback_email_address)
-                        + "?subject=" + getString(R.string.feedback_email_subject);
+                        + "?subject=" + getString(R.string.feedback_email_subject, version);
                 Intent i = new Intent(Intent.ACTION_SENDTO);
                 i.setData(Uri.parse(uriString));
                 startActivity(i);

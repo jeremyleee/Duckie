@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/menu_about"
+            android:label="@string/about_label"
             android:screenOrientation="portrait"
             android:parentActivityName=".MatchActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
