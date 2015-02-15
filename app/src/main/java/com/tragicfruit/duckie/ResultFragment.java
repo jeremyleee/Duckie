@@ -98,4 +98,12 @@ public class ResultFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            updateResult();
+        }
+    }
+
 }
