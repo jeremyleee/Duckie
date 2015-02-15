@@ -1,9 +1,11 @@
 package com.tragicfruit.duckie;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import java.util.UUID;
  */
 public class ChangeG50Fragment extends DialogFragment {
     private static final String EXTRA_MATCH_ID = "com.tragicfruit.duckie.match_id";
+    public static final String EXTRA_G50 = "com.tragicfruit.duckie.g50";
 
     private EditText mChangeG50Field;
     private int mG50;
@@ -46,8 +49,7 @@ public class ChangeG50Fragment extends DialogFragment {
                                     getString(R.string.g50_changed_toast, mG50),
                                     Toast.LENGTH_SHORT)
                                     .show();
-                            // TODO: change this to maintain fragment independence
-                            ((MatchActivity) getActivity()).updateFragments();
+                            setResult(Activity.RESULT_OK);
                         } else {
                             Toast.makeText(getActivity(),
                                     R.string.invalid_g50_toast,
@@ -62,11 +64,17 @@ public class ChangeG50Fragment extends DialogFragment {
     private boolean isValidInput() {
         try {
             mG50 = Integer.parseInt(mChangeG50Field.getText().toString());
-            mMatch.setG50(mG50);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private void setResult(int result) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_G50, mG50);
+
+        getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
     }
 
     public static ChangeG50Fragment newInstance(UUID matchId) {

@@ -1,9 +1,11 @@
 package com.tragicfruit.duckie;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -17,6 +19,7 @@ import java.util.UUID;
  */
 public class ChangeMatchTypeFragment extends DialogFragment {
     private static final String EXTRA_MATCH_ID = "com.tragicfruit.duckie.match_id";
+    public static final String EXTRA_MATCH_TYPE = "com.tragicfruit.duckie.match_type";
 
     private Match mMatch;
 
@@ -46,18 +49,20 @@ public class ChangeMatchTypeFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         int checkedItem = radioGroup.getCheckedRadioButtonId();
                         if (checkedItem == R.id.one_day_radioButton) {
-                            mMatch.setMatchType(Match.ONEDAY50);
-                            mMatch.mFirstInnings.setMaxOvers(Match.ONEDAY50);
-                            mMatch.mSecondInnings.setMaxOvers(Match.ONEDAY50);
+                            setResult(Activity.RESULT_OK, Match.ONEDAY50);
                         } else if (checkedItem == R.id.twenty20_radioButton) {
-                            mMatch.setMatchType(Match.TWENTY20);
-                            mMatch.mFirstInnings.setMaxOvers(Match.TWENTY20);
-                            mMatch.mSecondInnings.setMaxOvers(Match.TWENTY20);
+                            setResult(Activity.RESULT_OK, Match.TWENTY20);
                         }
-                        ((MatchActivity) getActivity()).updateFragments();
                     }
                 })
                 .create();
+    }
+
+    private void setResult(int result, int matchType) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_MATCH_TYPE, matchType);
+
+        getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
     }
 
     public static ChangeMatchTypeFragment newInstance(UUID matchId) {

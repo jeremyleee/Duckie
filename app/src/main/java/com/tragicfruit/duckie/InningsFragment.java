@@ -132,11 +132,11 @@ public class InningsFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     int input = Integer.parseInt(s.toString());
-                    //if (input >= 0 && input <= mMatch.getMatchType()) {
+                    if (input >= 0 && input <= mMatch.getMatchType()) {
                         mInnings.setMaxOvers(input);
-                    //} else {
-                    //    throw new Exception();
-                    //}
+                    } else {
+                        throw new Exception();
+                    }
                 } catch (Exception e) {
                     mInnings.setMaxOvers(-1);
                 }
