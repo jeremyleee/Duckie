@@ -1,7 +1,6 @@
 package com.tragicfruit.duckie;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -19,7 +18,6 @@ import android.view.MenuItem;
  * TODO: Multiple matches
  * Menu/settings: -------
  * TODO: Add ability to change total wickets?
- * TODO: Allow changing format (50 overs, T20)
  * TODO: Tidy up change G50 fragment
  * Misc: ----------------
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
@@ -29,6 +27,7 @@ import android.view.MenuItem;
  * TODO: Net run rate calculator
  */
 public class MatchActivity extends ActionBarActivity {
+    private static final String DIALOG_CHANGE_MATCH_TYPE = "change_match_type";
     private static final String DIALOG_CHANGE_G50 = "change_g50";
 
     private static final String TAG = "MatchActivity";
@@ -38,6 +37,8 @@ public class MatchActivity extends ActionBarActivity {
     private SlidingTabLayout mSlidingTabLayout;
 
     private Match mMatch;
+    private InningsFragment mFirstInningsFragment;
+    private InningsFragment mSecondInningsFragment;
     private ResultFragment mResultFragment; // required for updating result
 
     @Override
@@ -56,6 +57,8 @@ public class MatchActivity extends ActionBarActivity {
             MatchLab.get(this).addMatch(mMatch);
         }
 
+        mFirstInningsFragment = InningsFragment.newInstance(mMatch.getId(), true);
+        mSecondInningsFragment = InningsFragment.newInstance(mMatch.getId(), false);
         mResultFragment = ResultFragment.newInstance(mMatch.getId());
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -64,9 +67,9 @@ public class MatchActivity extends ActionBarActivity {
             public Fragment getItem(int i) {
                 switch (i) {
                     case 0:
-                        return InningsFragment.newInstance(mMatch.getId(), true);
+                        return mFirstInningsFragment;
                     case 1:
-                        return InningsFragment.newInstance(mMatch.getId(), false);
+                        return mSecondInningsFragment;
                     case 2:
                         return mResultFragment;
                 }
@@ -93,6 +96,8 @@ public class MatchActivity extends ActionBarActivity {
             }
         });
 
+        mViewPager.setOffscreenPageLimit(2);
+
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
@@ -106,15 +111,16 @@ public class MatchActivity extends ActionBarActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             public void onPageScrollStateChanged(int state) {}
             public void onPageSelected(int position) {
-                if (position == 2)
-                    updateResult();
+                updateFragments();
             }
         });
     }
 
-    public void updateResult() {
+    public void updateFragments() {
         try {
-            mResultFragment.updateResult();
+            mFirstInningsFragment.update();
+            mSecondInningsFragment.update();
+            mResultFragment.update();
         } catch (Exception e) {
             Log.i(TAG, "Error updating result", e);
         }
@@ -134,9 +140,13 @@ public class MatchActivity extends ActionBarActivity {
                 startActivity(i);
                 return true;
             case (R.id.menu_change_g50):
-                ChangeG50Fragment fragment = ChangeG50Fragment.newInstance(mMatch.getId(), mMatch.getG50());
-                FragmentManager fm = getFragmentManager();
-                fragment.show(fm, DIALOG_CHANGE_G50);
+                ChangeG50Fragment g50Fragment = ChangeG50Fragment.newInstance(mMatch.getId());
+                g50Fragment.show(getFragmentManager(), DIALOG_CHANGE_G50);
+                return true;
+            case (R.id.menu_change_match_type):
+                ChangeMatchTypeFragment matchTypeFragment = ChangeMatchTypeFragment.newInstance(mMatch.getId());
+                matchTypeFragment.show(getFragmentManager(), DIALOG_CHANGE_MATCH_TYPE);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -2,9 +2,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".CalculatorActivity">
+    <item android:id="@+id/menu_change_match_type"
+          android:title="@string/change_match_type_label"
+          android:orderInCategory="0"
+          app:showAsAction="never"/>
     <item android:id="@+id/menu_change_g50"
         android:title="@string/change_g50_label"
-        android:orderInCategory="0"
+        android:orderInCategory="1"
         app:showAsAction="never"/>
     <item android:id="@+id/menu_about"
           android:title="@string/about_label"

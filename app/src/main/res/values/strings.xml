@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Duckie</string>
+    <string name="change_match_type_label">Change match type</string>
     <string name="change_g50_label">Change G50</string>
     <string name="about_label">About</string>
     <string name="first_innings_label">1st Innings</string>
@@ -35,9 +36,8 @@
     <string name="about_page_second_paragraph">Results are calculated using the over-by-over tables
         provided in the ICC Playing Handbook 2013-2014. The default G50 figure used in the calculation
         is 245, which is the default for matches involving ICC full member nations and teams playing
-        first class cricket, but this figure can be changed to a custom number in the menu. This app
-        is intended to be used for 50 over matches, but support for Twenty20 matches is planned for
-        a future version.</string>
+        first class cricket, but this figure can be changed to a custom number in the menu. The default
+        match type is a 50 over match, but this can also be changed to a Twenty20 match in the menu.</string>
     <string name="rate_app_button">Rate App</string>
     <string name="send_feedback_button">Send Feedback</string>
     <string name="app_version_label">Version %s</string>

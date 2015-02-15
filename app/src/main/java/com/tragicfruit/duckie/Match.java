@@ -17,8 +17,8 @@ public class Match {
     private static final String JSON_FIRST_INNINGS = "first_innings";
     private static final String JSON_SECOND_INNINGS = "second_innings";
 
-    public static final int TWENTY20 = 0;
-    public static final int ONEDAY50 = 1;
+    public static final int TWENTY20 = 20;
+    public static final int ONEDAY50 = 50;
 
     private int mMatchType;
 
@@ -73,6 +73,10 @@ public class Match {
 
     public int getMatchType() {
         return mMatchType;
+    }
+
+    public void setMatchType(int matchType) {
+        mMatchType = matchType;
     }
 
     public int getG50() {

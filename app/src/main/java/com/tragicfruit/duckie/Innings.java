@@ -29,14 +29,8 @@ public class Innings {
 
     private ArrayList<Interruption> mInterruptions = new ArrayList<>();
 
-    public Innings(int matchType) {
-        if (matchType == Match.ONEDAY50) {
-            mMaxOvers = 50;
-        } else if (matchType == Match.TWENTY20) {
-            mMaxOvers = 20;
-        } else {
-            mMaxOvers = -1;
-        }
+    public Innings(int initialMaxOvers) {
+        mMaxOvers = initialMaxOvers;
         mRuns = -1;
         mWickets = -1;
     }

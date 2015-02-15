@@ -41,7 +41,7 @@ public class ResultFragment extends Fragment {
         mResultTextView = (TextView) v.findViewById(R.id.result_textView);
         mResultDetailTextView = (TextView) v.findViewById(R.id.result_detail_textView);
 
-        updateResult();
+        update();
 
         return v;
     }
@@ -52,7 +52,7 @@ public class ResultFragment extends Fragment {
             && mMatch.mSecondInnings.getMaxOvers() >= 0;
     }
 
-    public void updateResult() {
+    public void update() {
         if (isValidInput()) {
             try {
                 if (mMatch.getTargetScore() >= 0) {
@@ -96,18 +96,6 @@ public class ResultFragment extends Fragment {
         fragment.setArguments(args);
 
         return fragment;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            try {
-                updateResult();
-            } catch (Exception e) {
-                Log.i(TAG, "Error updating result", e);
-            }
-        }
     }
 
 }

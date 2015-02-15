@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/match_type_radioGroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:paddingLeft="24dp"
+    android:paddingStart="24dp"
+    android:paddingRight="24dp"
+    android:paddingEnd="24dp">
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="One day (50 overs)"
+        android:id="@+id/one_day_radioButton"/>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Twenty20 (20 overs)"
+        android:id="@+id/twenty20_radioButton"/>
+
+</RadioGroup>

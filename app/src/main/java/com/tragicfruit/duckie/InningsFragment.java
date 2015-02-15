@@ -34,6 +34,7 @@ public class InningsFragment extends Fragment {
     private static final String DIALOG_INTERRUPTION = "interruption";
     private static final int REQUEST_INTERRUPTION = 0;
 
+    private Match mMatch;
     private Innings mInnings;
     private boolean mIsFirstInnings;
 
@@ -51,13 +52,13 @@ public class InningsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
-        Match match = MatchLab.get(getActivity()).getMatch(matchId);
+        mMatch = MatchLab.get(getActivity()).getMatch(matchId);
 
         mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNINGS);
         if (mIsFirstInnings) {
-            mInnings = match.mFirstInnings;
+            mInnings = mMatch.mFirstInnings;
         } else {
-            mInnings = match.mSecondInnings;
+            mInnings = mMatch.mSecondInnings;
         }
 
     }
@@ -85,8 +86,6 @@ public class InningsFragment extends Fragment {
             firstInningsScoreSection.setVisibility(View.VISIBLE);
 
             mRunsField  = (EditText) v.findViewById(R.id.first_innings_runs_editText);
-            if (mInnings.getRuns() >= 0)
-                mRunsField.setText("" + mInnings.getRuns());
             mRunsField.addTextChangedListener(new TextWatcher() {
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 public void afterTextChanged(Editable s) {}
@@ -105,8 +104,6 @@ public class InningsFragment extends Fragment {
             });
 
             mWicketsField = (EditText) v.findViewById(R.id.first_innings_wickets_editText);
-            if (mInnings.getWickets() >= 0)
-                mWicketsField.setText("" + mInnings.getWickets());
             mWicketsField.addTextChangedListener(new TextWatcher() {
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 public void afterTextChanged(Editable s) {}
@@ -129,19 +126,17 @@ public class InningsFragment extends Fragment {
         }
 
         mOversField = (EditText) v.findViewById(R.id.max_overs_editText);
-        if (mInnings.getMaxOvers() >= 0)
-            mOversField.setText("" + mInnings.getMaxOvers());
         mOversField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void afterTextChanged(Editable s) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= 50) {
+                    //if (input >= 0 && input <= mMatch.getMatchType()) {
                         mInnings.setMaxOvers(input);
-                    } else {
-                        throw new Exception();
-                    }
+                    //} else {
+                    //    throw new Exception();
+                    //}
                 } catch (Exception e) {
                     mInnings.setMaxOvers(-1);
                 }
@@ -161,9 +156,23 @@ public class InningsFragment extends Fragment {
 
         mInterruptionsLabel = (TextView) v.findViewById(R.id.interruptions_label);
         mInterruptionList = (LinearLayout) v.findViewById(R.id.interruption_list_section);
-        updateInterruptionList();
+
+        update();
 
         return v;
+    }
+
+    public void update() {
+        if (mInnings.getRuns() >= 0)
+            mRunsField.setText("" + mInnings.getRuns());
+
+        if (mInnings.getWickets() >= 0)
+            mWicketsField.setText("" + mInnings.getWickets());
+
+        if (mInnings.getMaxOvers() >= 0)
+            mOversField.setText("" + mInnings.getMaxOvers());
+
+        updateInterruptionList();
     }
 
     private void updateInterruptionList() {

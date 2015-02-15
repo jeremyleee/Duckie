@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class ChangeG50Fragment extends DialogFragment {
     private static final String EXTRA_MATCH_ID = "com.tragicfruit.duckie.match_id";
-    public static final String EXTRA_G50 = "com.tragicfruit.duckie.extra_g50";
 
     private EditText mChangeG50Field;
     private int mG50;
@@ -31,7 +30,7 @@ public class ChangeG50Fragment extends DialogFragment {
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
         mMatch = MatchLab.get(getActivity()).getMatch(matchId);
 
-        int currentG50 = getArguments().getInt(EXTRA_G50);
+        int currentG50 = mMatch.getG50();
         mChangeG50Field = (EditText) v.findViewById(R.id.change_g50_editText);
         mChangeG50Field.setText("" + currentG50);
 
@@ -48,7 +47,7 @@ public class ChangeG50Fragment extends DialogFragment {
                                     Toast.LENGTH_SHORT)
                                     .show();
                             // TODO: change this to maintain fragment independence
-                            ((MatchActivity) getActivity()).updateResult();
+                            ((MatchActivity) getActivity()).updateFragments();
                         } else {
                             Toast.makeText(getActivity(),
                                     R.string.invalid_g50_toast,
@@ -70,10 +69,9 @@ public class ChangeG50Fragment extends DialogFragment {
         }
     }
 
-    public static ChangeG50Fragment newInstance(UUID matchId, int currentG50) {
+    public static ChangeG50Fragment newInstance(UUID matchId) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_MATCH_ID, matchId);
-        args.putSerializable(EXTRA_G50, currentG50);
 
         ChangeG50Fragment fragment = new ChangeG50Fragment();
         fragment.setArguments(args);
