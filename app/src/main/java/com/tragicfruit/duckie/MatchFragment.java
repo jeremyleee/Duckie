@@ -26,7 +26,7 @@ import android.view.ViewGroup;
  * TODO: Tidy up change G50 fragment
  * Misc: ----------------
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
- * TODO: Fix orientation change issue (onPageSelected -> null pointer)
+ * TODO: Make result updating faster
  * TODO: Redesign UI (Vincent)
  * TODO: Banner on Play Store
  * TODO: Overs lost calculator
