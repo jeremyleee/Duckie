@@ -8,6 +8,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -29,6 +30,8 @@ import android.view.MenuItem;
  */
 public class MatchActivity extends ActionBarActivity {
     private static final String DIALOG_CHANGE_G50 = "change_g50";
+
+    private static final String TAG = "MatchActivity";
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
@@ -110,7 +113,11 @@ public class MatchActivity extends ActionBarActivity {
     }
 
     public void updateResult() {
-        mResultFragment.updateResult();
+        try {
+            mResultFragment.updateResult();
+        } catch (Exception e) {
+            Log.i(TAG, "Error updating result", e);
+        }
     }
 
     @Override
