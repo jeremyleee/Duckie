@@ -23,7 +23,7 @@ import android.view.MenuItem;
  * TODO: Tidy up change G50 fragment
  * Misc: ----------------
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
- * TODO: Fix orientation change issue (onPageSelected)
+ * TODO: Fix orientation change issue (onPageSelected -> null pointer)
  * TODO: Redesign UI (Vincent)
  * TODO: Overs lost calculator
  * TODO: Net run rate calculator

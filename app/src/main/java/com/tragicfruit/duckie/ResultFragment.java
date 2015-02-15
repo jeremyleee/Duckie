@@ -102,7 +102,11 @@ public class ResultFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            updateResult();
+            try {
+                updateResult();
+            } catch (Exception e) {
+                Log.i(TAG, "Error updating result", e);
+            }
         }
     }
 
