@@ -53,15 +53,6 @@ public class MatchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        setRetainInstance(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_match, null);
-
-        mToolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        ((ActionBarActivity) getActivity()).setSupportActionBar(mToolbar);
 
         // TODO: implement user creating a match
         try {
@@ -70,6 +61,14 @@ public class MatchFragment extends Fragment {
             mMatch = new Match(true, Match.ONEDAY50);
             MatchLab.get(getActivity()).addMatch(mMatch);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_match, null);
+
+        mToolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        ((ActionBarActivity) getActivity()).setSupportActionBar(mToolbar);
 
         mFirstInningsFragment = InningsFragment.newInstance(mMatch.getId(), true);
         mSecondInningsFragment = InningsFragment.newInstance(mMatch.getId(), false);
@@ -121,14 +120,13 @@ public class MatchFragment extends Fragment {
             }
         });
         mSlidingTabLayout.setViewPager(mViewPager);
-        mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        /*mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             public void onPageScrollStateChanged(int state) {}
             public void onPageSelected(int position) {
-                if (position == 2)
-                    updateFragments();
+                updateFragments();
             }
-        });
+        });*/
 
         return v;
     }
@@ -140,9 +138,6 @@ public class MatchFragment extends Fragment {
             mResultFragment.update();
         } catch (Exception e) {
             Log.i(TAG, "Error updating result", e);
-            //mFirstInningsFragment = InningsFragment.newInstance(mMatch.getId(), true);
-            //mSecondInningsFragment = InningsFragment.newInstance(mMatch.getId(), false);
-            //mResultFragment = ResultFragment.newInstance(mMatch.getId());
         }
     }
 
