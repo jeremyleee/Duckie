@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="24dp"
-              android:gravity="center">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:padding="24dp">
 
-    <EditText
-        android:textColor="@color/editText"
-        android:gravity="center"
-        android:id="@+id/change_g50_editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:textSize="50sp"
-        android:ems="2"/>
+    <include layout="@layout/focus_here"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <EditText
+            android:textColor="@color/editText"
+            android:gravity="center"
+            android:id="@+id/change_g50_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="50sp"
+            android:ems="2"/>
+
+    </LinearLayout>
+
+</FrameLayout>

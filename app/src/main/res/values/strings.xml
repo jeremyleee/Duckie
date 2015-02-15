@@ -23,7 +23,7 @@
     <string name="interruption_new_total_overs">Total available overs\n(reduced figure)</string>
     <string name="interruption_title">Interruption at %1$s/%2$s after %3$s overs</string>
     <string name="invalid_interruption_toast">Invalid interruption</string>
-    <string name="g50_changed_toast">G50 changed to %s.</string>
+    <string name="g50_changed_toast">G50 changed to %s</string>
     <string name="invalid_g50_toast">Invalid G50</string>
     <string name="about_page_first_paragraph">This app calculates target scores in weather affected
         cricket matches using the Duckworth-Lewis method. It uses the Standard Edition which was
@@ -33,11 +33,11 @@
         Professional Edition, but the results start to diverge for very high first innings totals
         (around 350 runs and more).</string>
     <string name="about_page_second_paragraph">Results are calculated using the over-by-over tables
-        provided in the ICC Playing Handbook 2013-2014. The G50 figure used in the calculation is
-        245, which is the default for matches involving ICC full member nations and teams playing
-        first class cricket. The ability to change G50 to a custom number is planned for a future
-        version of the app. This app is intended to be used for 50 over matches, but support for
-        Twenty20 matches is also planned for a future version.</string>
+        provided in the ICC Playing Handbook 2013-2014. The default G50 figure used in the calculation
+        is 245, which is the default for matches involving ICC full member nations and teams playing
+        first class cricket, but this figure can be changed to a custom number in the menu. This app
+        is intended to be used for 50 over matches, but support for Twenty20 matches is planned for
+        a future version.</string>
     <string name="rate_app_button">Rate App</string>
     <string name="send_feedback_button">Send Feedback</string>
     <string name="app_version_label">Version %s</string>
