@@ -2,13 +2,13 @@ package com.tragicfruit.duckie;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,8 +38,6 @@ public class MatchFragment extends Fragment {
     private static final int REQUEST_MATCH_TYPE = 1;
     private static final int REQUEST_G50 = 2;
 
-    private static final String TAG = "MatchActivity";
-
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
@@ -47,12 +45,13 @@ public class MatchFragment extends Fragment {
     private Match mMatch;
     private InningsFragment mFirstInningsFragment;
     private InningsFragment mSecondInningsFragment;
-    private ResultFragment mResultFragment; // required for updating result
+    private ResultFragment mResultFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        setRetainInstance(true);
 
         // TODO: implement user creating a match
         try {
@@ -61,6 +60,11 @@ public class MatchFragment extends Fragment {
             mMatch = new Match(true, Match.ONEDAY50);
             MatchLab.get(getActivity()).addMatch(mMatch);
         }
+
+        mFirstInningsFragment = InningsFragment.newInstance(mMatch.getId(), true);
+        mSecondInningsFragment = InningsFragment.newInstance(mMatch.getId(), false);
+        mResultFragment = ResultFragment.newInstance(mMatch.getId());
+
     }
 
     @Override
@@ -70,28 +74,16 @@ public class MatchFragment extends Fragment {
         mToolbar = (Toolbar) v.findViewById(R.id.toolbar);
         ((ActionBarActivity) getActivity()).setSupportActionBar(mToolbar);
 
-        mFirstInningsFragment = InningsFragment.newInstance(mMatch.getId(), true);
-        mSecondInningsFragment = InningsFragment.newInstance(mMatch.getId(), false);
-        mResultFragment = ResultFragment.newInstance(mMatch.getId());
-
         mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
-                switch (i) {
-                    case 0:
-                        return mFirstInningsFragment;
-                    case 1:
-                        return mSecondInningsFragment;
-                    case 2:
-                        return mResultFragment;
-                }
-                return null;
+                return fragments[i];
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return fragments.length;
             }
 
             @Override
@@ -104,8 +96,30 @@ public class MatchFragment extends Fragment {
                     case 2:
                         return getString(R.string.result_label);
                 }
-
                 return "";
+            }
+
+            /**
+             * Fixes updating fragments after rotation
+             */
+            private Fragment[] fragments = {mFirstInningsFragment, mSecondInningsFragment, mResultFragment};
+            private FragmentManager fm = getFragmentManager();
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                fm.beginTransaction()
+                        .remove(fragments[position])
+                        .commit();
+                fragments[position] = null;
+            }
+
+            @Override
+            public Fragment instantiateItem(ViewGroup container, int position){
+                Fragment fragment = getItem(position);
+                fm.beginTransaction()
+                        .add(container.getId(), fragment, "fragment:" + position)
+                        .commit();
+                return fragment;
             }
         });
 
@@ -120,25 +134,23 @@ public class MatchFragment extends Fragment {
             }
         });
         mSlidingTabLayout.setViewPager(mViewPager);
-        /*mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             public void onPageScrollStateChanged(int state) {}
             public void onPageSelected(int position) {
-                updateFragments();
+                if (position == 2) {
+                    mResultFragment.update();
+                }
             }
-        });*/
+        });
 
         return v;
     }
 
     public void updateFragments() {
-        try {
-            mFirstInningsFragment.update();
-            mSecondInningsFragment.update();
-            mResultFragment.update();
-        } catch (Exception e) {
-            Log.i(TAG, "Error updating result", e);
-        }
+        mFirstInningsFragment.update();
+        mSecondInningsFragment.update();
+        mResultFragment.update();
     }
 
     @Override

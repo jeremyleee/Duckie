@@ -55,11 +55,12 @@ public class ResultFragment extends Fragment {
     public void update() {
         if (isValidInput()) {
             try {
-                if (mMatch.getTargetScore() >= 0) {
+                int targetScore = mMatch.getTargetScore();
+                if (targetScore >= 0) {
                     mTargetScoreTextView.setVisibility(View.VISIBLE);
 
-                    mResultTextView.setText("" + mMatch.getTargetScore());
-                    mResultDetailTextView.setText("(" + (mMatch.getTargetScore() - 1) + " runs to tie)");
+                    mResultTextView.setText("" + targetScore);
+                    mResultDetailTextView.setText("(" + (targetScore - 1) + " runs to tie)");
                 } else {
                     // No result (not reached minimum required overs)
                     mTargetScoreTextView.setVisibility(View.GONE);
@@ -96,13 +97,6 @@ public class ResultFragment extends Fragment {
         fragment.setArguments(args);
 
         return fragment;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-            update();
     }
 
 }
