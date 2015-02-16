@@ -23,7 +23,6 @@ import android.view.ViewGroup;
  * TODO: Multiple matches
  * Menu/settings: -------
  * TODO: Add ability to change total wickets?
- * TODO: Tidy up change G50 fragment
  * Misc: ----------------
  * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
  * Later: ---------------

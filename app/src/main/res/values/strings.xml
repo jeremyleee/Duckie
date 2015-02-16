@@ -24,6 +24,9 @@
     <string name="interruption_new_total_overs">Total available overs\n(reduced figure)</string>
     <string name="interruption_title">Interruption at %1$s/%2$s after %3$s overs</string>
     <string name="invalid_interruption_toast">Invalid interruption</string>
+    <string name="pro_g50_label">%s (ICC full member nations, first class cricket teams)</string>
+    <string name="amateur_g50_label">%s (ICC associate member nations, Under-19, Under-15, Women\'s ODIs)</string>
+    <string name="custom_g50_label">Custom G50</string>
     <string name="g50_changed_toast">G50 changed to %s</string>
     <string name="invalid_g50_toast">Invalid G50</string>
     <string name="about_page_first_paragraph">This app calculates target scores in weather affected

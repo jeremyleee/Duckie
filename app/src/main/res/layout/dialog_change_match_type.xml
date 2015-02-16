@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     android:paddingLeft="24dp"
     android:paddingStart="24dp"
     android:paddingRight="24dp"
@@ -12,13 +13,17 @@
 
     <RadioButton
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="One day (50 overs)"
         android:id="@+id/one_day_radioButton"/>
 
     <RadioButton
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Twenty20 (20 overs)"
         android:id="@+id/twenty20_radioButton"/>
 

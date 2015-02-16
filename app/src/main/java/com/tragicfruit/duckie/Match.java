@@ -27,8 +27,8 @@ public class Match {
      */
     private boolean mIsProMatch;
     private int mG50;
-    private static final int proG50 = 245;
-    private static final int amateurG50 = 200;
+    public static final int proG50 = 245;
+    public static final int amateurG50 = 200;
 
     private UUID mId;
 
