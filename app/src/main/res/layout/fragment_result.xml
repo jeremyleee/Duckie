@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="32dp">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/target_score_textView"
-        android:textSize="24sp"
+    <include layout="@layout/focus_here"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/target_score"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="32dp">
 
-    <TextView
-        android:id="@+id/result_textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        android:text="0"/>
+        <TextView
+            android:id="@+id/target_score_textView"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/target_score"/>
 
-    <TextView
-        android:id="@+id/result_detail_textView"
-        android:textSize="18sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"
-        android:text="(0 runs to tie)"/>
+        <TextView
+            android:id="@+id/result_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            android:text="0"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/result_detail_textView"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="(0 runs to tie)"/>
+
+    </LinearLayout>
+
+</FrameLayout>

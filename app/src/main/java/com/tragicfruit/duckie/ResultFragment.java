@@ -37,6 +37,10 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_result, container, false);
 
+        // Removes focus on EditText from innings fragment
+        View focusHere = v.findViewById(R.id.focus_here);
+        focusHere.requestFocus();
+
         mTargetScoreTextView = (TextView) v.findViewById(R.id.target_score_textView);
         mResultTextView = (TextView) v.findViewById(R.id.result_textView);
         mResultDetailTextView = (TextView) v.findViewById(R.id.result_detail_textView);
