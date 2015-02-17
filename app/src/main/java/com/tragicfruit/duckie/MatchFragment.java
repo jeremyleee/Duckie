@@ -19,13 +19,7 @@ import android.view.ViewGroup;
 /**
  * Created by Jeremy on 1/02/2015.
  * Launcher activity hosting fragments for a match (two innings + result fragments)
- * List of matches: -----
  * TODO: Multiple matches
- * Menu/settings: -------
- * TODO: Add ability to change total wickets?
- * Misc: ----------------
- * TODO: Implement checks eg. interruption inputs (interruption score higher than target score etc)
- * Later: ---------------
  * TODO: Redesign UI (Vincent)
  * TODO: Banner on Play Store
  * TODO: Overs lost calculator

@@ -92,11 +92,7 @@ public class InningsFragment extends Fragment {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     try {
                         int input = Integer.parseInt(s.toString());
-                        if (input >= 0) {
-                            mInnings.setRuns(input);
-                        } else {
-                            throw new Exception();
-                        }
+                        mInnings.setRuns(input);
                     } catch (Exception e) {
                         mInnings.setRuns(-1);
                     }
@@ -110,7 +106,7 @@ public class InningsFragment extends Fragment {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     try {
                         int input = Integer.parseInt(s.toString());
-                        if (input >= 0 && input <= 10) {
+                        if (input <= 10) {
                             mInnings.setWickets(input);
                         } else {
                             throw new Exception();
@@ -132,7 +128,7 @@ public class InningsFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     int input = Integer.parseInt(s.toString());
-                    if (input >= 0 && input <= mMatch.getMatchType()) {
+                    if (input <= mMatch.getMatchType()) {
                         mInnings.setMaxOvers(input);
                     } else {
                         throw new Exception();
@@ -221,6 +217,10 @@ public class InningsFragment extends Fragment {
                 });
             }
         }
+    }
+
+    public Match getMatch() {
+        return mMatch;
     }
 
     @Override

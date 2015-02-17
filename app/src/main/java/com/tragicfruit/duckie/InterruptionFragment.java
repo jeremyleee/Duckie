@@ -21,6 +21,8 @@ public class InterruptionFragment extends DialogFragment {
     public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
     public static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckie.input_new_total_overs";
 
+    private Match mMatch;
+
     private int mInputRuns;
     private int mInputWickets;
     private int mInputOversCompleted;
@@ -44,6 +46,17 @@ public class InterruptionFragment extends DialogFragment {
         fragment.setArguments(args);
 
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        try {
+            mMatch = ((InningsFragment) getTargetFragment()).getMatch();
+        } catch (Exception e) {
+            mMatch = null;
+        }
     }
 
     @Override
@@ -90,11 +103,16 @@ public class InterruptionFragment extends DialogFragment {
 
     private boolean isValidInput() {
         try {
-            // TODO: checks on valid # of overs etc.
             mInputRuns = Integer.parseInt(mRunsField.getText().toString());
             mInputWickets = Integer.parseInt(mWicketsField.getText().toString());
+            if (mInputWickets > 10)
+                throw new Exception();
             mInputOversCompleted = Integer.parseInt(mOversField.getText().toString());
+            if (mInputOversCompleted > mMatch.getMatchType())
+                throw new Exception();
             mInputNewTotalOvers = Integer.parseInt(mNewTotalOversField.getText().toString());
+            if (mInputNewTotalOvers > mMatch.getMatchType())
+                throw new Exception();
             return true;
         } catch (Exception e) {
             return false;

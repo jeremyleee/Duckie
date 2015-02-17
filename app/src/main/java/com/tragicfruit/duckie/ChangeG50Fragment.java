@@ -113,13 +113,6 @@ public class ChangeG50Fragment extends DialogFragment {
     }
 
     private void setResult(int result) {
-        if (result == Activity.RESULT_OK) {
-            Toast.makeText(getActivity(),
-                    getString(R.string.g50_changed_toast, mG50),
-                    Toast.LENGTH_SHORT)
-                    .show();
-        }
-
         Intent data = new Intent();
         data.putExtra(EXTRA_G50, mG50);
 
