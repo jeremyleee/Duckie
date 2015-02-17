@@ -105,6 +105,7 @@ public class Innings {
         sortInterruptions();
     }
 
+    // sorts interruptions based on when interruptions occur
     private void sortInterruptions() {
         Collections.sort(mInterruptions, new Comparator<Interruption>() {
             @Override
@@ -191,6 +192,8 @@ public class Innings {
             mWicketsRemaining = mInnings.getMaxWickets() - mInputWickets;
             mBeforeOversRemaining = oldTotalOvers - mInputOversCompleted;
             mAfterOversRemaining = mBeforeOversRemaining - (oldTotalOvers - mInputNewTotalOvers);
+            // new total overs less than overs completed
+            if (mAfterOversRemaining < 0) mAfterOversRemaining = 0;
 
             double initialResources = Resources.getPercentage(mBeforeOversRemaining, mWicketsRemaining);
             double restartResources = Resources.getPercentage(mAfterOversRemaining, mWicketsRemaining);

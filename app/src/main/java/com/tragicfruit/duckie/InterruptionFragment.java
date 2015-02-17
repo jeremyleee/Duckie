@@ -101,6 +101,7 @@ public class InterruptionFragment extends DialogFragment {
                 .create();
     }
 
+    // checks that input values are within the bounds
     private boolean isValidInput() {
         try {
             mInputRuns = Integer.parseInt(mRunsField.getText().toString());

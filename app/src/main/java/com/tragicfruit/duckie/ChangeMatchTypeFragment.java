@@ -31,6 +31,7 @@ public class ChangeMatchTypeFragment extends DialogFragment {
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
         mMatch = MatchLab.get(getActivity()).getMatch(matchId);
 
+        // determines preselection when user enters fragment
         int matchType = mMatch.getMatchType();
         if (matchType == Match.ONEDAY50) {
             ((RadioButton) v.findViewById(R.id.one_day_radioButton)).setChecked(true);

@@ -37,6 +37,7 @@ public class AboutActivity extends ActionBarActivity {
             Log.e("AboutActivity", "Error reporting version number", e);
         }
 
+        // rate app button sends user to Play Store
         Button rateAppButton = (Button) findViewById(R.id.rate_app_button);
         rateAppButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,7 @@ public class AboutActivity extends ActionBarActivity {
             }
         });
 
+        // send feedback button opens email app ready to end email
         Button sendFeedbackButton = (Button) findViewById(R.id.send_feedback_button);
         sendFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override

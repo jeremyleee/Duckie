@@ -28,8 +28,8 @@ import android.view.ViewGroup;
 public class MatchFragment extends Fragment {
     private static final String DIALOG_CHANGE_MATCH_TYPE = "change_match_type";
     private static final String DIALOG_CHANGE_G50 = "change_g50";
-    private static final int REQUEST_MATCH_TYPE = 1;
-    private static final int REQUEST_G50 = 2;
+    private static final int REQUEST_MATCH_TYPE = 0;
+    private static final int REQUEST_G50 = 1;
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
@@ -131,6 +131,7 @@ public class MatchFragment extends Fragment {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             public void onPageScrollStateChanged(int state) {}
             public void onPageSelected(int position) {
+                // updates result when result tab selected
                 if (position == 2) {
                     mResultFragment.update();
                 }
@@ -181,6 +182,7 @@ public class MatchFragment extends Fragment {
             int g50 = data.getIntExtra(ChangeG50Fragment.EXTRA_G50, -1);
             mMatch.setG50(g50);
             updateFragments();
+
         } else if (requestCode == REQUEST_MATCH_TYPE) {
             int matchType = data.getIntExtra(ChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
             mMatch.setMatchType(matchType);

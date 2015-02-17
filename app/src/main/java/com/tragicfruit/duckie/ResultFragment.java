@@ -80,7 +80,7 @@ public class ResultFragment extends Fragment {
                 mResultTextView.setText(R.string.calculation_error_label);
                 mResultDetailTextView.setText(R.string.calculation_error_detail);
 
-                Log.e(TAG, "Error calculating target score", e);
+                Log.i(TAG, "Error calculating target score");
             }
         } else {
             // Missing one of the input values

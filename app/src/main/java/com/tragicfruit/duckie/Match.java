@@ -87,6 +87,7 @@ public class Match {
         mG50 = g50;
     }
 
+    // checks if both innings are valid
     private boolean isValidMatch() {
         if (mMatchType == ONEDAY50) {
             if (inningsIsValid(mFirstInnings, 20) && inningsIsValid(mSecondInnings, 20)) {
@@ -100,6 +101,7 @@ public class Match {
         return false;
     }
 
+    // checks if innings meets the required # of overs
     private boolean inningsIsValid(Innings innings, int minRequiredOvers) {
         boolean allOut = innings.getWickets() >= 10;
 

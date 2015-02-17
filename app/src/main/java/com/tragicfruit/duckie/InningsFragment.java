@@ -32,11 +32,14 @@ public class InningsFragment extends Fragment {
             "com.tragicfruit.duckie.is_first_innings";
 
     private static final String DIALOG_INTERRUPTION = "interruption";
+    private static final String DIALOG_DELETE_INTERRUPTION = "delete_interruption";
     private static final int REQUEST_INTERRUPTION = 0;
+    private static final int REQUEST_DELETE_INTERRUPTION = 1;
 
     private Match mMatch;
     private Innings mInnings;
     private boolean mIsFirstInnings;
+    private ArrayList<Innings.Interruption> mInterruptions;
 
     private LinearLayout mInterruptionList;
     private TextView mInterruptionsLabel;
@@ -46,6 +49,7 @@ public class InningsFragment extends Fragment {
     private Button mAddInterruptionButton;
 
     private Innings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
+    private Innings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,7 @@ public class InningsFragment extends Fragment {
         focusHere.requestFocus();
 
         /**
-         * Set up innings specific widgets
+         * Set up EditText fields
          */
         TextView inningsLabel = (TextView) v.findViewById(R.id.innings_label);
         View firstInningsScoreSection = v.findViewById(R.id.first_innings_score_section);
@@ -158,6 +162,7 @@ public class InningsFragment extends Fragment {
         return v;
     }
 
+    // displays data from model
     public void update() {
         if (mInnings.getRuns() >= 0)
             mRunsField.setText("" + mInnings.getRuns());
@@ -172,16 +177,16 @@ public class InningsFragment extends Fragment {
     }
 
     private void updateInterruptionList() {
-        final ArrayList<Innings.Interruption> interruptions = mInnings.getInterruptions();
-        if (interruptions.isEmpty()) {
+        mInterruptions = mInnings.getInterruptions();
+        if (mInterruptions.isEmpty()) {
             mInterruptionsLabel.setVisibility(View.GONE);
         } else {
             mInterruptionsLabel.setVisibility(View.VISIBLE);
         }
 
-        mInterruptionList.removeAllViews();
-        for (final Innings.Interruption i : interruptions) {
-
+        mInterruptionList.removeAllViews(); // reset list of interruptions
+        for (final Innings.Interruption i : mInterruptions) {
+            // adds a single interruption to be displayed
             RelativeLayout interruptionListItem = (RelativeLayout) getActivity().getLayoutInflater()
                     .inflate(R.layout.list_item_interruption, mInterruptionList, false);
             TextView interruptionTitle = ((TextView) interruptionListItem.findViewById(R.id.interruption_desc_textView));
@@ -211,8 +216,11 @@ public class InningsFragment extends Fragment {
                 interruptionDeleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        interruptions.remove(i);
-                        updateInterruptionList();
+                        mCurrentInterruptionDeleted = i;
+                        FragmentManager fm = getFragmentManager();
+                        DeleteInterruptionFragment dialog = new DeleteInterruptionFragment();
+                        dialog.setTargetFragment(InningsFragment.this, REQUEST_DELETE_INTERRUPTION);
+                        dialog.show(fm, DIALOG_DELETE_INTERRUPTION);
                     }
                 });
             }
@@ -227,11 +235,13 @@ public class InningsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
             mCurrentInterruptionEdited = null;
+            mCurrentInterruptionDeleted = null;
             return;
         }
 
         if (requestCode == REQUEST_INTERRUPTION) {
             if (mCurrentInterruptionEdited != null) {
+                // remove old interruption after edit & replace with new one
                 mInnings.getInterruptions().remove(mCurrentInterruptionEdited);
                 mCurrentInterruptionEdited = null;
             }
@@ -242,6 +252,10 @@ public class InningsFragment extends Fragment {
                     data.getIntExtra(InterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
                     data.getIntExtra(InterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
             );
+            updateInterruptionList();
+        } else if (requestCode == REQUEST_DELETE_INTERRUPTION) {
+            mInterruptions.remove(mCurrentInterruptionDeleted);
+            mCurrentInterruptionDeleted = null;
             updateInterruptionList();
         }
     }

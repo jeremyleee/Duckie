@@ -56,6 +56,7 @@ public class ChangeG50Fragment extends DialogFragment {
         customG50RadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // display or remove EditText field when custom G50 radio button selected
                 if (isChecked) {
                     mCustomG50Field.setVisibility(View.VISIBLE);
                 } else {
@@ -64,6 +65,7 @@ public class ChangeG50Fragment extends DialogFragment {
             }
         });
 
+        // determines preselection when opening fragment
         if (currentG50 == Match.proG50) {
             proG50RadioButton.setChecked(true);
         } else if (currentG50 == Match.amateurG50) {
@@ -103,6 +105,7 @@ public class ChangeG50Fragment extends DialogFragment {
                 .create();
     }
 
+    // checks that field isn't empty
     private boolean isValidInput() {
         try {
             mG50 = Integer.parseInt(mCustomG50Field.getText().toString());
