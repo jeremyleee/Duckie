@@ -21,18 +21,16 @@ public class ChangeMatchTypeFragment extends DialogFragment {
     private static final String EXTRA_MATCH_ID = "com.tragicfruit.duckie.match_id";
     public static final String EXTRA_MATCH_TYPE = "com.tragicfruit.duckie.match_type";
 
-    private Match mMatch;
-
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_change_match_type, null);
 
 
         UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
-        mMatch = MatchLab.get(getActivity()).getMatch(matchId);
+        Match match = MatchLab.get(getActivity()).getMatch(matchId);
 
         // determines preselection when user enters fragment
-        int matchType = mMatch.getMatchType();
+        int matchType = match.getMatchType();
         if (matchType == Match.ONEDAY50) {
             ((RadioButton) v.findViewById(R.id.one_day_radioButton)).setChecked(true);
         } else if (matchType == Match.TWENTY20) {

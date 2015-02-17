@@ -10,7 +10,7 @@ public class Resources {
     }
 
     // Over by over
-    private static double[][] percentage = {
+    private static final double[][] percentage = {
         {100.0, 93.4, 85.1, 74.9, 62.7, 49.0, 34.9, 22.0, 11.9, 4.7}, //50
         {99.1, 92.6, 84.5, 74.4, 62.5, 48.9, 34.9, 22.0, 11.9, 4.7}, //49
         {98.1, 91.7, 83.8, 74.0, 62.2, 48.8, 34.9, 22.0, 11.9, 4.7}, //48

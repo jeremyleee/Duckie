@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 /**
  * Created by Jeremy on 6/02/2015.
- * Explains the Duckworth-Lewis method and the app's capabilties
+ * Explains the Duckworth-Lewis method and the app's capabilities
  */
 public class AboutActivity extends ActionBarActivity {
     private Toolbar mToolbar;

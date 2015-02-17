@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="One day (50 overs)"
+            android:text="@string/change_match_type_50_overs"
             android:id="@+id/one_day_radioButton"/>
 
         <RadioButton
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Twenty20 (20 overs)"
+            android:text="@string/change_match_type_20_overs"
             android:id="@+id/twenty20_radioButton"/>
 
     </RadioGroup>

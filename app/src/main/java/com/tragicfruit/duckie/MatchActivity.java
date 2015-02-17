@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 
 /**
  * Created by Jeremy on 15/02/2015.
+ * Hosts a MatchFragment
  */
 public class MatchActivity extends ActionBarActivity {
 

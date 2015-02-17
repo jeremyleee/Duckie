@@ -141,7 +141,7 @@ public class MatchFragment extends Fragment {
         return v;
     }
 
-    public void updateFragments() {
+    private void updateFragments() {
         mFirstInningsFragment.update();
         mSecondInningsFragment.update();
         mResultFragment.update();

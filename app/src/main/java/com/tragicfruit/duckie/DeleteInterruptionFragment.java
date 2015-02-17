@@ -16,9 +16,10 @@ public class DeleteInterruptionFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-                .setMessage("Delete interruption?")
+                .setMessage(R.string.delete_interruption_message)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.delete_interruption_positive_button,
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);

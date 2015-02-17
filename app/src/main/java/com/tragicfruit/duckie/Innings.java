@@ -132,7 +132,7 @@ public class Innings {
         mWickets = wickets;
     }
 
-    public int getMaxWickets() {
+    private int getMaxWickets() {
         return mMaxWickets;
     }
 

@@ -51,14 +51,12 @@ public class MatchLab {
         return mMatches;
     }
 
-    public boolean saveMatches() {
+    public void saveMatches() {
         try {
             mSerializer.saveMatches(mMatches);
             Log.d(TAG, "Matches saved to file");
-            return true;
         } catch (Exception e) {
             Log.d(TAG, "Error saving matchs", e);
-            return false;
         }
     }
 
