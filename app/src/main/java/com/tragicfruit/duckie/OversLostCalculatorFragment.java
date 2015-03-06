@@ -14,12 +14,18 @@ import android.widget.TextView;
  * TODO: Change overs per hour
  */
 public class OversLostCalculatorFragment extends Fragment {
-    // Taken from ICC Handbook 2013-14
-    private static final double OVERS_PER_HOUR = 14.28;
-
     private EditText mHoursLostField;
     private EditText mMinsLostField;
     private TextView mResultTextView;
+
+    private OversLostCalculation mCalculation;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mCalculation = CalculationLab.get().getOversLostCalculation();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,15 +38,23 @@ public class OversLostCalculatorFragment extends Fragment {
         focusHere.requestFocus();
 
         mHoursLostField = (EditText) v.findViewById(R.id.hours_lost_editText);
+        if (mCalculation.getHoursLost() >= 0)
+            mHoursLostField.setText("" + mCalculation.getHoursLost());
+
         mMinsLostField = (EditText) v.findViewById(R.id.mins_lost_editText);
+        if (mCalculation.getMinutesLost() >= 0)
+            mMinsLostField.setText("" + mCalculation.getMinutesLost());
+
         mResultTextView = (TextView) v.findViewById(R.id.overs_lost_result_textView);
+        if (mCalculation.getHoursLost() >= 0 && mCalculation.getMinutesLost() >= 0) {
+            showResult();
+        }
 
         Button calculateButton = (Button) v.findViewById(R.id.calculate_overs_lost_button);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mResultTextView.setVisibility(View.VISIBLE);
-                mResultTextView.setText(getResult() + " overs lost");
+                showResult();
             }
         });
 
@@ -50,6 +64,8 @@ public class OversLostCalculatorFragment extends Fragment {
             public void onClick(View v) {
                 mHoursLostField.setText("");
                 mMinsLostField.setText("");
+                mCalculation.setHoursLost(-1);
+                mCalculation.setMinutesLost(-1);
                 mResultTextView.setVisibility(View.GONE);
             }
         });
@@ -57,17 +73,28 @@ public class OversLostCalculatorFragment extends Fragment {
         return v;
     }
 
+    private void showResult() {
+        mResultTextView.setVisibility(View.VISIBLE);
+        mResultTextView.setText(getResult() + " overs lost");
+    }
+
     private int getResult() {
-        if (mHoursLostField.getText().toString().equals(""))
+        if (mHoursLostField.getText().toString().equals("")) {
             mHoursLostField.setText("0");
-        if (mMinsLostField.getText().toString().equals(""))
+            mCalculation.setHoursLost(0);
+        } else {
+            mCalculation.setHoursLost(Integer.parseInt(mHoursLostField.getText().toString()));
+        }
+
+        if (mMinsLostField.getText().toString().equals("")) {
             mMinsLostField.setText("0");
+            mCalculation.setMinutesLost(0);
+        } else {
+            mCalculation.setMinutesLost(Integer.parseInt(mMinsLostField.getText().toString()));
+        }
 
-        int hoursLost = Integer.parseInt(mHoursLostField.getText().toString());
-        int minsLost = Integer.parseInt(mMinsLostField.getText().toString());
-
-        double totalHoursLost = hoursLost + minsLost / 60.0;
-        double oversLost = totalHoursLost * OVERS_PER_HOUR;
+        double totalHoursLost = mCalculation.getHoursLost() + mCalculation.getMinutesLost() / 60.0;
+        double oversLost = totalHoursLost * mCalculation.getOversPerHour();
 
         return (int) Math.round(oversLost);
     }
