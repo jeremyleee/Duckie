@@ -3,6 +3,7 @@ package com.tragicfruit.duckie;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +23,8 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle("a cricket calculator");
     }
 
     @Override

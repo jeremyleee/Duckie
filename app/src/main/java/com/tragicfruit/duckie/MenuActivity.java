@@ -12,10 +12,10 @@ import android.support.v7.widget.Toolbar;
  * TODO: Multiple matches
  * TODO: Redesign UI (Vincent)
  * TODO: Banner on Play Store
- * TODO: Overs lost calculator
  * TODO: Net run rate calculator
  * TODO: Par score calculator
  * TODO: Drawer to switch between calculators
+ * TODO: Tidy up menu screen
  */
 public class MenuActivity extends ActionBarActivity {
 
