@@ -16,6 +16,8 @@ import android.widget.Button;
  * Menu screen for user to choose which calculator to use
  */
 public class MenuFragment extends Fragment {
+    public static final int DL_CALCULATOR = 0;
+    public static final int OVERS_LOST_CALCULATOR = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), CalculatorActivity.class);
+                i.putExtra(CalculatorActivity.EXTRA_MENU_CHOICE, DL_CALCULATOR);
                 startActivity(i);
             }
         });
@@ -41,7 +44,9 @@ public class MenuFragment extends Fragment {
         oversLostCalculatorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: set up overs lost calculator
+                Intent i = new Intent(getActivity(), CalculatorActivity.class);
+                i.putExtra(CalculatorActivity.EXTRA_MENU_CHOICE, OVERS_LOST_CALCULATOR);
+                startActivity(i);
             }
         });
 

@@ -9,6 +9,13 @@ import android.support.v7.widget.Toolbar;
 /**
  * Created by Jeremy on 6/03/2015.
  * Hosts MenuFragment
+ * TODO: Multiple matches
+ * TODO: Redesign UI (Vincent)
+ * TODO: Banner on Play Store
+ * TODO: Overs lost calculator
+ * TODO: Net run rate calculator
+ * TODO: Par score calculator
+ * TODO: Drawer to switch between calculators
  */
 public class MenuActivity extends ActionBarActivity {
 

@@ -5,12 +5,16 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 /**
  * Created by Jeremy on 15/02/2015.
  * Hosts a different fragments depending on calculator chosen
  */
 public class CalculatorActivity extends ActionBarActivity {
+    public static final String EXTRA_MENU_CHOICE = "com.tragicfruit.duckie.menu_choice";
+
+    private static final String TAG = "CalculatorActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +24,7 @@ public class CalculatorActivity extends ActionBarActivity {
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
         if (fragment == null) {
-            fragment = new DLCalculatorFragment();
+            fragment = createFragment();
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment)
                     .commit();
@@ -28,6 +32,19 @@ public class CalculatorActivity extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    private Fragment createFragment() {
+        switch (getIntent().getIntExtra(EXTRA_MENU_CHOICE, -1)) {
+            case MenuFragment.DL_CALCULATOR:
+                return new DLCalculatorFragment();
+            case MenuFragment.OVERS_LOST_CALCULATOR:
+                return new OversLostCalculatorFragment();
+            default:
+                Log.i(TAG, "Cannot find menu choice");
+                finish();
+                return null;
+        }
     }
 
 }

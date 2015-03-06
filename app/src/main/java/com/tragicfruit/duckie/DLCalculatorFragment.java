@@ -17,12 +17,6 @@ import android.view.ViewGroup;
 /**
  * Created by Jeremy on 1/02/2015.
  * Duckworth-Lewis Calculator fragment hosting fragments for a match (two innings + result fragments)
- * TODO: Multiple matches
- * TODO: Redesign UI (Vincent)
- * TODO: Banner on Play Store
- * TODO: Overs lost calculator
- * TODO: Net run rate calculator
- * TODO: Par score calculator
  */
 public class DLCalculatorFragment extends Fragment {
     private static final String DIALOG_CHANGE_MATCH_TYPE = "change_match_type";
