@@ -10,8 +10,4 @@
         android:title="@string/change_g50_label"
         android:orderInCategory="1"
         app:showAsAction="never"/>
-    <item android:id="@+id/menu_about"
-          android:title="@string/about_label"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
 </menu>

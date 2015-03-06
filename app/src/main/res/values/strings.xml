@@ -5,6 +5,7 @@
     <string name="change_match_type_label">Change match type</string>
     <string name="change_g50_label">Change G50</string>
     <string name="about_label">About</string>
+    <string name="dl_calculator_label">Duckworth-Lewis Calculator</string>
     <string name="first_innings_label">1st Innings</string>
     <string name="second_innings_label">2nd Innings</string>
     <string name="result_label">Result</string>

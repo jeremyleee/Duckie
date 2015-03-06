@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,20 +16,20 @@ import android.view.ViewGroup;
 
 /**
  * Created by Jeremy on 1/02/2015.
- * Launcher activity hosting fragments for a match (two innings + result fragments)
+ * Duckworth-Lewis Calculator fragment hosting fragments for a match (two innings + result fragments)
  * TODO: Multiple matches
  * TODO: Redesign UI (Vincent)
  * TODO: Banner on Play Store
  * TODO: Overs lost calculator
  * TODO: Net run rate calculator
+ * TODO: Par score calculator
  */
-public class MatchFragment extends Fragment {
+public class DLCalculatorFragment extends Fragment {
     private static final String DIALOG_CHANGE_MATCH_TYPE = "change_match_type";
     private static final String DIALOG_CHANGE_G50 = "change_g50";
     private static final int REQUEST_MATCH_TYPE = 0;
     private static final int REQUEST_G50 = 1;
 
-    private Toolbar mToolbar;
     private ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
 
@@ -62,10 +60,9 @@ public class MatchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_match, null);
+        View v = inflater.inflate(R.layout.fragment_dl_calculator, null);
 
-        mToolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        ((ActionBarActivity) getActivity()).setSupportActionBar(mToolbar);
+        getActivity().setTitle(R.string.dl_calculator_label);
 
         mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
@@ -149,7 +146,7 @@ public class MatchFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_match, menu);
+        inflater.inflate(R.menu.menu_dl_calculator, menu);
     }
 
     @Override
@@ -161,12 +158,12 @@ public class MatchFragment extends Fragment {
                 return true;
             case (R.id.menu_change_g50):
                 ChangeG50Fragment g50Fragment = ChangeG50Fragment.newInstance(mMatch.getId());
-                g50Fragment.setTargetFragment(MatchFragment.this, REQUEST_G50);
+                g50Fragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_G50);
                 g50Fragment.show(getFragmentManager(), DIALOG_CHANGE_G50);
                 return true;
             case (R.id.menu_change_match_type):
                 ChangeMatchTypeFragment matchTypeFragment = ChangeMatchTypeFragment.newInstance(mMatch.getId());
-                matchTypeFragment.setTargetFragment(MatchFragment.this, REQUEST_MATCH_TYPE);
+                matchTypeFragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_MATCH_TYPE);
                 matchTypeFragment.show(getFragmentManager(), DIALOG_CHANGE_MATCH_TYPE);
                 return true;
             default:
