@@ -18,14 +18,14 @@ import java.util.ArrayList;
 
 /**
  * Created by Jeremy on 6/02/2015.
- * Saves and loads matches to JSON file
+ * Saves and loads calculations to JSON file
  */
-public class CalculationJSONSerializer {
+public class CalculationJSONSerialiser {
 
     private Context mContext;
     private String mFileName;
 
-    public CalculationJSONSerializer(Context c, String f) {
+    public CalculationJSONSerialiser(Context c, String f) {
         mContext = c;
         mFileName = f;
     }

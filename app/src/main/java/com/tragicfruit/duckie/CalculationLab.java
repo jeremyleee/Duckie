@@ -18,7 +18,7 @@ public class CalculationLab {
     private Context mAppContext;
 
     private ArrayList<Calculation> mCalculations;
-    private CalculationJSONSerializer mSerialiser;
+    private CalculationJSONSerialiser mSerialiser;
 
     public static CalculationLab get(Context c) {
         if (sCalculationLab == null) {
@@ -29,7 +29,7 @@ public class CalculationLab {
 
     private CalculationLab(Context context) {
         mAppContext = context;
-        mSerialiser = new CalculationJSONSerializer(mAppContext, FILENAME);
+        mSerialiser = new CalculationJSONSerialiser(mAppContext, FILENAME);
 
         try {
             mCalculations = mSerialiser.loadCalculations();
@@ -49,11 +49,19 @@ public class CalculationLab {
     }
 
     public DLCalculation getDLCalculation() {
-        return (DLCalculation) mCalculations.get(0);
+        for (Calculation c : mCalculations) {
+            if (c instanceof DLCalculation)
+            return (DLCalculation) c;
+        }
+        return null;
     }
 
     public OLCalculation getOLCalculation() {
-        return (OLCalculation) mCalculations.get(1);
+        for (Calculation c : mCalculations) {
+            if (c instanceof OLCalculation)
+                return (OLCalculation) c;
+        }
+        return null;
     }
 
     public void saveCalculations() {
