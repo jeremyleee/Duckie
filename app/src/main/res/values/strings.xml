@@ -48,18 +48,18 @@
     <string name="custom_overs_per_hour_label">Custom overs per hour</string>
     <string name="overs_per_hour_success_toast">Overs lost recalculated</string>
     <string name="invalid_overs_per_hour_toast">Invalid overs per hour</string>
-    <string name="about_page_first_paragraph">This app calculates target scores in weather affected
-        cricket matches using the Duckworth-Lewis method. It uses the Standard Edition which was
+    <string name="about_page_first_paragraph">Target scores for weather affected
+        cricket matches are calculated using the Duckworth-Lewis method. It uses the Standard Edition which was
         used for all matches prior to 2003. The current method used for all international matches
         is the Professional Edition, however using this method requires software which is not publicly
         available. The results using the Standard Edition are generally similar to those from the
         Professional Edition, but the results start to diverge for very high first innings totals
-        (around 350 runs and more).</string>
-    <string name="about_page_second_paragraph">Results are calculated using the over-by-over tables
-        provided in the ICC Playing Handbook 2013-2014. The default G50 figure used in the calculation
-        is 245, which is the default for matches involving ICC full member nations and teams playing
-        first class cricket, but this figure can be changed to a custom number in the menu. The default
-        match type is a 50 over match, but this can also be changed to a Twenty20 match in the menu.</string>
+        (around 350 runs and more). Results are calculated using the over-by-over tables
+        provided in the ICC Playing Handbook 2013-2014.</string>
+    <string name="about_page_second_paragraph">The number of overs lost is calculated based on
+        the over rates provided in the ICC Playing Handbook 2013-2014. The default over rate of the
+        calculator is 14.28 overs per hour which is the rate for standard One Day International
+        matches, but this rate can be changed in the menu.</string>
     <string name="rate_app_button">Rate App</string>
     <string name="send_feedback_button">Send Feedback</string>
     <string name="app_version_label">Version %s</string>
