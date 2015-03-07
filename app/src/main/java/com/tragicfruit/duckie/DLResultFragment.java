@@ -12,7 +12,7 @@ import android.widget.TextView;
  * Created by Jeremy on 3/02/2015.
  * Fragment for displaying the results of the Duckworth-Lewis calculation
  */
-public class ResultFragment extends Fragment {
+public class DLResultFragment extends Fragment {
     private static final String TAG = "ResultFragment";
 
     private DLCalculation mMatch;
@@ -29,7 +29,7 @@ public class ResultFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_result, container, false);
+        View v = inflater.inflate(R.layout.dl_fragment_result, container, false);
 
         // Removes focus on EditText from innings fragment
         View focusHere = v.findViewById(R.id.focus_here);

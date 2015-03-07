@@ -3,7 +3,7 @@ package com.tragicfruit.duckie;
 /**
  * Created by Jeremy on 7/03/2015.
  */
-public class OversLostCalculation {
+public class OLCalculation {
     private int mHoursLost;
     private int mMinutesLost;
     private double mOversPerHour;
@@ -14,7 +14,7 @@ public class OversLostCalculation {
     private static final double WOMENS_ODI = 15.79;
     private static final double WOMENS_T20 = 16.0;
 
-    public OversLostCalculation() {
+    public OLCalculation() {
         mHoursLost = -1;
         mMinutesLost = -1;
         mOversPerHour = MENS_ODI;

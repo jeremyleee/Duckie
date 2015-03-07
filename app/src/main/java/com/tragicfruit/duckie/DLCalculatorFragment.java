@@ -28,9 +28,9 @@ public class DLCalculatorFragment extends Fragment {
     private SlidingTabLayout mSlidingTabLayout;
 
     private DLCalculation mMatch;
-    private InningsFragment mFirstInningsFragment;
-    private InningsFragment mSecondInningsFragment;
-    private ResultFragment mResultFragment;
+    private DLInningsFragment mFirstInningsFragment;
+    private DLInningsFragment mSecondInningsFragment;
+    private DLResultFragment mResultFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,15 +40,15 @@ public class DLCalculatorFragment extends Fragment {
 
         mMatch = CalculationLab.get().getDLCalculation();
 
-        mFirstInningsFragment = InningsFragment.newInstance(true);
-        mSecondInningsFragment = InningsFragment.newInstance(false);
-        mResultFragment = new ResultFragment();
+        mFirstInningsFragment = DLInningsFragment.newInstance(true);
+        mSecondInningsFragment = DLInningsFragment.newInstance(false);
+        mResultFragment = new DLResultFragment();
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dl_calculator, null);
+        View v = inflater.inflate(R.layout.dl_fragment_calculator, null);
 
         getActivity().setTitle(R.string.dl_calculator_label);
 
@@ -134,7 +134,7 @@ public class DLCalculatorFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_dl_calculator, menu);
+        inflater.inflate(R.menu.dl_menu_calculator, menu);
     }
 
     @Override
@@ -145,12 +145,12 @@ public class DLCalculatorFragment extends Fragment {
                 startActivity(i);
                 return true;
             case (R.id.menu_change_g50):
-                ChangeG50Fragment g50Fragment = new ChangeG50Fragment();
+                DLChangeG50Fragment g50Fragment = new DLChangeG50Fragment();
                 g50Fragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_G50);
                 g50Fragment.show(getFragmentManager(), DIALOG_CHANGE_G50);
                 return true;
             case (R.id.menu_change_match_type):
-                ChangeMatchTypeFragment matchTypeFragment = new ChangeMatchTypeFragment();
+                DLChangeMatchTypeFragment matchTypeFragment = new DLChangeMatchTypeFragment();
                 matchTypeFragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_MATCH_TYPE);
                 matchTypeFragment.show(getFragmentManager(), DIALOG_CHANGE_MATCH_TYPE);
                 return true;
@@ -164,12 +164,12 @@ public class DLCalculatorFragment extends Fragment {
         if (resultCode == Activity.RESULT_CANCELED) return;
 
         if (requestCode == REQUEST_G50) {
-            int g50 = data.getIntExtra(ChangeG50Fragment.EXTRA_G50, -1);
+            int g50 = data.getIntExtra(DLChangeG50Fragment.EXTRA_G50, -1);
             mMatch.setG50(g50);
             updateFragments();
 
         } else if (requestCode == REQUEST_MATCH_TYPE) {
-            int matchType = data.getIntExtra(ChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
+            int matchType = data.getIntExtra(DLChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
             mMatch.setMatchType(matchType);
             mMatch.mFirstInnings.setMaxOvers(matchType);
             mMatch.mSecondInnings.setMaxOvers(matchType);
@@ -180,8 +180,7 @@ public class DLCalculatorFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        //TODO: implement saving
-        //MatchLab.get(getActivity()).saveMatches();
+        CalculationLab.get().saveCalculations();
     }
 
 }

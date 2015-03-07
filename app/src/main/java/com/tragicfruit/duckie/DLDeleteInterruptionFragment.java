@@ -11,7 +11,7 @@ import android.os.Bundle;
  * Created by Jeremy on 17/02/2015.
  * Requests confirmation from user to delete fragment
  */
-public class DeleteInterruptionFragment extends DialogFragment {
+public class DLDeleteInterruptionFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

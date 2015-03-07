@@ -13,7 +13,7 @@ import java.util.Comparator;
  * Created by Jeremy on 1/02/2015.
  * Represents a single innings within a match
  */
-public class Innings {
+public class DLInnings {
     private static final String JSON_MAX_OVERS = "max_overs";
     private static final String JSON_MAX_WICKETS = "max_wickets";
     private static final String JSON_RESOURCES = "resources";
@@ -29,13 +29,13 @@ public class Innings {
 
     private ArrayList<Interruption> mInterruptions = new ArrayList<>();
 
-    public Innings(int initialMaxOvers) {
+    public DLInnings(int initialMaxOvers) {
         mMaxOvers = initialMaxOvers;
         mRuns = -1;
         mWickets = -1;
     }
 
-    public Innings(JSONObject json) throws JSONException {
+    public DLInnings(JSONObject json) throws JSONException {
         mMaxOvers = json.getInt(JSON_MAX_OVERS);
         mMaxWickets = json.getInt(JSON_MAX_WICKETS);
         mResources = json.getDouble(JSON_RESOURCES);
@@ -90,7 +90,7 @@ public class Innings {
     }
 
     public void updateResources() {
-        mResources = Resources.getPercentage(mMaxOvers, getMaxWickets());
+        mResources = DLResources.getPercentage(mMaxOvers, getMaxWickets());
         // Loop through interruptions to reduce resources
         int totalOvers = mMaxOvers;
         for (Interruption i : mInterruptions) {
@@ -145,7 +145,7 @@ public class Innings {
         private static final String JSON_AFTER_OVERS_REMAINING = "after_overs_remaining";
         private static final String JSON_WICKETS_REMAINING = "wickets_remaining";
 
-        private Innings mInnings;
+        private DLInnings mInnings;
 
         private int mInputRuns; // not really required
         private int mInputWickets;
@@ -156,7 +156,7 @@ public class Innings {
         private int mAfterOversRemaining; // number of overs remaining after interruption
         private int mWicketsRemaining; // wickets in hand at interruption
 
-        public Interruption(Innings innings, int inputRuns, int inputWickets,
+        public Interruption(DLInnings innings, int inputRuns, int inputWickets,
                             int inputOversCompleted, int inputNewTotalOvers) {
             mInnings = innings;
             mInputRuns = inputRuns;
@@ -165,7 +165,7 @@ public class Innings {
             mInputNewTotalOvers = inputNewTotalOvers;
         }
 
-        public Interruption(Innings innings, JSONObject json) throws JSONException {
+        public Interruption(DLInnings innings, JSONObject json) throws JSONException {
             mInnings = innings;
             mInputRuns = json.getInt(JSON_INPUT_RUNS);
             mInputWickets = json.getInt(JSON_INPUT_WICKETS);
@@ -195,8 +195,8 @@ public class Innings {
             // new total overs less than overs completed
             if (mAfterOversRemaining < 0) mAfterOversRemaining = 0;
 
-            double initialResources = Resources.getPercentage(mBeforeOversRemaining, mWicketsRemaining);
-            double restartResources = Resources.getPercentage(mAfterOversRemaining, mWicketsRemaining);
+            double initialResources = DLResources.getPercentage(mBeforeOversRemaining, mWicketsRemaining);
+            double restartResources = DLResources.getPercentage(mAfterOversRemaining, mWicketsRemaining);
             return initialResources - restartResources;
         }
 

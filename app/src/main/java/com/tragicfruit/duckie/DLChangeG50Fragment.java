@@ -18,7 +18,7 @@ import android.widget.Toast;
  * Created by Jeremy on 15/02/2015.
  * Allows changing G50 to a custom figure
  */
-public class ChangeG50Fragment extends DialogFragment {
+public class DLChangeG50Fragment extends DialogFragment {
     public static final String EXTRA_G50 = "com.tragicfruit.duckie.g50";
 
     private RadioGroup mRadioGroup;
@@ -29,7 +29,7 @@ public class ChangeG50Fragment extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
-                .inflate(R.layout.dialog_change_g50, null);
+                .inflate(R.layout.dl_dialog_change_g50, null);
 
         mMatch = CalculationLab.get().getDLCalculation();
 

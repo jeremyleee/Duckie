@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by Jeremy on 3/02/2015.
  * Fragment for user input and displaying data for a single innings
  */
-public class InningsFragment extends Fragment {
+public class DLInningsFragment extends Fragment {
     private static final String EXTRA_IS_FIRST_INNINGS =
             "com.tragicfruit.duckie.is_first_innings";
 
@@ -34,9 +34,9 @@ public class InningsFragment extends Fragment {
     private static final int REQUEST_DELETE_INTERRUPTION = 1;
 
     private DLCalculation mMatch;
-    private Innings mInnings;
+    private DLInnings mInnings;
     private boolean mIsFirstInnings;
-    private ArrayList<Innings.Interruption> mInterruptions;
+    private ArrayList<DLInnings.Interruption> mInterruptions;
 
     private LinearLayout mInterruptionList;
     private TextView mInterruptionsLabel;
@@ -45,8 +45,8 @@ public class InningsFragment extends Fragment {
     private EditText mRunsField;
     private Button mAddInterruptionButton;
 
-    private Innings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
-    private Innings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
+    private DLInnings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
+    private DLInnings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class InningsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_innings, container, false);
+        View v = inflater.inflate(R.layout.dl_fragment_innings, container, false);
 
         // Initially hides virtual keyboard
         getActivity().getWindow().setSoftInputMode(
@@ -144,8 +144,8 @@ public class InningsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                InterruptionFragment dialog = new InterruptionFragment();
-                dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
+                DLInterruptionFragment dialog = new DLInterruptionFragment();
+                dialog.setTargetFragment(DLInningsFragment.this, REQUEST_INTERRUPTION);
                 dialog.show(fm, DIALOG_INTERRUPTION);
             }
         });
@@ -181,10 +181,10 @@ public class InningsFragment extends Fragment {
         }
 
         mInterruptionList.removeAllViews(); // reset list of interruptions
-        for (final Innings.Interruption i : mInterruptions) {
+        for (final DLInnings.Interruption i : mInterruptions) {
             // adds a single interruption to be displayed
             RelativeLayout interruptionListItem = (RelativeLayout) getActivity().getLayoutInflater()
-                    .inflate(R.layout.list_item_interruption, mInterruptionList, false);
+                    .inflate(R.layout.dl_list_item_interruption, mInterruptionList, false);
             TextView interruptionTitle = ((TextView) interruptionListItem.findViewById(R.id.interruption_desc_textView));
             String title = getString(R.string.interruption_title,
                     i.getInputRuns(), i.getInputWickets(), i.getInputOversCompleted());
@@ -199,9 +199,9 @@ public class InningsFragment extends Fragment {
                     public void onClick(View v) {
                         mCurrentInterruptionEdited = i;
                         FragmentManager fm = getFragmentManager();
-                        InterruptionFragment dialog = InterruptionFragment.newInstance(i.getInputRuns(),
+                        DLInterruptionFragment dialog = DLInterruptionFragment.newInstance(i.getInputRuns(),
                                 i.getInputWickets(), i.getInputOversCompleted(), i.getInputNewTotalOvers());
-                        dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
+                        dialog.setTargetFragment(DLInningsFragment.this, REQUEST_INTERRUPTION);
                         dialog.show(fm, DIALOG_INTERRUPTION);
                     }
                 });
@@ -214,8 +214,8 @@ public class InningsFragment extends Fragment {
                     public void onClick(View v) {
                         mCurrentInterruptionDeleted = i;
                         FragmentManager fm = getFragmentManager();
-                        DeleteInterruptionFragment dialog = new DeleteInterruptionFragment();
-                        dialog.setTargetFragment(InningsFragment.this, REQUEST_DELETE_INTERRUPTION);
+                        DLDeleteInterruptionFragment dialog = new DLDeleteInterruptionFragment();
+                        dialog.setTargetFragment(DLInningsFragment.this, REQUEST_DELETE_INTERRUPTION);
                         dialog.show(fm, DIALOG_DELETE_INTERRUPTION);
                     }
                 });
@@ -243,10 +243,10 @@ public class InningsFragment extends Fragment {
             }
 
             mInnings.addInterruption(
-                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_RUNS, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_WICKETS, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
-                    data.getIntExtra(InterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
+                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_RUNS, -1),
+                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_WICKETS, -1),
+                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
+                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
             );
             updateInterruptionList();
         } else if (requestCode == REQUEST_DELETE_INTERRUPTION) {
@@ -256,11 +256,11 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    public static InningsFragment newInstance(boolean isFirstInnings) {
+    public static DLInningsFragment newInstance(boolean isFirstInnings) {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_IS_FIRST_INNINGS, isFirstInnings);
 
-        InningsFragment fragment = new InningsFragment();
+        DLInningsFragment fragment = new DLInningsFragment();
         fragment.setArguments(args);
 
         return fragment;

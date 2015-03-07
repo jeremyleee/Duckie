@@ -39,7 +39,7 @@ public class CalculatorActivity extends ActionBarActivity {
             case MenuFragment.DL_CALCULATOR:
                 return new DLCalculatorFragment();
             case MenuFragment.OVERS_LOST_CALCULATOR:
-                return new OversLostCalculatorFragment();
+                return new OLCalculatorFragment();
             default:
                 Log.i(TAG, "Cannot find menu choice");
                 finish();

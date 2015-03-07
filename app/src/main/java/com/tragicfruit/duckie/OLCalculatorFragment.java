@@ -11,25 +11,26 @@ import android.widget.TextView;
 
 /**
  * Created by Jeremy on 6/03/2015.
+ * Overs Lost Calculator fragment
  * TODO: Change overs per hour
  */
-public class OversLostCalculatorFragment extends Fragment {
+public class OLCalculatorFragment extends Fragment {
     private EditText mHoursLostField;
     private EditText mMinsLostField;
     private TextView mResultTextView;
 
-    private OversLostCalculation mCalculation;
+    private OLCalculation mCalculation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mCalculation = CalculationLab.get().getOversLostCalculation();
+        mCalculation = CalculationLab.get().getOLCalculation();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_overs_lost_calculator, container, false);
+        View v = inflater.inflate(R.layout.ol_fragment_calculator, container, false);
 
         getActivity().setTitle(R.string.overs_lost_calculator_label);
 
@@ -97,6 +98,12 @@ public class OversLostCalculatorFragment extends Fragment {
         double oversLost = totalHoursLost * mCalculation.getOversPerHour();
 
         return (int) Math.round(oversLost);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        CalculationLab.get().saveCalculations();
     }
 
 }

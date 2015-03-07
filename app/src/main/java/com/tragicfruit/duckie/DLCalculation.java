@@ -27,8 +27,8 @@ public class DLCalculation {
     public static final int proG50 = 245;
     public static final int amateurG50 = 200;
 
-    public Innings mFirstInnings;
-    public Innings mSecondInnings;
+    public DLInnings mFirstInnings;
+    public DLInnings mSecondInnings;
 
     public DLCalculation(boolean isProMatch, int matchType) {
         mIsProMatch = isProMatch;
@@ -40,16 +40,16 @@ public class DLCalculation {
            mG50 = amateurG50;
        }
 
-        mFirstInnings = new Innings(mMatchType);
-        mSecondInnings = new Innings(mMatchType);
+        mFirstInnings = new DLInnings(mMatchType);
+        mSecondInnings = new DLInnings(mMatchType);
     }
 
     public DLCalculation(JSONObject json) throws JSONException {
         mMatchType = json.getInt(JSON_MATCH_TYPE);
         mIsProMatch = json.getBoolean(JSON_IS_PRO_MATCH);
         mG50 = json.getInt(JSON_G50);
-        mFirstInnings = new Innings(json.getJSONObject(JSON_FIRST_INNINGS));
-        mSecondInnings = new Innings(json.getJSONObject(JSON_SECOND_INNINGS));
+        mFirstInnings = new DLInnings(json.getJSONObject(JSON_FIRST_INNINGS));
+        mSecondInnings = new DLInnings(json.getJSONObject(JSON_SECOND_INNINGS));
     }
 
     public JSONObject toJSON() throws JSONException {
@@ -93,13 +93,13 @@ public class DLCalculation {
     }
 
     // checks if innings meets the required # of overs
-    private boolean inningsIsValid(Innings innings, int minRequiredOvers) {
+    private boolean inningsIsValid(DLInnings innings, int minRequiredOvers) {
         boolean allOut = innings.getWickets() >= 10;
 
         boolean metRequiredOvers;
         int size;
         if ((size = innings.getInterruptions().size()) > 0) {
-            Innings.Interruption lastInterruption = innings.getInterruptions().get(size - 1);
+            DLInnings.Interruption lastInterruption = innings.getInterruptions().get(size - 1);
             metRequiredOvers = lastInterruption.getInputNewTotalOvers() >= minRequiredOvers;
         } else {
             metRequiredOvers = innings.getMaxOvers() >= minRequiredOvers;

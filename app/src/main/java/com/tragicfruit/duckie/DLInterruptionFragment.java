@@ -15,7 +15,7 @@ import android.widget.Toast;
  * Created by Jeremy on 1/02/2015.
  * Displays details of an interruption
  */
-public class InterruptionFragment extends DialogFragment {
+public class DLInterruptionFragment extends DialogFragment {
     public static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckie.input_runs";
     public static final String EXTRA_INPUT_WICKETS = "com.tragicfruit.duckie.input_wickets";
     public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
@@ -34,7 +34,7 @@ public class InterruptionFragment extends DialogFragment {
     private EditText mNewTotalOversField;
 
     // Editing existing interruption
-    public static InterruptionFragment newInstance(int inputRuns, int inputWickets,
+    public static DLInterruptionFragment newInstance(int inputRuns, int inputWickets,
                                                    int inputOversCompleted, int inputNewTotalOvers) {
         Bundle args = new Bundle();
         args.putInt(EXTRA_INPUT_RUNS, inputRuns);
@@ -42,7 +42,7 @@ public class InterruptionFragment extends DialogFragment {
         args.putInt(EXTRA_INPUT_OVERS_COMPLETED, inputOversCompleted);
         args.putInt(EXTRA_INPUT_NEW_TOTAL_OVERS, inputNewTotalOvers);
 
-        InterruptionFragment fragment = new InterruptionFragment();
+        DLInterruptionFragment fragment = new DLInterruptionFragment();
         fragment.setArguments(args);
 
         return fragment;
@@ -53,7 +53,7 @@ public class InterruptionFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         try {
-            mMatch = ((InningsFragment) getTargetFragment()).getMatch();
+            mMatch = ((DLInningsFragment) getTargetFragment()).getMatch();
         } catch (Exception e) {
             mMatch = null;
         }
@@ -62,7 +62,7 @@ public class InterruptionFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
-                .inflate(R.layout.dialog_interruption, null);
+                .inflate(R.layout.dl_dialog_interruption, null);
 
         // Prevents focus on EditText when opening dialog
         View focusHere = v.findViewById(R.id.focus_here);

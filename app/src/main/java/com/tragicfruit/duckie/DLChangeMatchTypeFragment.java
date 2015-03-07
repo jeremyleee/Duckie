@@ -15,14 +15,14 @@ import android.widget.RadioGroup;
  * Created by Jeremy on 15/02/2015.
  * Allows changing match type to either 50 over match or 20 over match
  */
-public class ChangeMatchTypeFragment extends DialogFragment {
+public class DLChangeMatchTypeFragment extends DialogFragment {
     public static final String EXTRA_MATCH_TYPE = "com.tragicfruit.duckie.match_type";
 
     private DLCalculation mMatch;
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
-                .inflate(R.layout.dialog_change_match_type, null);
+                .inflate(R.layout.dl_dialog_change_match_type, null);
 
         mMatch = CalculationLab.get().getDLCalculation();
 
