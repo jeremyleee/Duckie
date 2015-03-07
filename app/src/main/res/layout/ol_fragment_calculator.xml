@@ -6,19 +6,24 @@
     <include layout="@layout/focus_here"/>
 
     <LinearLayout
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:gravity="center_horizontal"
-                  android:padding="16dp">
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center_horizontal"
+          android:padding="16dp">
 
         <TextView
             android:gravity="center"
-            android:text="Total play time lost\n(including drinks breaks)"
+            android:text="@string/total_play_time_lost_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="20sp"/>
+
+        <TextView
+            android:text="@string/including_drinks_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,13 +38,14 @@
                 android:inputType="number"
                 android:ems="2"
                 android:textSize="20sp"
-                android:gravity="right"/>
+                android:gravity="end"/>
 
             <TextView
-                android:text="hrs"
+                android:text="@string/hours_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:textSize="20sp"/>
 
             <EditText
@@ -49,10 +55,10 @@
                 android:inputType="number"
                 android:ems="2"
                 android:textSize="20sp"
-                android:gravity="right"/>
+                android:gravity="end"/>
 
             <TextView
-                android:text="mins"
+                android:text="@string/minutes_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"/>
@@ -65,14 +71,14 @@
 
             <Button
                 android:id="@+id/calculate_overs_lost_button"
-                android:text="Calculate"
+                android:text="@string/calculate_overs_lost_button_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"/>
 
             <Button
                 android:id="@+id/reset_button"
-                android:text="Reset"
+                android:text="@string/reset_overs_lost_button_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -80,6 +86,7 @@
 
         <TextView
             android:visibility="gone"
+            android:layout_marginTop="20dp"
             android:id="@+id/overs_lost_result_textView"
             android:textSize="36sp"
             android:layout_width="wrap_content"

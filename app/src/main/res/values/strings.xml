@@ -34,6 +34,12 @@
     <string name="amateur_g50_label">%s (ICC associate member nations, Under-19, Under-15, Women\'s ODIs)</string>
     <string name="custom_g50_label">Custom G50</string>
     <string name="invalid_g50_toast">Invalid G50</string>
+    <string name="total_play_time_lost_label">Total play time lost</string>
+    <string name="including_drinks_label">(including drinks breaks)</string>
+    <string name="hours_label">hrs</string>
+    <string name="minutes_label">mins</string>
+    <string name="calculate_overs_lost_button_label">Calculate</string>
+    <string name="reset_overs_lost_button_label">Reset</string>
     <string name="change_overs_per_hour_label">Change overs per hour</string>
     <string name="mens_odi_label">%s overs per hour (ODI)</string>
     <string name="mens_t20_label">%s overs per hour (T20)</string>

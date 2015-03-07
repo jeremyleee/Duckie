@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center">
+              android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 
     <TableLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_gravity="center|bottom">
 
             <Button
                 android:id="@+id/dl_calculator_button"
-                android:text="Duckworth-Lewis Calculator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/nrr_calculator_button"
-                android:text="Net Run Rate Calculator"
+                android:text="@string/dl_calculator_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/overs_lost_calculator_button"
-                android:text="Overs Lost Calculator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/par_score_calculator_button"
-                android:text="Par Score Calculator"
+                android:text="@string/overs_lost_calculator_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
     </TableLayout>
 
-</LinearLayout>
+</FrameLayout>
