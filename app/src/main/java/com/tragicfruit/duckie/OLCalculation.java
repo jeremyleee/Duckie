@@ -9,10 +9,10 @@ public class OLCalculation {
     private double mOversPerHour;
 
     // Taken from ICC Handbook 2013-14
-    private static final double MENS_ODI = 14.28;
-    private static final double MENS_T20 = 15.0;
-    private static final double WOMENS_ODI = 15.79;
-    private static final double WOMENS_T20 = 16.0;
+    public static final double MENS_ODI = 14.28;
+    public static final double MENS_T20 = 15.0;
+    public static final double WOMENS_ODI = 15.79;
+    public static final double WOMENS_T20 = 16.0;
 
     public OLCalculation() {
         mHoursLost = -1;

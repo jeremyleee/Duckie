@@ -1,13 +1,19 @@
 package com.tragicfruit.duckie;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Jeremy on 6/03/2015.
@@ -15,6 +21,9 @@ import android.widget.TextView;
  * TODO: Change overs per hour
  */
 public class OLCalculatorFragment extends Fragment {
+    private static final String DIALOG_CHANGE_OVERS_PER_HOUR = "change_overs_per_hour";
+    private static final int REQUEST_OVERS_PER_HOUR = 0;
+
     private EditText mHoursLostField;
     private EditText mMinsLostField;
     private TextView mResultTextView;
@@ -24,6 +33,7 @@ public class OLCalculatorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         mCalculation = CalculationLab.get().getOLCalculation();
     }
@@ -48,14 +58,14 @@ public class OLCalculatorFragment extends Fragment {
 
         mResultTextView = (TextView) v.findViewById(R.id.overs_lost_result_textView);
         if (mCalculation.getHoursLost() >= 0 && mCalculation.getMinutesLost() >= 0) {
-            showResult();
+            updateResult();
         }
 
         Button calculateButton = (Button) v.findViewById(R.id.calculate_overs_lost_button);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showResult();
+                updateResult();
             }
         });
 
@@ -74,7 +84,7 @@ public class OLCalculatorFragment extends Fragment {
         return v;
     }
 
-    private void showResult() {
+    private void updateResult() {
         mResultTextView.setVisibility(View.VISIBLE);
         mResultTextView.setText(getResult() + " overs lost");
     }
@@ -98,6 +108,39 @@ public class OLCalculatorFragment extends Fragment {
         double oversLost = totalHoursLost * mCalculation.getOversPerHour();
 
         return (int) Math.round(oversLost);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.ol_menu_calculator, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.menu_change_overs_per_hour):
+                OLChangeOversPerHourFragment fragment = new OLChangeOversPerHourFragment();
+                fragment.setTargetFragment(OLCalculatorFragment.this, REQUEST_OVERS_PER_HOUR);
+                fragment.show(getFragmentManager(), DIALOG_CHANGE_OVERS_PER_HOUR);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_CANCELED) return;
+
+        if (requestCode == REQUEST_OVERS_PER_HOUR) {
+            double oversPerHour = data.getDoubleExtra(OLChangeOversPerHourFragment.EXTRA_G50, -1);
+            mCalculation.setOversPerHour(oversPerHour);
+            updateResult();
+            Toast.makeText(getActivity(),
+                    R.string.overs_per_hour_success_toast,
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     @Override

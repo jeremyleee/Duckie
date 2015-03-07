@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
  * TODO: Par score calculator
  * TODO: Drawer to switch between calculators
  * TODO: Tidy up menu screen
+ * TODO: Reimplement saving
+ * TODO: Update about page
  */
 public class MenuActivity extends ActionBarActivity {
 
