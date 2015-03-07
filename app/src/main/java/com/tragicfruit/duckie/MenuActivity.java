@@ -37,6 +37,7 @@ public class MenuActivity extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setSubtitle("a cricket calculator");
     }
 
 }
