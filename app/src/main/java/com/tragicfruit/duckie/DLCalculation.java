@@ -3,14 +3,11 @@ package com.tragicfruit.duckie;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.UUID;
-
 /**
  * Created by Jeremy on 1/02/2015.
  * Represents a single match
  */
-public class Match {
-    private static final String JSON_ID = "id";
+public class DLCalculation {
     private static final String JSON_MATCH_TYPE = "match_type";
     private static final String JSON_IS_PRO_MATCH = "pro_match";
     private static final String JSON_G50 = "g50";
@@ -30,14 +27,10 @@ public class Match {
     public static final int proG50 = 245;
     public static final int amateurG50 = 200;
 
-    private UUID mId;
-
     public Innings mFirstInnings;
     public Innings mSecondInnings;
 
-    public Match(boolean isProMatch, int matchType) {
-        mId = UUID.randomUUID();
-
+    public DLCalculation(boolean isProMatch, int matchType) {
         mIsProMatch = isProMatch;
         mMatchType = matchType;
 
@@ -51,8 +44,7 @@ public class Match {
         mSecondInnings = new Innings(mMatchType);
     }
 
-    public Match(JSONObject json) throws JSONException {
-        mId = UUID.fromString(json.getString(JSON_ID));
+    public DLCalculation(JSONObject json) throws JSONException {
         mMatchType = json.getInt(JSON_MATCH_TYPE);
         mIsProMatch = json.getBoolean(JSON_IS_PRO_MATCH);
         mG50 = json.getInt(JSON_G50);
@@ -62,7 +54,6 @@ public class Match {
 
     public JSONObject toJSON() throws JSONException {
         JSONObject json = new JSONObject();
-        json.put(JSON_ID, mId.toString());
         json.put(JSON_MATCH_TYPE, mMatchType);
         json.put(JSON_IS_PRO_MATCH, mIsProMatch);
         json.put(JSON_G50, mG50);
@@ -140,7 +131,4 @@ public class Match {
         return (int) targetScore + 1;
     }
 
-    public UUID getId() {
-        return mId;
-    }
 }

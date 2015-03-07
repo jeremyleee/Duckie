@@ -19,15 +19,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by Jeremy on 3/02/2015.
  * Fragment for user input and displaying data for a single innings
  */
 public class InningsFragment extends Fragment {
-    private static final String EXTRA_MATCH_ID =
-            "com.tragicfruit.duckie.match_id";
     private static final String EXTRA_IS_FIRST_INNINGS =
             "com.tragicfruit.duckie.is_first_innings";
 
@@ -36,7 +33,7 @@ public class InningsFragment extends Fragment {
     private static final int REQUEST_INTERRUPTION = 0;
     private static final int REQUEST_DELETE_INTERRUPTION = 1;
 
-    private Match mMatch;
+    private DLCalculation mMatch;
     private Innings mInnings;
     private boolean mIsFirstInnings;
     private ArrayList<Innings.Interruption> mInterruptions;
@@ -55,8 +52,7 @@ public class InningsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
-        mMatch = MatchLab.get(getActivity()).getMatch(matchId);
+        mMatch = CalculationLab.get().getDLCalculation();
 
         mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNINGS);
         if (mIsFirstInnings) {
@@ -227,7 +223,7 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    public Match getMatch() {
+    public DLCalculation getMatch() {
         return mMatch;
     }
 
@@ -260,9 +256,8 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    public static InningsFragment newInstance(UUID matchId, boolean isFirstInnings) {
+    public static InningsFragment newInstance(boolean isFirstInnings) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_MATCH_ID, matchId);
         args.putBoolean(EXTRA_IS_FIRST_INNINGS, isFirstInnings);
 
         InningsFragment fragment = new InningsFragment();

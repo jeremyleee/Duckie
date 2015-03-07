@@ -17,7 +17,7 @@ public class MatchLab {
     private static MatchLab sMatchLab;
     private Context mAppContext;
 
-    private ArrayList<Match> mMatches;
+    private ArrayList<DLCalculation> mMatches;
     private DuckieJSONSerializer mSerializer;
 
     public static MatchLab get(Context c) {
@@ -39,15 +39,15 @@ public class MatchLab {
         }
     }
 
-    public void addMatch(Match m) {
+    public void addMatch(DLCalculation m) {
         mMatches.add(m);
     }
 
-    public void deleteMatch(Match m) {
+    public void deleteMatch(DLCalculation m) {
         mMatches.remove(m);
     }
 
-    public ArrayList<Match> getMatches() {
+    public ArrayList<DLCalculation> getMatches() {
         return mMatches;
     }
 
@@ -60,9 +60,9 @@ public class MatchLab {
         }
     }
 
-    public Match getMatch(UUID id) {
-        for (Match m : mMatches) {
-            if (m.getId().equals(id))
+    public DLCalculation getMatch(UUID id) {
+        for (DLCalculation m : mMatches) {
+            //if (m.getId().equals(id))
                 return m;
         }
         return null;

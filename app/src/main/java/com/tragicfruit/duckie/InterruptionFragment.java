@@ -21,7 +21,7 @@ public class InterruptionFragment extends DialogFragment {
     public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
     public static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckie.input_new_total_overs";
 
-    private Match mMatch;
+    private DLCalculation mMatch;
 
     private int mInputRuns;
     private int mInputWickets;

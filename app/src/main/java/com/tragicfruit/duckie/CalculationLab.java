@@ -6,7 +6,7 @@ package com.tragicfruit.duckie;
 public class CalculationLab {
     private static CalculationLab sCalculationLab;
 
-    private Match mDLCalculation;
+    private DLCalculation mDLCalculation;
     private OversLostCalculation mOversLostCalculation;
 
     public static CalculationLab get() {
@@ -18,12 +18,12 @@ public class CalculationLab {
 
     private CalculationLab() {
         // initialise all calculations
-        mDLCalculation = new Match(true, Match.ONEDAY50);
+        mDLCalculation = new DLCalculation(true, DLCalculation.ONEDAY50);
         mOversLostCalculation = new OversLostCalculation();
     }
 
 
-    public Match getDLCalculation() {
+    public DLCalculation getDLCalculation() {
         return mDLCalculation;
     }
 

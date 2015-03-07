@@ -14,28 +14,24 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.util.UUID;
-
 /**
  * Created by Jeremy on 15/02/2015.
  * Allows changing G50 to a custom figure
  */
 public class ChangeG50Fragment extends DialogFragment {
-    private static final String EXTRA_MATCH_ID = "com.tragicfruit.duckie.match_id";
     public static final String EXTRA_G50 = "com.tragicfruit.duckie.g50";
 
     private RadioGroup mRadioGroup;
     private EditText mCustomG50Field;
 
     private int mG50;
-    private Match mMatch;
+    private DLCalculation mMatch;
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_change_g50, null);
 
-        UUID matchId = (UUID) getArguments().getSerializable(EXTRA_MATCH_ID);
-        mMatch = MatchLab.get(getActivity()).getMatch(matchId);
+        mMatch = CalculationLab.get().getDLCalculation();
 
         // Prevents focus on EditText when opening dialog
         View focusHere = v.findViewById(R.id.focus_here);
@@ -46,10 +42,10 @@ public class ChangeG50Fragment extends DialogFragment {
         mRadioGroup = (RadioGroup) v.findViewById(R.id.g50_radioGroup);
 
         RadioButton proG50RadioButton = (RadioButton) v.findViewById(R.id.pro_g50_radioButton);
-        proG50RadioButton.setText(getString(R.string.pro_g50_label, Match.proG50));
+        proG50RadioButton.setText(getString(R.string.pro_g50_label, DLCalculation.proG50));
 
         RadioButton amateurG50RadioButton = (RadioButton) v.findViewById(R.id.amateur_g50_radioButton);
-        amateurG50RadioButton.setText(getString(R.string.amateur_g50_label, Match.amateurG50));
+        amateurG50RadioButton.setText(getString(R.string.amateur_g50_label, DLCalculation.amateurG50));
 
         RadioButton customG50RadioButton = (RadioButton) v.findViewById(R.id.custom_g50_radioButton);
         mCustomG50Field = (EditText) v.findViewById(R.id.change_g50_editText);
@@ -66,9 +62,9 @@ public class ChangeG50Fragment extends DialogFragment {
         });
 
         // determines preselection when opening fragment
-        if (currentG50 == Match.proG50) {
+        if (currentG50 == DLCalculation.proG50) {
             proG50RadioButton.setChecked(true);
-        } else if (currentG50 == Match.amateurG50) {
+        } else if (currentG50 == DLCalculation.amateurG50) {
             amateurG50RadioButton.setChecked(true);
         } else {
             customG50RadioButton.setChecked(true);
@@ -85,10 +81,10 @@ public class ChangeG50Fragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         int checkedItem = mRadioGroup.getCheckedRadioButtonId();
                         if (checkedItem == R.id.pro_g50_radioButton) {
-                            mG50 = Match.proG50;
+                            mG50 = DLCalculation.proG50;
                             setResult(Activity.RESULT_OK);
                         } else if (checkedItem == R.id.amateur_g50_radioButton) {
-                            mG50 = Match.amateurG50;
+                            mG50 = DLCalculation.amateurG50;
                             setResult(Activity.RESULT_OK);
                         } else if (checkedItem == R.id.custom_g50_radioButton) {
                             if (isValidInput()) {
@@ -120,16 +116,6 @@ public class ChangeG50Fragment extends DialogFragment {
         data.putExtra(EXTRA_G50, mG50);
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
-    }
-
-    public static ChangeG50Fragment newInstance(UUID matchId) {
-        Bundle args = new Bundle();
-        args.putSerializable(EXTRA_MATCH_ID, matchId);
-
-        ChangeG50Fragment fragment = new ChangeG50Fragment();
-        fragment.setArguments(args);
-
-        return fragment;
     }
 
 }

@@ -27,7 +27,7 @@ public class DLCalculatorFragment extends Fragment {
     private ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
 
-    private Match mMatch;
+    private DLCalculation mMatch;
     private InningsFragment mFirstInningsFragment;
     private InningsFragment mSecondInningsFragment;
     private ResultFragment mResultFragment;
@@ -38,17 +38,11 @@ public class DLCalculatorFragment extends Fragment {
         setHasOptionsMenu(true);
         setRetainInstance(true);
 
-        // TODO: implement user creating a match
-        try {
-            mMatch = MatchLab.get(getActivity()).getMatches().get(0);
-        } catch (Exception e) {
-            mMatch = new Match(true, Match.ONEDAY50);
-            MatchLab.get(getActivity()).addMatch(mMatch);
-        }
+        mMatch = CalculationLab.get().getDLCalculation();
 
-        mFirstInningsFragment = InningsFragment.newInstance(mMatch.getId(), true);
-        mSecondInningsFragment = InningsFragment.newInstance(mMatch.getId(), false);
-        mResultFragment = ResultFragment.newInstance(mMatch.getId());
+        mFirstInningsFragment = InningsFragment.newInstance(true);
+        mSecondInningsFragment = InningsFragment.newInstance(false);
+        mResultFragment = new ResultFragment();
 
     }
 
@@ -151,12 +145,12 @@ public class DLCalculatorFragment extends Fragment {
                 startActivity(i);
                 return true;
             case (R.id.menu_change_g50):
-                ChangeG50Fragment g50Fragment = ChangeG50Fragment.newInstance(mMatch.getId());
+                ChangeG50Fragment g50Fragment = new ChangeG50Fragment();
                 g50Fragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_G50);
                 g50Fragment.show(getFragmentManager(), DIALOG_CHANGE_G50);
                 return true;
             case (R.id.menu_change_match_type):
-                ChangeMatchTypeFragment matchTypeFragment = ChangeMatchTypeFragment.newInstance(mMatch.getId());
+                ChangeMatchTypeFragment matchTypeFragment = new ChangeMatchTypeFragment();
                 matchTypeFragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_MATCH_TYPE);
                 matchTypeFragment.show(getFragmentManager(), DIALOG_CHANGE_MATCH_TYPE);
                 return true;
@@ -186,7 +180,8 @@ public class DLCalculatorFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        MatchLab.get(getActivity()).saveMatches();
+        //TODO: implement saving
+        //MatchLab.get(getActivity()).saveMatches();
     }
 
 }

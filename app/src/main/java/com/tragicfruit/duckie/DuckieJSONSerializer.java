@@ -30,8 +30,8 @@ public class DuckieJSONSerializer {
         mFileName = f;
     }
 
-    public ArrayList<Match> loadMatches() throws IOException, JSONException {
-        ArrayList<Match> matches = new ArrayList<>();
+    public ArrayList<DLCalculation> loadMatches() throws IOException, JSONException {
+        ArrayList<DLCalculation> matches = new ArrayList<>();
         BufferedReader reader = null;
         try {
             InputStream in = mContext.openFileInput(mFileName);
@@ -44,7 +44,7 @@ public class DuckieJSONSerializer {
 
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
             for (int i = 0; i < array.length(); i++) {
-                matches.add(new Match(array.getJSONObject(i)));
+                matches.add(new DLCalculation(array.getJSONObject(i)));
             }
         } catch (FileNotFoundException e) {
             // App starting fresh
@@ -55,9 +55,9 @@ public class DuckieJSONSerializer {
         return matches;
     }
 
-    public void saveMatches(ArrayList<Match> matches) throws IOException, JSONException {
+    public void saveMatches(ArrayList<DLCalculation> matches) throws IOException, JSONException {
         JSONArray array = new JSONArray();
-        for (Match m : matches) {
+        for (DLCalculation m : matches) {
             array.put(m.toJSON());
         }
 
