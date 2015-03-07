@@ -1,9 +1,16 @@
 package com.tragicfruit.duckie;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Jeremy on 7/03/2015.
  */
-public class OLCalculation {
+public class OLCalculation extends Calculation {
+    private static final String JSON_HOURS_LOST = "hours_lost";
+    private static final String JSON_MINUTES_LOST = "minutes_lost";
+    private static final String JSON_OVERS_PER_HOUR = "overs_per_hour";
+
     private int mHoursLost;
     private int mMinutesLost;
     private double mOversPerHour;
@@ -18,6 +25,20 @@ public class OLCalculation {
         mHoursLost = -1;
         mMinutesLost = -1;
         mOversPerHour = MENS_ODI;
+    }
+
+    public OLCalculation(JSONObject json) throws JSONException {
+        mHoursLost = json.getInt(JSON_HOURS_LOST);
+        mMinutesLost = json.getInt(JSON_MINUTES_LOST);
+        mOversPerHour = json.getDouble(JSON_OVERS_PER_HOUR);
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put(JSON_HOURS_LOST, mHoursLost);
+        json.put(JSON_MINUTES_LOST, mMinutesLost);
+        json.put(JSON_OVERS_PER_HOUR, mOversPerHour);
+        return json;
     }
 
     public int getHoursLost() {

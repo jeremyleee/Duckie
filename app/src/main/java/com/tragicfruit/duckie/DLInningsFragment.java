@@ -52,7 +52,7 @@ public class DLInningsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMatch = CalculationLab.get().getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
 
         mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNINGS);
         if (mIsFirstInnings) {

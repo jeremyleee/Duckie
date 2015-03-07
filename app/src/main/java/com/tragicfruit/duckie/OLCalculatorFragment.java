@@ -35,7 +35,7 @@ public class OLCalculatorFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mCalculation = CalculationLab.get().getOLCalculation();
+        mCalculation = CalculationLab.get(getActivity()).getOLCalculation();
     }
 
     @Override
@@ -146,7 +146,7 @@ public class OLCalculatorFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        CalculationLab.get().saveCalculations();
+        CalculationLab.get(getActivity()).saveCalculations();
     }
 
 }

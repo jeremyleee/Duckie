@@ -31,7 +31,7 @@ public class DLChangeG50Fragment extends DialogFragment {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dl_dialog_change_g50, null);
 
-        mMatch = CalculationLab.get().getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
 
         // Prevents focus on EditText when opening dialog
         View focusHere = v.findViewById(R.id.focus_here);

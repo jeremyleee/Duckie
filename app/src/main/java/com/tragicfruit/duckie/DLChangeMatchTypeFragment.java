@@ -24,7 +24,7 @@ public class DLChangeMatchTypeFragment extends DialogFragment {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dl_dialog_change_match_type, null);
 
-        mMatch = CalculationLab.get().getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
 
         // determines preselection when user enters fragment
         int matchType = mMatch.getMatchType();

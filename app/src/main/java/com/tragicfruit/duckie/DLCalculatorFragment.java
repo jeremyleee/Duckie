@@ -38,7 +38,7 @@ public class DLCalculatorFragment extends Fragment {
         setHasOptionsMenu(true);
         setRetainInstance(true);
 
-        mMatch = CalculationLab.get().getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
 
         mFirstInningsFragment = DLInningsFragment.newInstance(true);
         mSecondInningsFragment = DLInningsFragment.newInstance(false);
@@ -180,7 +180,7 @@ public class DLCalculatorFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        CalculationLab.get().saveCalculations();
+        CalculationLab.get(getActivity()).saveCalculations();
     }
 
 }

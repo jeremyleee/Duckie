@@ -20,18 +20,18 @@ import java.util.ArrayList;
  * Created by Jeremy on 6/02/2015.
  * Saves and loads matches to JSON file
  */
-public class DuckieJSONSerializer {
+public class CalculationJSONSerializer {
 
     private Context mContext;
     private String mFileName;
 
-    public DuckieJSONSerializer(Context c, String f) {
+    public CalculationJSONSerializer(Context c, String f) {
         mContext = c;
         mFileName = f;
     }
 
-    public ArrayList<DLCalculation> loadMatches() throws IOException, JSONException {
-        ArrayList<DLCalculation> matches = new ArrayList<>();
+    public ArrayList<Calculation> loadCalculations() throws IOException, JSONException {
+        ArrayList<Calculation> calculations = new ArrayList<>();
         BufferedReader reader = null;
         try {
             InputStream in = mContext.openFileInput(mFileName);
@@ -43,22 +43,22 @@ public class DuckieJSONSerializer {
             }
 
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
-            for (int i = 0; i < array.length(); i++) {
-                matches.add(new DLCalculation(array.getJSONObject(i)));
-            }
+            calculations.add(new DLCalculation(array.getJSONObject(0)));
+            calculations.add(new OLCalculation(array.getJSONObject(1)));
         } catch (FileNotFoundException e) {
             // App starting fresh
+            throw new FileNotFoundException();
         } finally {
             if (reader != null)
                 reader.close();
         }
-        return matches;
+        return calculations;
     }
 
-    public void saveMatches(ArrayList<DLCalculation> matches) throws IOException, JSONException {
+    public void saveCalculations(ArrayList<Calculation> calculations) throws IOException, JSONException {
         JSONArray array = new JSONArray();
-        for (DLCalculation m : matches) {
-            array.put(m.toJSON());
+        for (Calculation c : calculations) {
+            array.put(c.toJSON());
         }
 
         Writer writer = null;

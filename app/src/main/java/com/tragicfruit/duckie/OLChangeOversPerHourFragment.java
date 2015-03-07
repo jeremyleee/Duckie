@@ -32,7 +32,7 @@ public class OLChangeOversPerHourFragment extends DialogFragment {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.ol_dialog_change_overs_per_hour, null);
 
-        mCalculation = CalculationLab.get().getOLCalculation();
+        mCalculation = CalculationLab.get(getActivity()).getOLCalculation();
 
         // Prevents focus on EditText when opening dialog
         View focusHere = v.findViewById(R.id.focus_here);

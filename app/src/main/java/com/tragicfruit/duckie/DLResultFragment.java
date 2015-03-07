@@ -24,7 +24,7 @@ public class DLResultFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMatch = CalculationLab.get().getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
     }
 
     @Override

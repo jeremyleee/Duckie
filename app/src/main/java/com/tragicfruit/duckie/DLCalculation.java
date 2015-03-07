@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Created by Jeremy on 1/02/2015.
  * Represents a single match
  */
-public class DLCalculation {
+public class DLCalculation extends Calculation {
     private static final String JSON_MATCH_TYPE = "match_type";
     private static final String JSON_IS_PRO_MATCH = "pro_match";
     private static final String JSON_G50 = "g50";
