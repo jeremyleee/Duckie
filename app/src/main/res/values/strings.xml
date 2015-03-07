@@ -40,6 +40,7 @@
     <string name="minutes_label">mins</string>
     <string name="calculate_overs_lost_button_label">Calculate</string>
     <string name="reset_overs_lost_button_label">Reset</string>
+    <string name="overs_lost_label">overs lost</string>
     <string name="change_overs_per_hour_label">Change overs per hour</string>
     <string name="mens_odi_label">%s overs per hour (ODI)</string>
     <string name="mens_t20_label">%s overs per hour (T20)</string>

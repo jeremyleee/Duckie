@@ -27,6 +27,7 @@ public class OLCalculatorFragment extends Fragment {
     private EditText mHoursLostField;
     private EditText mMinsLostField;
     private TextView mResultTextView;
+    private View mResultSection;
 
     private OLCalculation mCalculation;
 
@@ -56,6 +57,7 @@ public class OLCalculatorFragment extends Fragment {
         if (mCalculation.getMinutesLost() >= 0)
             mMinsLostField.setText("" + mCalculation.getMinutesLost());
 
+        mResultSection = v.findViewById(R.id.overs_lost_result_section);
         mResultTextView = (TextView) v.findViewById(R.id.overs_lost_result_textView);
         if (mCalculation.getHoursLost() >= 0 && mCalculation.getMinutesLost() >= 0) {
             updateResult();
@@ -77,7 +79,7 @@ public class OLCalculatorFragment extends Fragment {
                 mMinsLostField.setText("");
                 mCalculation.setHoursLost(-1);
                 mCalculation.setMinutesLost(-1);
-                mResultTextView.setVisibility(View.GONE);
+                mResultSection.setVisibility(View.GONE);
             }
         });
 
@@ -85,8 +87,8 @@ public class OLCalculatorFragment extends Fragment {
     }
 
     private void updateResult() {
-        mResultTextView.setVisibility(View.VISIBLE);
-        mResultTextView.setText(getResult() + " overs lost");
+        mResultSection.setVisibility(View.VISIBLE);
+        mResultTextView.setText("" + getResult());
     }
 
     private int getResult() {
