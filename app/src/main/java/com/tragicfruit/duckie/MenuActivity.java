@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
  * TODO: Banner on Play Store
  * TODO: Net run rate calculator
  * TODO: Par score calculator
+ * TODO: Career average calculator
+ * TODO: Score keeping
  * TODO: Drawer to switch between calculators
  * TODO: Clean up messy JSON serialiser code
  */
