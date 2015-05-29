@@ -38,7 +38,7 @@ public class MenuActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
-            getSupportActionBar().setSubtitle("a cricket calculator");
+            getSupportActionBar().setSubtitle(R.string.subtitle);
     }
 
 }
