@@ -3,7 +3,7 @@ package com.tragicfruit.duckie;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 /**
@@ -19,7 +19,7 @@ import android.support.v7.widget.Toolbar;
  * TODO: Drawer to switch between calculators
  * TODO: Clean up messy JSON serialiser code
  */
-public class MenuActivity extends ActionBarActivity {
+public class MenuActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,8 @@ public class MenuActivity extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setSubtitle("a cricket calculator");
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setSubtitle("a cricket calculator");
     }
 
 }

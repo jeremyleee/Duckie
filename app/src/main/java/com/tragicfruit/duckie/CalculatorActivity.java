@@ -3,7 +3,7 @@ package com.tragicfruit.duckie;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
@@ -11,7 +11,7 @@ import android.util.Log;
  * Created by Jeremy on 15/02/2015.
  * Hosts a different fragments depending on calculator chosen
  */
-public class CalculatorActivity extends ActionBarActivity {
+public class CalculatorActivity extends AppCompatActivity {
     public static final String EXTRA_MENU_CHOICE = "com.tragicfruit.duckie.menu_choice";
 
     private static final String TAG = "CalculatorActivity";
