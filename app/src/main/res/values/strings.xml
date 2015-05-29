@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Duckie</string>
+    <string name="subtitle">a cricket calculator</string>
     <string name="change_match_type_label">Change match type</string>
     <string name="change_g50_label">Change G50</string>
     <string name="about_label">About</string>
