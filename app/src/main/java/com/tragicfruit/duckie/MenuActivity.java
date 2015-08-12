@@ -35,10 +35,10 @@ public class MenuActivity extends AppCompatActivity {
                     .commit();
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
-            getSupportActionBar().setSubtitle(R.string.subtitle);
+            getSupportActionBar().setSubtitle(R.string.subtitle);*/
     }
 
 }
