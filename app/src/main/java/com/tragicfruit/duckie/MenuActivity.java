@@ -18,12 +18,13 @@ import android.support.v7.widget.Toolbar;
  * TODO: Score keeping
  * TODO: Drawer to switch between calculators
  * TODO: Clean up messy JSON serialiser code
+ * TODO: Make bars on menu transparent and diff colours for diff calculators (changing styles btwn activities)
  */
 public class MenuActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
+        setContentView(R.layout.activity_fragment_no_toolbar);
 
         FragmentManager fm = getFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
@@ -35,10 +36,10 @@ public class MenuActivity extends AppCompatActivity {
                     .commit();
         }
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setSubtitle(R.string.subtitle);*/
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        if (getSupportActionBar() != null)
+//            getSupportActionBar().setSubtitle(R.string.subtitle);
     }
 
 }
