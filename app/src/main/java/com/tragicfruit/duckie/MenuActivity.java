@@ -9,16 +9,6 @@ import android.support.v7.widget.Toolbar;
 /**
  * Created by Jeremy on 6/03/2015.
  * Hosts MenuFragment
- * TODO: Multiple matches
- * TODO: Redesign UI (Vincent)
- * TODO: Banner on Play Store
- * TODO: Net run rate calculator
- * TODO: Par score calculator
- * TODO: Career average calculator
- * TODO: Score keeping
- * TODO: Drawer to switch between calculators
- * TODO: Clean up messy JSON serialiser code
- * TODO: Make bars on menu transparent and diff colours for diff calculators (changing styles btwn activities)
  */
 public class MenuActivity extends AppCompatActivity {
 
