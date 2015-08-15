@@ -11,16 +11,18 @@
         android:scaleType="centerCrop"/>
 
     <TableLayout
-        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:layout_gravity="center|bottom">
+        android:layout_gravity="center|bottom"
+        android:paddingBottom="48dp">
 
             <Button
                 android:id="@+id/dl_calculator_button"
                 android:text="@string/dl_calculator_label"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"/>
 
             <Button
                 android:id="@+id/overs_lost_calculator_button"
