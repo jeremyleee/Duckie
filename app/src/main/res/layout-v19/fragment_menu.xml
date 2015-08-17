@@ -14,7 +14,8 @@
         android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom">
+        android:layout_gravity="center|bottom"
+        android:paddingBottom="48dp">
 
             <Button
                 android:id="@+id/dl_calculator_button"

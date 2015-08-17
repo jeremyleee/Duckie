@@ -8,6 +8,10 @@
     android:background="@color/ColorPrimary"
     android:elevation="4dp">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
