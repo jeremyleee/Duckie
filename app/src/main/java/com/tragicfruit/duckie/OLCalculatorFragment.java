@@ -18,7 +18,6 @@ import android.widget.Toast;
 /**
  * Created by Jeremy on 6/03/2015.
  * Overs Lost Calculator fragment
- * TODO: Change overs per hour
  */
 public class OLCalculatorFragment extends Fragment {
     private static final String DIALOG_CHANGE_OVERS_PER_HOUR = "change_overs_per_hour";
