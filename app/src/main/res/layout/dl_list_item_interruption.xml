@@ -4,6 +4,7 @@
                 android:layout_height="wrap_content">
 
     <TextView
+        android:textColor="@android:color/white"
         android:id="@+id/interruption_desc_textView"
         android:text="Interruption after 00 overs"
         android:gravity="center"
