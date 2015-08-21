@@ -7,6 +7,12 @@
 
     <include layout="@layout/focus_here"/>
 
+    <ImageView
+        android:src="@drawable/innings_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -92,6 +98,7 @@
                 android:layout_marginBottom="16dp">
 
                 <TextView
+                    android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
