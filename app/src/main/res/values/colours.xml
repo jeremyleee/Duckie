@@ -4,7 +4,7 @@
     <color name="ColorPrimary">#C88C17</color>
     <color name="ColorPrimaryDark">#B57C00</color>
     <color name="tabsScrollColor">#FFFFFF</color>
-    <color name="notSelectedTab">#c8b48a</color>
+    <color name="notSelectedTab">#c8b59a</color>
     <color name="editText">#616161</color>
 
 </resources>

@@ -16,6 +16,9 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private static final String TAG = "CalculatorActivity";
 
+    public DLCalculatorFragment mDLCalculatorFragment;
+    public OLCalculatorFragment mOLCalculatorFragment;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_toolbar);
@@ -37,9 +40,13 @@ public class CalculatorActivity extends AppCompatActivity {
     private Fragment createFragment() {
         switch (getIntent().getIntExtra(EXTRA_MENU_CHOICE, -1)) {
             case MenuFragment.DL_CALCULATOR:
-                return new DLCalculatorFragment();
+                if (mDLCalculatorFragment == null)
+                    mDLCalculatorFragment = new DLCalculatorFragment();
+                return mDLCalculatorFragment;
             case MenuFragment.OVERS_LOST_CALCULATOR:
-                return new OLCalculatorFragment();
+                if (mOLCalculatorFragment == null)
+                    mOLCalculatorFragment = new OLCalculatorFragment();
+                return mOLCalculatorFragment;
             default:
                 Log.i(TAG, "Cannot find menu choice");
                 finish();

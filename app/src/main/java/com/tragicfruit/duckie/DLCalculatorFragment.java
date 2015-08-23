@@ -92,7 +92,7 @@ public class DLCalculatorFragment extends Fragment {
             }
 
             @Override
-            public Fragment instantiateItem(ViewGroup container, int position){
+            public Fragment instantiateItem(ViewGroup container, int position) {
                 Fragment fragment = getItem(position);
                 fm.beginTransaction()
                         .add(container.getId(), fragment, "fragment:" + position)
@@ -113,8 +113,12 @@ public class DLCalculatorFragment extends Fragment {
         });
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            public void onPageScrollStateChanged(int state) {
+            }
+
             public void onPageSelected(int position) {
                 // updates result when result tab selected
                 if (position == 2) {
@@ -130,6 +134,11 @@ public class DLCalculatorFragment extends Fragment {
         mFirstInningsFragment.update();
         mSecondInningsFragment.update();
         mResultFragment.update();
+    }
+
+    // Sets mViewPager current item to next item
+    public void nextPage() {
+        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
     }
 
     @Override

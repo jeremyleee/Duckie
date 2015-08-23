@@ -44,6 +44,7 @@ public class DLInningsFragment extends Fragment {
     private EditText mOversField;
     private EditText mRunsField;
     private Button mAddInterruptionButton;
+    private Button mContinueButton;
 
     private DLInnings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
     private DLInnings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
@@ -152,6 +153,14 @@ public class DLInningsFragment extends Fragment {
 
         mInterruptionsLabel = (TextView) v.findViewById(R.id.interruptions_label);
         mInterruptionList = (LinearLayout) v.findViewById(R.id.interruption_list_section);
+
+        mContinueButton = (Button) v.findViewById(R.id.continue_button);
+        mContinueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CalculatorActivity) getActivity()).mDLCalculatorFragment.nextPage();
+            }
+        });
 
         update();
 
