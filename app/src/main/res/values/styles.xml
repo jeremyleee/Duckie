@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
         <item name="buttonStyle">@style/button</item>
+        <!--<item name="editTextColor">#FFFFFFFF</item>-->
+        <!--<item name="editTextBackground">@drawable/edit_text_holo_light</item>-->
     </style>
 
     <style name="AppTheme.NoToolbar">

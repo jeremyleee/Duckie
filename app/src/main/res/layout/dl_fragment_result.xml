@@ -7,7 +7,7 @@
     <include layout="@layout/focus_here"/>
 
     <ImageView
-        android:src="@drawable/innings_bg"
+        android:src="@drawable/calculator_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
