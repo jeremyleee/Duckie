@@ -11,6 +11,7 @@
         android:scaleType="centerCrop"/>
 
     <TableLayout
+        android:fitsSystemWindows="true"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
