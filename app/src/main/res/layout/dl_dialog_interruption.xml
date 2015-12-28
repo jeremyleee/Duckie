@@ -38,7 +38,6 @@
                     android:layout_marginBottom="16dp">
 
                     <EditText
-                        android:textColor="@color/editText"
                         android:gravity="center"
                         android:id="@+id/interruption_runs_editText"
                         android:textSize="24sp"
@@ -54,7 +53,6 @@
                         android:layout_height="wrap_content"/>
 
                     <EditText
-                        android:textColor="@color/editText"
                         android:gravity="center"
                         android:id="@+id/interruption_wickets_editText"
                         android:textSize="24sp"
@@ -81,7 +79,6 @@
                     android:textSize="16sp"/>
 
                 <EditText
-                    android:textColor="@color/editText"
                     android:gravity="center"
                     android:textSize="24sp"
                     android:id="@+id/interruption_overs_completed"
@@ -106,7 +103,6 @@
                     android:textSize="16sp"/>
 
                 <EditText
-                    android:textColor="@color/editText"
                     android:gravity="center"
                     android:textSize="24sp"
                     android:id="@+id/interruption_new_total_overs"

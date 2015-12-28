@@ -66,7 +66,6 @@
         </RadioGroup>
 
         <EditText
-            android:textColor="@color/editText"
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/change_overs_per_hour_editText"

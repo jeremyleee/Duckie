@@ -48,17 +48,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/starting_overs_label"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"/>
 
                 <EditText
-                    android:textColor="@color/editText"
+                    style="@style/EditText"
                     android:gravity="center"
                     android:id="@+id/max_overs_editText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:textSize="50sp"
-                    android:ems="2"
+                    android:ems="4"
                     android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
@@ -86,8 +86,6 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
                 android:layout_marginBottom="16dp"/>
 
             <LinearLayout
@@ -113,13 +111,12 @@
 
                     <EditText
                         android:gravity="center"
-                        android:textColor="@color/editText"
+                        style="@style/EditText"
                         android:id="@+id/first_innings_runs_editText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:textSize="50sp"
-                        android:ems="2"/>
+                        android:ems="4"/>
 
                     <TextView
                         android:textColor="@android:color/white"
@@ -130,13 +127,12 @@
 
                     <EditText
                         android:gravity="center"
-                        android:textColor="@color/editText"
+                        style="@style/EditText"
                         android:id="@+id/first_innings_wickets_editText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:textSize="50sp"
-                        android:ems="1"/>
+                        android:ems="2"/>
 
                 </LinearLayout>
 

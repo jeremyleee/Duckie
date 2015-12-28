@@ -50,7 +50,6 @@
         </RadioGroup>
 
         <EditText
-            android:textColor="@color/editText"
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/change_g50_editText"
