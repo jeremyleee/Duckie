@@ -14,7 +14,7 @@ public class MenuActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_no_toolbar);
+        setContentView(R.layout.activity_fragment);
 
         FragmentManager fm = getFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
@@ -25,11 +25,5 @@ public class MenuActivity extends AppCompatActivity {
                     .add(R.id.fragmentContainer, fragment)
                     .commit();
         }
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        if (getSupportActionBar() != null)
-//            getSupportActionBar().setSubtitle(R.string.subtitle);
     }
-
 }
