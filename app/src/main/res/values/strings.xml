@@ -15,6 +15,7 @@
     <string name="interruption_score_label">Score at interruption</string>
     <string name="starting_overs_label">Total available overs\n(beginning of innings)</string>
     <string name="add_interruption_label">Add interruption</string>
+    <string name="runs_wickets_separator">/</string>
     <string name="target_score">Target score:</string>
     <string name="calculation_error_label">Error</string>
     <string name="calculation_error_detail">Unable to calculate target score.\nPlease check input values.</string>
@@ -29,6 +30,7 @@
     <string name="invalid_interruption_toast">Invalid interruption</string>
     <string name="delete_interruption_message">Delete interruption?</string>
     <string name="delete_interruption_positive_button">Delete</string>
+    <string name="continue_button">Continue</string>
     <string name="change_match_type_50_overs">One day (50 overs)</string>
     <string name="change_match_type_20_overs">Twenty20 (20 overs)</string>
     <string name="pro_g50_label">%s (ICC full member nations, first class cricket teams)</string>

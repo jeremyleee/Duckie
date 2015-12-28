@@ -52,7 +52,7 @@ public class DLCalculatorFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dl_fragment_calculator, null);
+        View v = inflater.inflate(R.layout.dl_fragment_calculator, container, false);
 
         getActivity().setTitle(R.string.dl_calculator_label);
 

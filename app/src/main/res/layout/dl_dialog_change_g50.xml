@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
+    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Pro G50"
+                tools:text="Pro G50"
                 android:id="@+id/pro_g50_radioButton"/>
 
             <RadioButton
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Amateur G50"
+                tools:text="Amateur G50"
                 android:id="@+id/amateur_g50_radioButton"/>
 
             <RadioButton
