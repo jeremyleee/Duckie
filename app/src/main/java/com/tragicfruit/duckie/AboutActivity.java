@@ -17,15 +17,11 @@ import android.widget.TextView;
  * Explains the Duckworth-Lewis method and the app's capabilities
  */
 public class AboutActivity extends AppCompatActivity {
-    private Toolbar mToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
             TextView versionLabel = (TextView) findViewById(R.id.version_label);

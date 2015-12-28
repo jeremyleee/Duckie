@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,11 @@ import android.widget.Toast;
  * Displays details of an interruption
  */
 public class DLInterruptionFragment extends DialogFragment {
+    public static final String ARG_RUNS = "runs";
+    public static final String ARG_WICKETS = "wickets";
+    public static final String ARG_OVERS_COMPLETED = "overs_completed";
+    public static final String ARG_NEW_TOTAL_OVERS = "total_overs";
+
     public static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckie.input_runs";
     public static final String EXTRA_INPUT_WICKETS = "com.tragicfruit.duckie.input_wickets";
     public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
@@ -33,14 +39,19 @@ public class DLInterruptionFragment extends DialogFragment {
     private EditText mOversField;
     private EditText mNewTotalOversField;
 
+    // Creating new interruption
+    public static DLInterruptionFragment newInstance() {
+        return new DLInterruptionFragment();
+    }
+
     // Editing existing interruption
     public static DLInterruptionFragment newInstance(int inputRuns, int inputWickets,
                                                    int inputOversCompleted, int inputNewTotalOvers) {
         Bundle args = new Bundle();
-        args.putInt(EXTRA_INPUT_RUNS, inputRuns);
-        args.putInt(EXTRA_INPUT_WICKETS, inputWickets);
-        args.putInt(EXTRA_INPUT_OVERS_COMPLETED, inputOversCompleted);
-        args.putInt(EXTRA_INPUT_NEW_TOTAL_OVERS, inputNewTotalOvers);
+        args.putInt(ARG_RUNS, inputRuns);
+        args.putInt(ARG_WICKETS, inputWickets);
+        args.putInt(ARG_OVERS_COMPLETED, inputOversCompleted);
+        args.putInt(ARG_NEW_TOTAL_OVERS, inputNewTotalOvers);
 
         DLInterruptionFragment fragment = new DLInterruptionFragment();
         fragment.setArguments(args);
@@ -59,6 +70,7 @@ public class DLInterruptionFragment extends DialogFragment {
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
@@ -74,10 +86,10 @@ public class DLInterruptionFragment extends DialogFragment {
         mNewTotalOversField = (EditText) v.findViewById(R.id.interruption_new_total_overs);
 
         if (getArguments() != null) {
-            mRunsField.setText("" + getArguments().getInt(EXTRA_INPUT_RUNS, -1));
-            mWicketsField.setText("" + getArguments().getInt(EXTRA_INPUT_WICKETS, -1));
-            mOversField.setText("" + getArguments().getInt(EXTRA_INPUT_OVERS_COMPLETED, -1));
-            mNewTotalOversField.setText("" + getArguments().getInt(EXTRA_INPUT_NEW_TOTAL_OVERS, -1));
+            mRunsField.setText(Integer.toString(getArguments().getInt(ARG_RUNS, -1)));
+            mWicketsField.setText(Integer.toString(getArguments().getInt(ARG_WICKETS, -1)));
+            mOversField.setText(Integer.toString(getArguments().getInt(ARG_OVERS_COMPLETED, -1)));
+            mNewTotalOversField.setText(Integer.toString(getArguments().getInt(ARG_NEW_TOTAL_OVERS, -1)));
         }
 
         return new AlertDialog.Builder(getActivity())
@@ -128,6 +140,15 @@ public class DLInterruptionFragment extends DialogFragment {
         data.putExtra(EXTRA_INPUT_NEW_TOTAL_OVERS, mInputNewTotalOvers);
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
+    }
+
+    public static void addInterruption(DLInnings innings, Intent data) {
+        innings.addInterruption(
+                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_RUNS, -1),
+                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_WICKETS, -1),
+                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
+                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
+        );
     }
 
 }

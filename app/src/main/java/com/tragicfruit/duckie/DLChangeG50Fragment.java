@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -27,6 +28,12 @@ public class DLChangeG50Fragment extends DialogFragment {
     private int mG50;
     private DLCalculation mMatch;
 
+    public static DLChangeG50Fragment newInstance() {
+        return new DLChangeG50Fragment();
+    }
+
+    @NonNull
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dl_dialog_change_g50, null);

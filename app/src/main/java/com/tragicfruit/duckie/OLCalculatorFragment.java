@@ -30,6 +30,10 @@ public class OLCalculatorFragment extends Fragment {
 
     private OLCalculation mCalculation;
 
+    public static OLCalculatorFragment newInstance() {
+        return new OLCalculatorFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +124,7 @@ public class OLCalculatorFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case (R.id.menu_change_overs_per_hour):
-                OLChangeOversPerHourFragment fragment = new OLChangeOversPerHourFragment();
+                OLChangeOversPerHourFragment fragment = OLChangeOversPerHourFragment.newInstance();
                 fragment.setTargetFragment(OLCalculatorFragment.this, REQUEST_OVERS_PER_HOUR);
                 fragment.show(getFragmentManager(), DIALOG_CHANGE_OVERS_PER_HOUR);
                 return true;
@@ -134,7 +138,7 @@ public class OLCalculatorFragment extends Fragment {
         if (resultCode == Activity.RESULT_CANCELED) return;
 
         if (requestCode == REQUEST_OVERS_PER_HOUR) {
-            double oversPerHour = data.getDoubleExtra(OLChangeOversPerHourFragment.EXTRA_G50, -1);
+            double oversPerHour = OLChangeOversPerHourFragment.getOversPerHour(data);
             mCalculation.setOversPerHour(oversPerHour);
             updateResult();
             Toast.makeText(getActivity(),

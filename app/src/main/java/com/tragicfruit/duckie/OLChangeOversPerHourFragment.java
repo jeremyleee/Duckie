@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -27,6 +28,11 @@ public class OLChangeOversPerHourFragment extends DialogFragment {
 
     private double mOversPerHour;
 
+    public static OLChangeOversPerHourFragment newInstance() {
+        return new OLChangeOversPerHourFragment();
+    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
@@ -134,6 +140,10 @@ public class OLChangeOversPerHourFragment extends DialogFragment {
         data.putExtra(EXTRA_G50, mOversPerHour);
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
+    }
+
+    public static double getOversPerHour(Intent data) {
+        return data.getDoubleExtra(OLChangeOversPerHourFragment.EXTRA_G50, -1);
     }
 
 }

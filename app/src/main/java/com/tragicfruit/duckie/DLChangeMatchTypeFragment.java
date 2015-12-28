@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.RadioButton;
@@ -20,6 +21,12 @@ public class DLChangeMatchTypeFragment extends DialogFragment {
 
     private DLCalculation mMatch;
 
+    public static DLChangeMatchTypeFragment newInstance() {
+        return new DLChangeMatchTypeFragment();
+    }
+
+    @NonNull
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dl_dialog_change_match_type, null);
@@ -59,6 +66,10 @@ public class DLChangeMatchTypeFragment extends DialogFragment {
         data.putExtra(EXTRA_MATCH_TYPE, matchType);
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
+    }
+
+    public static int getMatchType(Intent data) {
+        return data.getIntExtra(DLChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
     }
 
 }

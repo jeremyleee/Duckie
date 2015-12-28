@@ -32,6 +32,10 @@ public class DLCalculatorFragment extends Fragment {
     private DLInningsFragment mSecondInningsFragment;
     private DLResultFragment mResultFragment;
 
+    public static DLCalculatorFragment newInstance() {
+        return new DLCalculatorFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +46,7 @@ public class DLCalculatorFragment extends Fragment {
 
         mFirstInningsFragment = DLInningsFragment.newInstance(true);
         mSecondInningsFragment = DLInningsFragment.newInstance(false);
-        mResultFragment = new DLResultFragment();
+        mResultFragment = DLResultFragment.newInstance();
 
     }
 
@@ -154,12 +158,12 @@ public class DLCalculatorFragment extends Fragment {
                 startActivity(i);
                 return true;
             case (R.id.menu_change_g50):
-                DLChangeG50Fragment g50Fragment = new DLChangeG50Fragment();
+                DLChangeG50Fragment g50Fragment = DLChangeG50Fragment.newInstance();
                 g50Fragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_G50);
                 g50Fragment.show(getFragmentManager(), DIALOG_CHANGE_G50);
                 return true;
             case (R.id.menu_change_match_type):
-                DLChangeMatchTypeFragment matchTypeFragment = new DLChangeMatchTypeFragment();
+                DLChangeMatchTypeFragment matchTypeFragment = DLChangeMatchTypeFragment.newInstance();
                 matchTypeFragment.setTargetFragment(DLCalculatorFragment.this, REQUEST_MATCH_TYPE);
                 matchTypeFragment.show(getFragmentManager(), DIALOG_CHANGE_MATCH_TYPE);
                 return true;
@@ -178,7 +182,7 @@ public class DLCalculatorFragment extends Fragment {
             updateFragments();
 
         } else if (requestCode == REQUEST_MATCH_TYPE) {
-            int matchType = data.getIntExtra(DLChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
+            int matchType = DLChangeMatchTypeFragment.getMatchType(data);
             mMatch.setMatchType(matchType);
             mMatch.mFirstInnings.setMaxOvers(matchType);
             mMatch.mSecondInnings.setMaxOvers(matchType);

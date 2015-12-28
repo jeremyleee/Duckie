@@ -35,13 +35,13 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private Fragment createFragment() {
         switch (getIntent().getIntExtra(EXTRA_MENU_CHOICE, -1)) {
-            case MenuFragment.DL_CALCULATOR:
+            case MenuFragment.REQUEST_DL_CALCULATOR:
                 if (mDLCalculatorFragment == null)
-                    mDLCalculatorFragment = new DLCalculatorFragment();
+                    mDLCalculatorFragment = DLCalculatorFragment.newInstance();
                 return mDLCalculatorFragment;
-            case MenuFragment.OVERS_LOST_CALCULATOR:
+            case MenuFragment.REQUEST_OVERS_LOST_CALCULATOR:
                 if (mOLCalculatorFragment == null)
-                    mOLCalculatorFragment = new OLCalculatorFragment();
+                    mOLCalculatorFragment = OLCalculatorFragment.newInstance();
                 return mOLCalculatorFragment;
             default:
                 Log.i(TAG, "Cannot find menu choice");

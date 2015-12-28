@@ -19,7 +19,7 @@ public class MenuActivity extends AppCompatActivity {
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
         if (fragment == null) {
-            fragment = new MenuFragment();
+            fragment = MenuFragment.newInstance();
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment)
                     .commit();

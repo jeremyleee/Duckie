@@ -20,6 +20,10 @@ public class DLResultFragment extends Fragment {
     private TextView mResultTextView;
     private TextView mResultDetailTextView;
 
+    public static DLResultFragment newInstance() {
+        return new DLResultFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

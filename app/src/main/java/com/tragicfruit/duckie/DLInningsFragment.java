@@ -49,6 +49,16 @@ public class DLInningsFragment extends Fragment {
     private DLInnings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
     private DLInnings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
 
+    public static DLInningsFragment newInstance(boolean isFirstInnings) {
+        Bundle args = new Bundle();
+        args.putBoolean(EXTRA_IS_FIRST_INNINGS, isFirstInnings);
+
+        DLInningsFragment fragment = new DLInningsFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +155,7 @@ public class DLInningsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                DLInterruptionFragment dialog = new DLInterruptionFragment();
+                DLInterruptionFragment dialog = DLInterruptionFragment.newInstance();
                 dialog.setTargetFragment(DLInningsFragment.this, REQUEST_INTERRUPTION);
                 dialog.show(fm, DIALOG_INTERRUPTION);
             }
@@ -223,7 +233,7 @@ public class DLInningsFragment extends Fragment {
                     public void onClick(View v) {
                         mCurrentInterruptionDeleted = i;
                         FragmentManager fm = getFragmentManager();
-                        DLDeleteInterruptionFragment dialog = new DLDeleteInterruptionFragment();
+                        DLDeleteInterruptionFragment dialog = DLDeleteInterruptionFragment.newInstance();
                         dialog.setTargetFragment(DLInningsFragment.this, REQUEST_DELETE_INTERRUPTION);
                         dialog.show(fm, DIALOG_DELETE_INTERRUPTION);
                     }
@@ -251,28 +261,13 @@ public class DLInningsFragment extends Fragment {
                 mCurrentInterruptionEdited = null;
             }
 
-            mInnings.addInterruption(
-                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_RUNS, -1),
-                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_WICKETS, -1),
-                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
-                    data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
-            );
+            DLInterruptionFragment.addInterruption(mInnings, data);
             updateInterruptionList();
         } else if (requestCode == REQUEST_DELETE_INTERRUPTION) {
             mInterruptions.remove(mCurrentInterruptionDeleted);
             mCurrentInterruptionDeleted = null;
             updateInterruptionList();
         }
-    }
-
-    public static DLInningsFragment newInstance(boolean isFirstInnings) {
-        Bundle args = new Bundle();
-        args.putBoolean(EXTRA_IS_FIRST_INNINGS, isFirstInnings);
-
-        DLInningsFragment fragment = new DLInningsFragment();
-        fragment.setArguments(args);
-
-        return fragment;
     }
 
 }
