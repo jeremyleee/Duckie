@@ -4,18 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.tragicfruit.duckie.SlidingTabLayout
-        android:id="@+id/sliding_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ColorPrimary"/>
+    <include layout="@layout/tab_indicator"/>
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1"
-        android:background="@android:color/white"/>
+        android:layout_weight="1"/>
 
 </LinearLayout>

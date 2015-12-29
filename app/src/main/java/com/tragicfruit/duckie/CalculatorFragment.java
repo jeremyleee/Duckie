@@ -2,6 +2,7 @@ package com.tragicfruit.duckie;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * Created by Jeremy on 1/02/2015.
@@ -26,7 +28,9 @@ public class CalculatorFragment extends Fragment implements InningsFragment.Call
     private static final int REQUEST_G50 = 1;
 
     private ViewPager mViewPager;
-    private SlidingTabLayout mSlidingTabLayout;
+    private ImageView mFirstInningsIndicator;
+    private ImageView mSecondInningsIndicator;
+    private ImageView mResultIndicator;
 
     private Calculation mMatch;
     private InningsFragment mFirstInningsFragment;
@@ -41,21 +45,25 @@ public class CalculatorFragment extends Fragment implements InningsFragment.Call
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        setRetainInstance(true);
+        setRetainInstance(true); // Prevents crash on rotation on result fragment
 
         mMatch = CalculationLab.get(getActivity()).getCalculation();
 
         mFirstInningsFragment = InningsFragment.newInstance(true);
         mSecondInningsFragment = InningsFragment.newInstance(false);
         mResultFragment = ResultFragment.newInstance();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calculator, container, false);
 
+        mFirstInningsIndicator = (ImageView) v.findViewById(R.id.first_innings_indicator);
+        mSecondInningsIndicator = (ImageView) v.findViewById(R.id.second_innings_indicator);
+        mResultIndicator = (ImageView) v.findViewById(R.id.result_indicator);
+
         mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
+        mViewPager.setOffscreenPageLimit(2); // All three pages retained
         mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
@@ -104,36 +112,75 @@ public class CalculatorFragment extends Fragment implements InningsFragment.Call
             }
         });
 
-        mViewPager.setOffscreenPageLimit(2);
-
-        mSlidingTabLayout = (SlidingTabLayout) v.findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
-        mSlidingTabLayout.setViewPager(mViewPager);
-        mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
-            public void onPageScrollStateChanged(int state) {
-            }
-
+            @Override
             public void onPageSelected(int position) {
                 getActivity().setTitle(mViewPager.getAdapter().getPageTitle(position));
+                updateIndicator(position);
                 // updates result when result tab selected
                 if (position == 2) {
                     mResultFragment.update();
                 }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        mFirstInningsIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(0);
+            }
+        });
+
+        mSecondInningsIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(1);
+            }
+        });
+
+        mResultIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(2);
             }
         });
 
         getActivity().setTitle(mViewPager.getAdapter().getPageTitle(0));
 
         return v;
+    }
+
+    private void updateIndicator(int position) {
+        resetIndicators();
+        Drawable onIndicator = getResources().getDrawable(R.drawable.indicator_on);
+        switch (position) {
+            case 0:
+                mFirstInningsIndicator.setImageDrawable(onIndicator);
+                break;
+            case 1:
+                mSecondInningsIndicator.setImageDrawable(onIndicator);
+                break;
+            case 2:
+                mResultIndicator.setImageDrawable(onIndicator);
+                break;
+        }
+    }
+
+    private void resetIndicators() {
+        Drawable offIndicator = getResources().getDrawable(R.drawable.indicator_off);
+        mFirstInningsIndicator.setImageDrawable(offIndicator);
+        mSecondInningsIndicator.setImageDrawable(offIndicator);
+        mResultIndicator.setImageDrawable(offIndicator);
     }
 
     private void updateFragments() {
