@@ -35,14 +35,14 @@ public class CalculationLab {
         try {
             mCalculations = mSerialiser.loadCalculations();
         } catch (FileNotFoundException e) {
-            initialiseCalculations();
+            initialiseCalculation();
         } catch (Exception e) {
-            initialiseCalculations();
+            initialiseCalculation();
             Log.e(TAG, "Error loading matches", e);
         }
     }
 
-    private void initialiseCalculations() {
+    public void initialiseCalculation() {
         // initialise all calculations
         mCalculations = new ArrayList<>();
         mCalculations.add(new Calculation(true, Calculation.ONEDAY50));

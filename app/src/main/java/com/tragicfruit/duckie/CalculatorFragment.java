@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +20,7 @@ import android.widget.ImageView;
  * Created by Jeremy on 1/02/2015.
  * Duckworth-Lewis Calculator fragment hosting fragments for a match (two innings + result fragments)
  */
-public class CalculatorFragment extends Fragment implements InningsFragment.Callbacks {
+public class CalculatorFragment extends Fragment {
     private static final String DIALOG_CHANGE_MATCH_TYPE = "change_match_type";
     private static final String DIALOG_CHANGE_G50 = "change_g50";
     private static final int REQUEST_MATCH_TYPE = 0;

@@ -41,4 +41,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_gravity="bottom|center"
+        android:id="@+id/reset_button"
+        android:text="@string/reset_button"
+        android:background="@drawable/transparent_button"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </FrameLayout>
