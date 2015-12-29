@@ -3,15 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@drawable/gradient_background">
 
     <include layout="@layout/focus_here"/>
-
-    <ImageView
-        android:src="@drawable/calculator_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
 
     <ScrollView
         android:layout_width="match_parent"
