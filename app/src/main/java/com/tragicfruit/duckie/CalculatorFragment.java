@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,8 +54,6 @@ public class CalculatorFragment extends Fragment implements InningsFragment.Call
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calculator, container, false);
-
-        getActivity().setTitle(R.string.calculator_label);
 
         mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
@@ -124,12 +123,15 @@ public class CalculatorFragment extends Fragment implements InningsFragment.Call
             }
 
             public void onPageSelected(int position) {
+                getActivity().setTitle(mViewPager.getAdapter().getPageTitle(position));
                 // updates result when result tab selected
                 if (position == 2) {
                     mResultFragment.update();
                 }
             }
         });
+
+        getActivity().setTitle(mViewPager.getAdapter().getPageTitle(0));
 
         return v;
     }

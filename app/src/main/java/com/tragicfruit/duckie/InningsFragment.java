@@ -108,10 +108,8 @@ public class InningsFragment extends Fragment {
         /**
          * Set up EditText fields
          */
-        TextView inningsLabel = (TextView) v.findViewById(R.id.innings_label);
         View firstInningsScoreSection = v.findViewById(R.id.first_innings_score_section);
         if (mIsFirstInnings) {
-            inningsLabel.setText(R.string.first_innings_label);
             firstInningsScoreSection.setVisibility(View.VISIBLE);
 
             mRunsField  = (EditText) v.findViewById(R.id.first_innings_runs_editText);
@@ -146,7 +144,6 @@ public class InningsFragment extends Fragment {
                 }
             });
         } else {
-            inningsLabel.setText(R.string.second_innings_label);
             firstInningsScoreSection.setVisibility(View.GONE);
         }
 
