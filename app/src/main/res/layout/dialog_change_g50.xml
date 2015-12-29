@@ -16,6 +16,12 @@
 
         <include layout="@layout/focus_here"/>
 
+        <TextView
+            android:text="@string/g50_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -34,6 +34,7 @@
     <string name="reset_warning">Reset calculation?</string>
     <string name="change_match_type_50_overs">One day (50 overs)</string>
     <string name="change_match_type_20_overs">Twenty20 (20 overs)</string>
+    <string name="g50_info">G50 is the average score expected from the team batting first in an uninterrupted 50 over match.</string>
     <string name="pro_g50_label">%s (ICC full member nations, first class cricket teams)</string>
     <string name="amateur_g50_label">%s (ICC associate member nations, Under-19, Under-15, Women\'s ODIs)</string>
     <string name="custom_g50_label">Custom G50</string>
@@ -53,7 +54,7 @@
         those from the Professional Edition, but the results start to diverge for very high first
         innings totals (around 350 runs and more).</string>
     <string name="faq_fifth_question">How are the results calculated?</string>
-    <string name="faq_fifth_answer">The app uses the official over-by-over tables provided in the
+    <string name="faq_fifth_answer">The app uses the official over-by-over tables and G50 values provided in the
         ICC Playing Handbook 2014-2015. More information about the Duckworth-Lewis method and how results
         are calculated can be found in that handbook.</string>
     <string name="faq_button">Frequently Asked Questions</string>
