@@ -1,6 +1,7 @@
 package com.tragicfruit.duckie;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  * Created by Jeremy on 3/02/2015.
  * Fragment for user input and displaying data for a single innings
  */
-public class DLInningsFragment extends Fragment {
+public class InningsFragment extends Fragment {
     private static final String EXTRA_IS_FIRST_INNINGS =
             "com.tragicfruit.duckie.is_first_innings";
 
@@ -33,10 +34,11 @@ public class DLInningsFragment extends Fragment {
     private static final int REQUEST_INTERRUPTION = 0;
     private static final int REQUEST_DELETE_INTERRUPTION = 1;
 
-    private DLCalculation mMatch;
-    private DLInnings mInnings;
+    private Calculation mMatch;
+    private Innings mInnings;
     private boolean mIsFirstInnings;
-    private ArrayList<DLInnings.Interruption> mInterruptions;
+    private ArrayList<Innings.Interruption> mInterruptions;
+    private Callbacks mCallbacks;
 
     private LinearLayout mInterruptionList;
     private TextView mInterruptionsLabel;
@@ -46,24 +48,40 @@ public class DLInningsFragment extends Fragment {
     private Button mAddInterruptionButton;
     private Button mContinueButton;
 
-    private DLInnings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
-    private DLInnings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
+    private Innings.Interruption mCurrentInterruptionEdited; // points to interruption being edited
+    private Innings.Interruption mCurrentInterruptionDeleted; // points to interruption being deleted
 
-    public static DLInningsFragment newInstance(boolean isFirstInnings) {
+    public interface Callbacks {
+        void nextPage();
+    }
+
+    public static InningsFragment newInstance(boolean isFirstInnings) {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_IS_FIRST_INNINGS, isFirstInnings);
 
-        DLInningsFragment fragment = new DLInningsFragment();
+        InningsFragment fragment = new InningsFragment();
         fragment.setArguments(args);
 
         return fragment;
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getCalculation();
 
         mIsFirstInnings = getArguments().getBoolean(EXTRA_IS_FIRST_INNINGS);
         if (mIsFirstInnings) {
@@ -76,7 +94,7 @@ public class DLInningsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dl_fragment_innings, container, false);
+        View v = inflater.inflate(R.layout.fragment_innings, container, false);
 
         // Initially hides virtual keyboard
         getActivity().getWindow().setSoftInputMode(
@@ -155,8 +173,8 @@ public class DLInningsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                DLInterruptionFragment dialog = DLInterruptionFragment.newInstance();
-                dialog.setTargetFragment(DLInningsFragment.this, REQUEST_INTERRUPTION);
+                InterruptionFragment dialog = InterruptionFragment.newInstance();
+                dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
                 dialog.show(fm, DIALOG_INTERRUPTION);
             }
         });
@@ -168,7 +186,7 @@ public class DLInningsFragment extends Fragment {
         mContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CalculatorActivity) getActivity()).mDLCalculatorFragment.nextPage();
+                mCallbacks.nextPage();
             }
         });
 
@@ -200,10 +218,10 @@ public class DLInningsFragment extends Fragment {
         }
 
         mInterruptionList.removeAllViews(); // reset list of interruptions
-        for (final DLInnings.Interruption i : mInterruptions) {
+        for (final Innings.Interruption i : mInterruptions) {
             // adds a single interruption to be displayed
             RelativeLayout interruptionListItem = (RelativeLayout) getActivity().getLayoutInflater()
-                    .inflate(R.layout.dl_list_item_interruption, mInterruptionList, false);
+                    .inflate(R.layout.list_item_interruption, mInterruptionList, false);
             TextView interruptionTitle = ((TextView) interruptionListItem.findViewById(R.id.interruption_desc_textView));
             String title = getString(R.string.interruption_title,
                     i.getInputRuns(), i.getInputWickets(), i.getInputOversCompleted());
@@ -218,9 +236,9 @@ public class DLInningsFragment extends Fragment {
                     public void onClick(View v) {
                         mCurrentInterruptionEdited = i;
                         FragmentManager fm = getFragmentManager();
-                        DLInterruptionFragment dialog = DLInterruptionFragment.newInstance(i.getInputRuns(),
+                        InterruptionFragment dialog = InterruptionFragment.newInstance(i.getInputRuns(),
                                 i.getInputWickets(), i.getInputOversCompleted(), i.getInputNewTotalOvers());
-                        dialog.setTargetFragment(DLInningsFragment.this, REQUEST_INTERRUPTION);
+                        dialog.setTargetFragment(InningsFragment.this, REQUEST_INTERRUPTION);
                         dialog.show(fm, DIALOG_INTERRUPTION);
                     }
                 });
@@ -233,8 +251,8 @@ public class DLInningsFragment extends Fragment {
                     public void onClick(View v) {
                         mCurrentInterruptionDeleted = i;
                         FragmentManager fm = getFragmentManager();
-                        DLDeleteInterruptionFragment dialog = DLDeleteInterruptionFragment.newInstance();
-                        dialog.setTargetFragment(DLInningsFragment.this, REQUEST_DELETE_INTERRUPTION);
+                        DeleteInterruptionFragment dialog = DeleteInterruptionFragment.newInstance();
+                        dialog.setTargetFragment(InningsFragment.this, REQUEST_DELETE_INTERRUPTION);
                         dialog.show(fm, DIALOG_DELETE_INTERRUPTION);
                     }
                 });
@@ -242,7 +260,7 @@ public class DLInningsFragment extends Fragment {
         }
     }
 
-    public DLCalculation getMatch() {
+    public Calculation getMatch() {
         return mMatch;
     }
 
@@ -261,7 +279,7 @@ public class DLInningsFragment extends Fragment {
                 mCurrentInterruptionEdited = null;
             }
 
-            DLInterruptionFragment.addInterruption(mInnings, data);
+            InterruptionFragment.addInterruption(mInnings, data);
             updateInterruptionList();
         } else if (requestCode == REQUEST_DELETE_INTERRUPTION) {
             mInterruptions.remove(mCurrentInterruptionDeleted);

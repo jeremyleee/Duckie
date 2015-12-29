@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jeremy on 7/03/2015.
@@ -17,7 +18,7 @@ public class CalculationLab {
     private static CalculationLab sCalculationLab;
     private Context mAppContext;
 
-    private ArrayList<Calculation> mCalculations;
+    private List<Calculation> mCalculations;
     private CalculationJSONSerialiser mSerialiser;
 
     public static CalculationLab get(Context c) {
@@ -44,24 +45,11 @@ public class CalculationLab {
     private void initialiseCalculations() {
         // initialise all calculations
         mCalculations = new ArrayList<>();
-        mCalculations.add(new DLCalculation(true, DLCalculation.ONEDAY50));
-        mCalculations.add(new OLCalculation());
+        mCalculations.add(new Calculation(true, Calculation.ONEDAY50));
     }
 
-    public DLCalculation getDLCalculation() {
-        for (Calculation c : mCalculations) {
-            if (c instanceof DLCalculation)
-            return (DLCalculation) c;
-        }
-        return null;
-    }
-
-    public OLCalculation getOLCalculation() {
-        for (Calculation c : mCalculations) {
-            if (c instanceof OLCalculation)
-                return (OLCalculation) c;
-        }
-        return null;
+    public Calculation getCalculation() {
+        return mCalculations.get(0);
     }
 
     public void saveCalculations() {

@@ -10,26 +10,31 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
-    <TableLayout
+    <LinearLayout
         android:fitsSystemWindows="true"
         android:layout_margin="20dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom">
 
             <Button
+                android:layout_marginRight="10dp"
                 android:id="@+id/dl_calculator_button"
-                android:text="@string/dl_calculator_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
-
-            <Button
-                android:id="@+id/overs_lost_calculator_button"
-                android:text="@string/overs_lost_calculator_label"
-                android:layout_width="match_parent"
+                android:text="@string/open_calculator_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"/>
 
-    </TableLayout>
+            <Button
+                android:background="@drawable/transparent_button_yellow"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/about_button"
+                android:text="@string/about_label"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </FrameLayout>

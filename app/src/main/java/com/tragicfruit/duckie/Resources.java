@@ -4,7 +4,7 @@ package com.tragicfruit.duckie;
  * Created by Jeremy on 1/02/2015.
  * References resource table from ICC Playing Handbook 2013-14
  */
-public class DLResources {
+public class Resources {
     public static double getPercentage(int oversRemaining, int wicketsRemaining) {
         return percentage[50 - oversRemaining][10 - wicketsRemaining];
     }

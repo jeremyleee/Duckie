@@ -9,20 +9,10 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Jeremy on 6/03/2015.
  * Hosts MenuFragment
  */
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends SingleFragmentActivity {
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-
-        if (fragment == null) {
-            fragment = MenuFragment.newInstance();
-            fm.beginTransaction()
-                    .add(R.id.fragmentContainer, fragment)
-                    .commit();
-        }
+    @Override
+    protected Fragment createFragment() {
+        return MenuFragment.newInstance();
     }
 }

@@ -3,11 +3,11 @@
 
     <string name="app_name">Duckie</string>
     <string name="subtitle">a cricket calculator</string>
+    <string name="open_calculator_button">Calculate</string>
     <string name="change_match_type_label">Change match type</string>
     <string name="change_g50_label">Change G50</string>
     <string name="about_label">About</string>
-    <string name="dl_calculator_label">Duckworth-Lewis Calculator</string>
-    <string name="overs_lost_calculator_label">Overs Lost Calculator</string>
+    <string name="calculator_label">Duckworth-Lewis Calculator</string>
     <string name="first_innings_label">1st Innings</string>
     <string name="second_innings_label">2nd Innings</string>
     <string name="result_label">Result</string>
@@ -37,21 +37,6 @@
     <string name="amateur_g50_label">%s (ICC associate member nations, Under-19, Under-15, Women\'s ODIs)</string>
     <string name="custom_g50_label">Custom G50</string>
     <string name="invalid_g50_toast">Invalid G50</string>
-    <string name="total_play_time_lost_label">Total play time lost</string>
-    <string name="including_drinks_label">(including drinks breaks)</string>
-    <string name="hours_label">hrs</string>
-    <string name="minutes_label">mins</string>
-    <string name="calculate_overs_lost_button_label">Calculate</string>
-    <string name="reset_overs_lost_button_label">Reset</string>
-    <string name="overs_lost_label">overs lost</string>
-    <string name="change_overs_per_hour_label">Change overs per hour</string>
-    <string name="mens_odi_label">%s overs per hour (ODI)</string>
-    <string name="mens_t20_label">%s overs per hour (T20)</string>
-    <string name="womens_odi_label">%s overs per hour (Women\'s ODI)</string>
-    <string name="womens_t20_label">%s overs per hour (Women\'s T20)</string>
-    <string name="custom_overs_per_hour_label">Custom overs per hour</string>
-    <string name="overs_per_hour_success_toast">Overs lost recalculated</string>
-    <string name="invalid_overs_per_hour_toast">Invalid overs per hour</string>
     <string name="about_page_first_paragraph">Target scores for weather affected
         cricket matches are calculated using the Duckworth-Lewis method. It uses the Standard Edition which was
         used for all matches prior to 2003. The current method used for all international matches

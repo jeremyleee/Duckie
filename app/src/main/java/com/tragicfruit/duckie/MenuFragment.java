@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,8 +13,6 @@ import android.widget.Button;
  * Menu screen for user to choose which calculator to use
  */
 public class MenuFragment extends Fragment {
-    public static final int REQUEST_DL_CALCULATOR = 0;
-    public static final int REQUEST_OVERS_LOST_CALCULATOR = 1;
 
     public static MenuFragment newInstance() {
         return new MenuFragment();
@@ -38,39 +33,20 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), CalculatorActivity.class);
-                i.putExtra(CalculatorActivity.EXTRA_MENU_CHOICE, REQUEST_DL_CALCULATOR);
                 startActivity(i);
             }
         });
 
-        Button oversLostCalculatorButton = (Button) v.findViewById(R.id.overs_lost_calculator_button);
-        oversLostCalculatorButton.setOnClickListener(new View.OnClickListener() {
+        Button aboutButton = (Button) v.findViewById(R.id.about_button);
+        aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), CalculatorActivity.class);
-                i.putExtra(CalculatorActivity.EXTRA_MENU_CHOICE, REQUEST_OVERS_LOST_CALCULATOR);
+                Intent i = new Intent(getActivity(), AboutActivity.class);
                 startActivity(i);
             }
         });
 
         return v;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case (R.id.menu_about):
-                Intent i = new Intent(getActivity(), AboutActivity.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
 }

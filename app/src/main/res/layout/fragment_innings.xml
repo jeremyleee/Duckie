@@ -140,7 +140,6 @@
 
             <Button
                 android:id="@+id/continue_button"
-                android:textColor="@android:color/white"
                 android:text="@string/continue_button"
                 android:background="@drawable/transparent_button"
                 android:layout_margin="4dp"

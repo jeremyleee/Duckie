@@ -12,10 +12,10 @@ import android.support.v4.app.DialogFragment;
  * Created by Jeremy on 17/02/2015.
  * Requests confirmation from user to delete fragment
  */
-public class DLDeleteInterruptionFragment extends DialogFragment {
+public class DeleteInterruptionFragment extends DialogFragment {
 
-    public static DLDeleteInterruptionFragment newInstance() {
-        return new DLDeleteInterruptionFragment();
+    public static DeleteInterruptionFragment newInstance() {
+        return new DeleteInterruptionFragment();
     }
 
     @NonNull

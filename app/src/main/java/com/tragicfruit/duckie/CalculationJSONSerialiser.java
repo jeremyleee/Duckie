@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jeremy on 6/02/2015.
@@ -43,8 +44,7 @@ public class CalculationJSONSerialiser {
             }
 
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
-            calculations.add(new DLCalculation(array.getJSONObject(0)));
-            calculations.add(new OLCalculation(array.getJSONObject(1)));
+            calculations.add(new Calculation(array.getJSONObject(0)));
         } catch (FileNotFoundException e) {
             // App starting fresh
             throw new FileNotFoundException();
@@ -55,7 +55,7 @@ public class CalculationJSONSerialiser {
         return calculations;
     }
 
-    public void saveCalculations(ArrayList<Calculation> calculations) throws IOException, JSONException {
+    public void saveCalculations(List<Calculation> calculations) throws IOException, JSONException {
         JSONArray array = new JSONArray();
         for (Calculation c : calculations) {
             array.put(c.toJSON());

@@ -16,28 +16,28 @@ import android.widget.RadioGroup;
  * Created by Jeremy on 15/02/2015.
  * Allows changing match type to either 50 over match or 20 over match
  */
-public class DLChangeMatchTypeFragment extends DialogFragment {
+public class ChangeMatchTypeFragment extends DialogFragment {
     public static final String EXTRA_MATCH_TYPE = "com.tragicfruit.duckie.match_type";
 
-    private DLCalculation mMatch;
+    private Calculation mMatch;
 
-    public static DLChangeMatchTypeFragment newInstance() {
-        return new DLChangeMatchTypeFragment();
+    public static ChangeMatchTypeFragment newInstance() {
+        return new ChangeMatchTypeFragment();
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
-                .inflate(R.layout.dl_dialog_change_match_type, null);
+                .inflate(R.layout.dialog_change_match_type, null);
 
-        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getCalculation();
 
         // determines preselection when user enters fragment
         int matchType = mMatch.getMatchType();
-        if (matchType == DLCalculation.ONEDAY50) {
+        if (matchType == Calculation.ONEDAY50) {
             ((RadioButton) v.findViewById(R.id.one_day_radioButton)).setChecked(true);
-        } else if (matchType == DLCalculation.TWENTY20) {
+        } else if (matchType == Calculation.TWENTY20) {
             ((RadioButton) v.findViewById(R.id.twenty20_radioButton)).setChecked(true);
         }
 
@@ -52,9 +52,9 @@ public class DLChangeMatchTypeFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         int checkedItem = radioGroup.getCheckedRadioButtonId();
                         if (checkedItem == R.id.one_day_radioButton) {
-                            setResult(Activity.RESULT_OK, DLCalculation.ONEDAY50);
+                            setResult(Activity.RESULT_OK, Calculation.ONEDAY50);
                         } else if (checkedItem == R.id.twenty20_radioButton) {
-                            setResult(Activity.RESULT_OK, DLCalculation.TWENTY20);
+                            setResult(Activity.RESULT_OK, Calculation.TWENTY20);
                         }
                     }
                 })
@@ -69,7 +69,7 @@ public class DLChangeMatchTypeFragment extends DialogFragment {
     }
 
     public static int getMatchType(Intent data) {
-        return data.getIntExtra(DLChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
+        return data.getIntExtra(ChangeMatchTypeFragment.EXTRA_MATCH_TYPE, -1);
     }
 
 }

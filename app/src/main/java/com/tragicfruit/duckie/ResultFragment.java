@@ -12,28 +12,28 @@ import android.widget.TextView;
  * Created by Jeremy on 3/02/2015.
  * Fragment for displaying the results of the Duckworth-Lewis calculation
  */
-public class DLResultFragment extends Fragment {
+public class ResultFragment extends Fragment {
     private static final String TAG = "ResultFragment";
 
-    private DLCalculation mMatch;
+    private Calculation mMatch;
     private TextView mTargetScoreTextView;
     private TextView mResultTextView;
     private TextView mResultDetailTextView;
 
-    public static DLResultFragment newInstance() {
-        return new DLResultFragment();
+    public static ResultFragment newInstance() {
+        return new ResultFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMatch = CalculationLab.get(getActivity()).getDLCalculation();
+        mMatch = CalculationLab.get(getActivity()).getCalculation();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dl_fragment_result, container, false);
+        View v = inflater.inflate(R.layout.fragment_result, container, false);
 
         // Removes focus on EditText from innings fragment
         View focusHere = v.findViewById(R.id.focus_here);
@@ -68,7 +68,7 @@ public class DLResultFragment extends Fragment {
                     mTargetScoreTextView.setVisibility(View.GONE);
 
                     mResultTextView.setText(R.string.no_result_label);
-                    int minOvers = mMatch.getMatchType() == DLCalculation.ONEDAY50 ? 20 : 5;
+                    int minOvers = mMatch.getMatchType() == Calculation.ONEDAY50 ? 20 : 5;
                     mResultDetailTextView.setText(getString(R.string.no_result_detail, minOvers));
                 }
             } catch (Exception e) {

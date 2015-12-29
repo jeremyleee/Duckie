@@ -16,7 +16,7 @@ import android.widget.Toast;
  * Created by Jeremy on 1/02/2015.
  * Displays details of an interruption
  */
-public class DLInterruptionFragment extends DialogFragment {
+public class InterruptionFragment extends DialogFragment {
     public static final String ARG_RUNS = "runs";
     public static final String ARG_WICKETS = "wickets";
     public static final String ARG_OVERS_COMPLETED = "overs_completed";
@@ -27,7 +27,7 @@ public class DLInterruptionFragment extends DialogFragment {
     public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
     public static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckie.input_new_total_overs";
 
-    private DLCalculation mMatch;
+    private Calculation mMatch;
 
     private int mInputRuns;
     private int mInputWickets;
@@ -40,12 +40,12 @@ public class DLInterruptionFragment extends DialogFragment {
     private EditText mNewTotalOversField;
 
     // Creating new interruption
-    public static DLInterruptionFragment newInstance() {
-        return new DLInterruptionFragment();
+    public static InterruptionFragment newInstance() {
+        return new InterruptionFragment();
     }
 
     // Editing existing interruption
-    public static DLInterruptionFragment newInstance(int inputRuns, int inputWickets,
+    public static InterruptionFragment newInstance(int inputRuns, int inputWickets,
                                                    int inputOversCompleted, int inputNewTotalOvers) {
         Bundle args = new Bundle();
         args.putInt(ARG_RUNS, inputRuns);
@@ -53,7 +53,7 @@ public class DLInterruptionFragment extends DialogFragment {
         args.putInt(ARG_OVERS_COMPLETED, inputOversCompleted);
         args.putInt(ARG_NEW_TOTAL_OVERS, inputNewTotalOvers);
 
-        DLInterruptionFragment fragment = new DLInterruptionFragment();
+        InterruptionFragment fragment = new InterruptionFragment();
         fragment.setArguments(args);
 
         return fragment;
@@ -64,7 +64,7 @@ public class DLInterruptionFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         try {
-            mMatch = ((DLInningsFragment) getTargetFragment()).getMatch();
+            mMatch = ((InningsFragment) getTargetFragment()).getMatch();
         } catch (Exception e) {
             mMatch = null;
         }
@@ -74,7 +74,7 @@ public class DLInterruptionFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = getActivity().getLayoutInflater()
-                .inflate(R.layout.dl_dialog_interruption, null);
+                .inflate(R.layout.dialog_interruption, null);
 
         // Prevents focus on EditText when opening dialog
         View focusHere = v.findViewById(R.id.focus_here);
@@ -142,12 +142,12 @@ public class DLInterruptionFragment extends DialogFragment {
         getTargetFragment().onActivityResult(getTargetRequestCode(), result, data);
     }
 
-    public static void addInterruption(DLInnings innings, Intent data) {
+    public static void addInterruption(Innings innings, Intent data) {
         innings.addInterruption(
-                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_RUNS, -1),
-                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_WICKETS, -1),
-                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
-                data.getIntExtra(DLInterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
+                data.getIntExtra(InterruptionFragment.EXTRA_INPUT_RUNS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_INPUT_WICKETS, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_INPUT_OVERS_COMPLETED, -1),
+                data.getIntExtra(InterruptionFragment.EXTRA_INPUT_NEW_TOTAL_OVERS, -1)
         );
     }
 

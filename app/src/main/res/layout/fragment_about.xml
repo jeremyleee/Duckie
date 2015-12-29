@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="@string/dl_calculator_label"
+            android:text="@string/calculator_label"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,19 +23,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/about_page_first_paragraph"/>
-
-        <TextView
-            android:text="@string/overs_lost_calculator_label"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/about_page_second_paragraph"/>
 
         <LinearLayout
             android:layout_width="match_parent"
