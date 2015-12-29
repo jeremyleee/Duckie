@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical">
 
     <include layout="@layout/focus_here"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:padding="16dp">
+
+            <!-- Avaliable overs section -->
 
             <LinearLayout
                 android:layout_gravity="center"
@@ -30,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/starting_overs_label"
                     android:textSize="16sp"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="8dp"/>
 
                 <EditText
                     style="@style/EditText"
@@ -43,6 +47,14 @@
                     android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="#AFFF"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Interruptions section -->
 
             <TextView
                 android:id="@+id/interruptions_label"
@@ -68,20 +80,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"/>
 
+            <!-- Score section -->
+
             <LinearLayout
                 android:id="@+id/first_innings_score_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginBottom="16dp">
+                android:gravity="center">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="#AFFF"
+                    android:layout_marginBottom="16dp"/>
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/first_innings_score_label"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -98,9 +117,10 @@
                         android:ems="4"/>
 
                     <TextView
+                        android:gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="50sp"
+                        android:layout_height="match_parent"
+                        android:textSize="24sp"
                         android:text="@string/runs_wickets_separator"/>
 
                     <EditText
@@ -116,16 +136,17 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/continue_button"
-                android:text="@string/continue_button"
-                android:background="@drawable/transparent_button"
-                android:layout_margin="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
         </LinearLayout>
 
     </ScrollView>
 
-</FrameLayout>
+    <Button
+        android:layout_gravity="bottom|center"
+        android:id="@+id/continue_button"
+        android:text="@string/continue_button"
+        android:background="@drawable/transparent_button"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

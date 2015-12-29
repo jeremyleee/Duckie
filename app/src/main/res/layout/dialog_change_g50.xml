@@ -9,12 +9,10 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:paddingLeft="24dp"
-        android:paddingStart="24dp"
-        android:paddingRight="24dp"
-        android:paddingEnd="24dp">
+        android:paddingRight="24dp">
 
         <include layout="@layout/focus_here"/>
 
@@ -50,14 +48,14 @@
         </RadioGroup>
 
         <EditText
-            android:layout_gravity="center"
+            style="@style/EditText.Small"
+            android:layout_marginLeft="30dp"
             android:gravity="center"
             android:id="@+id/change_g50_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:textSize="50sp"
-            android:ems="2"
+            android:ems="4"
             android:visibility="gone"/>
 
     </LinearLayout>

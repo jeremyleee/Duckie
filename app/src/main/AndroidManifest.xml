@@ -26,7 +26,8 @@
             android:label="@string/about_label"
             android:parentActivityName=".MenuActivity">
         </activity>
-        <activity android:name=".FaqActivity"
+        <activity
+            android:name=".FaqActivity"
             android:label="@string/faq_button"
             android:parentActivityName=".AboutActivity">
         </activity>

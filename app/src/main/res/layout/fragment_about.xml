@@ -4,35 +4,3 @@
     android:id="@+id/fragment_about_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
-
-
-<!--<LinearLayout-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:padding="16dp"-->
-    <!--android:orientation="vertical"-->
-    <!--android:background="@drawable/gradient_background">-->
-
-    <!--&lt;!&ndash;<Button&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/faq_button"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="@string/faq_button"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginBottom="16dp"/>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<Button&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/rate_app_button"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="@string/rate_app_button"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginBottom="16dp"/>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<Button&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/send_feedback_button"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="@string/send_feedback_button"/>&ndash;&gt;-->
-
-<!--</LinearLayout>-->

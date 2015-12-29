@@ -50,8 +50,7 @@
     <string name="faq_fourth_question">Are the results still accurate?</string>
     <string name="faq_fourth_answer">The results using the Standard Edition are generally similar to
         those from the Professional Edition, but the results start to diverge for very high first
-        innings totals (around 350 runs and more). The app uses the official over-by-over tables
-        provided in the ICC Playing Handbook 2014-2015.</string>
+        innings totals (around 350 runs and more).</string>
     <string name="faq_fifth_question">How are the results calculated?</string>
     <string name="faq_fifth_answer">The app uses the official over-by-over tables provided in the
         ICC Playing Handbook 2014-2015. More information about the Duckworth-Lewis method and how results

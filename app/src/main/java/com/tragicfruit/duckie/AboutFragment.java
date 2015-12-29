@@ -40,48 +40,6 @@ public class AboutFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(new SelectionAdapter());
 
-//        // rate app button sends user to Play Store
-//        Button rateAppButton = (Button) v.findViewById(R.id.rate_app_button);
-//        rateAppButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String appPackageName = getActivity().getPackageName();
-//                try {
-//                    Uri playStoreLink = Uri.parse("market://details?id=" + appPackageName);
-//                    Intent i = new Intent(Intent.ACTION_VIEW, playStoreLink);
-//                    startActivity(i);
-//                } catch (android.content.ActivityNotFoundException e) {
-//                    // Devices without Play Store
-//                    Uri playStoreLink = Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName);
-//                    Intent i = new Intent(Intent.ACTION_VIEW, playStoreLink);
-//                    startActivity(i);
-//                }
-//
-//
-//            }
-//        });
-//
-//        // send feedback button opens email app ready to end email
-//        Button sendFeedbackButton = (Button) v.findViewById(R.id.send_feedback_button);
-//        sendFeedbackButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String version;
-//                try {
-//                    version = getActivity().getPackageManager()
-//                            .getPackageInfo(getActivity().getPackageName(), 0).versionName;
-//                } catch (Exception e) {
-//                    version = "no version";
-//                }
-//                String uriString = "mailto:"
-//                        + getString(R.string.feedback_email_address)
-//                        + "?subject=" + getString(R.string.feedback_email_subject, version);
-//                Intent i = new Intent(Intent.ACTION_SENDTO);
-//                i.setData(Uri.parse(uriString));
-//                startActivity(i);
-//            }
-//        });
-
         return v;
     }
 
@@ -105,9 +63,11 @@ public class AboutFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (mSelectionIndex) {
+                // opens FaqActivity
                 case 0:
                     startActivity(new Intent(getActivity(), FaqActivity.class));
                     break;
+                // rate app button sends user to Play Store
                 case 1:
                     String appPackageName = getActivity().getPackageName();
                     try {
@@ -121,6 +81,7 @@ public class AboutFragment extends Fragment {
                         startActivity(i);
                     }
                     break;
+                // send feedback button opens email app ready to end email
                 case 2:
                     String version;
                     try {

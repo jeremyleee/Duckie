@@ -8,12 +8,10 @@
         android:id="@+id/match_type_radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:paddingLeft="24dp"
-        android:paddingStart="24dp"
-        android:paddingRight="24dp"
-        android:paddingEnd="24dp">
+        android:paddingRight="24dp">
 
         <RadioButton
             android:layout_width="wrap_content"

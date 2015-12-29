@@ -5,7 +5,9 @@
               android:layout_height="wrap_content"
               android:background="?android:attr/selectableItemBackground"
     android:paddingLeft="8dp"
-    android:paddingTop="8dp">
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingRight="8dp">
 
     <ImageView
         android:id="@+id/list_item_about_icon"
@@ -15,7 +17,6 @@
     <TextView
         android:layout_marginLeft="8dp"
         android:id="@+id/list_item_about_text"
-        android:fontFamily="sans-serif-condensed"
         android:textSize="20sp"
         android:gravity="center_vertical"
         android:layout_weight="1"

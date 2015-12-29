@@ -6,15 +6,14 @@
 
     <FrameLayout
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:layout_width="match_parent">
 
         <include layout="@layout/focus_here"/>
 
         <LinearLayout
+            android:padding="16dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center">
@@ -28,7 +27,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/interruption_score_label"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -38,32 +38,39 @@
                     android:layout_marginBottom="16dp">
 
                     <EditText
+                        style="@style/EditText.Small"
                         android:gravity="center"
                         android:id="@+id/interruption_runs_editText"
-                        android:textSize="24sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="4"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="@string/runs_wickets_separator"
+                        android:textSize="18sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                    <EditText
+                        style="@style/EditText.Small"
+                        android:gravity="center"
+                        android:id="@+id/interruption_wickets_editText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="2"/>
 
-                    <TextView
-                        android:text="@string/runs_wickets_separator"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <EditText
-                        android:gravity="center"
-                        android:id="@+id/interruption_wickets_editText"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="1"/>
-
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="#AFFF"
+                android:layout_marginBottom="16dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -76,18 +83,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/interruption_overs_completed_label"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
 
                 <EditText
+                    style="@style/EditText.Small"
                     android:gravity="center"
-                    android:textSize="24sp"
                     android:id="@+id/interruption_overs_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:ems="2"/>
+                    android:ems="4"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="#AFFF"
+                android:layout_marginBottom="16dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -100,16 +114,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/interruption_new_total_overs"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
 
                 <EditText
+                    style="@style/EditText.Small"
                     android:gravity="center"
-                    android:textSize="24sp"
                     android:id="@+id/interruption_new_total_overs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:ems="2"/>
+                    android:ems="4"/>
 
             </LinearLayout>
 
