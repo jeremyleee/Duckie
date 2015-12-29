@@ -106,7 +106,7 @@ public class AboutFragment extends Fragment {
         public void onClick(View v) {
             switch (mSelectionIndex) {
                 case 0:
-//                    holder.mLabel.setText(R.string.faq_button);
+                    startActivity(new Intent(getActivity(), FaqActivity.class));
                     break;
                 case 1:
                     String appPackageName = getActivity().getPackageName();

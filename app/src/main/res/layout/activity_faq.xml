@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     <TextView
         android:textSize="16sp"
-        android:text="What is Duckie?"
+        android:text="@string/faq_first_question"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,11 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/about_page_first_paragraph"/>
+        android:text="@string/faq_first_answer"/>
 
     <TextView
         android:textSize="16sp"
-        android:text="Why doesn't it calculate exactly the same score as on TV?"
+        android:text="@string/faq_second_question"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,11 +38,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/about_page_second_paragraph"/>
+        android:text="@string/faq_second_answer"/>
 
     <TextView
         android:textSize="16sp"
-        android:text="Why not use the Professional Edition?"
+        android:text="@string/faq_third_question"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,11 +53,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/about_page_third_paragraph"/>
+        android:text="@string/faq_third_answer"/>
 
     <TextView
         android:textSize="16sp"
-        android:text="Are the results still accurate?"
+        android:text="@string/faq_fourth_question"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,6 +68,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/about_page_fourth_paragraph"/>
+        android:text="@string/faq_fourth_answer"/>
 
-</LinearLayout>
+        <TextView
+            android:textSize="16sp"
+            android:text="@string/faq_fifth_question"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/faq_fifth_answer"/>
+
+    </LinearLayout>
+
+</ScrollView>
