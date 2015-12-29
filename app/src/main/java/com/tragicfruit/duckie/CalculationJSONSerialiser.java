@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
@@ -31,8 +32,8 @@ public class CalculationJSONSerialiser {
         mFileName = f;
     }
 
-    public ArrayList<Calculation> loadCalculations() throws IOException, JSONException {
-        ArrayList<Calculation> calculations = new ArrayList<>();
+    public Calculation loadCalculation() throws IOException, JSONException {
+        Calculation calculation;
         BufferedReader reader = null;
         try {
             InputStream in = mContext.openFileInput(mFileName);
@@ -43,8 +44,9 @@ public class CalculationJSONSerialiser {
                 jsonString.append(line);
             }
 
-            JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
-            calculations.add(new Calculation(array.getJSONObject(0)));
+            JSONObject jsonObject = new JSONObject(jsonString.toString());
+
+            calculation = new Calculation(jsonObject);
         } catch (FileNotFoundException e) {
             // App starting fresh
             throw new FileNotFoundException();
@@ -52,20 +54,15 @@ public class CalculationJSONSerialiser {
             if (reader != null)
                 reader.close();
         }
-        return calculations;
+        return calculation;
     }
 
-    public void saveCalculations(List<Calculation> calculations) throws IOException, JSONException {
-        JSONArray array = new JSONArray();
-        for (Calculation c : calculations) {
-            array.put(c.toJSON());
-        }
-
+    public void saveCalculation(Calculation calculation) throws IOException, JSONException {
         Writer writer = null;
         try {
             OutputStream out = mContext.openFileOutput(mFileName, Context.MODE_PRIVATE);
             writer = new OutputStreamWriter(out);
-            writer.write(array.toString());
+            writer.write(calculation.toJSON().toString());
         } finally {
             if (writer != null)
                 writer.close();

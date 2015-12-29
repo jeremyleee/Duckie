@@ -18,7 +18,7 @@ public class CalculationLab {
     private static CalculationLab sCalculationLab;
     private Context mAppContext;
 
-    private List<Calculation> mCalculations;
+    private Calculation mCalculation;
     private CalculationJSONSerialiser mSerialiser;
 
     public static CalculationLab get(Context c) {
@@ -33,7 +33,7 @@ public class CalculationLab {
         mSerialiser = new CalculationJSONSerialiser(mAppContext, FILENAME);
 
         try {
-            mCalculations = mSerialiser.loadCalculations();
+            mCalculation = mSerialiser.loadCalculation();
         } catch (FileNotFoundException e) {
             initialiseCalculation();
         } catch (Exception e) {
@@ -44,20 +44,19 @@ public class CalculationLab {
 
     public void initialiseCalculation() {
         // initialise all calculations
-        mCalculations = new ArrayList<>();
-        mCalculations.add(new Calculation(true, Calculation.ONEDAY50));
+        mCalculation = new Calculation(true, Calculation.ONEDAY50);
     }
 
     public Calculation getCalculation() {
-        return mCalculations.get(0);
+        return mCalculation;
     }
 
-    public void saveCalculations() {
+    public void saveCalculation() {
         try {
-            mSerialiser.saveCalculations(mCalculations);
-            Log.d(TAG, "Calculations saved to file");
+            mSerialiser.saveCalculation(mCalculation);
+            Log.d(TAG, "Calculation saved to file");
         } catch (Exception e) {
-            Log.d(TAG, "Error saving calculations", e);
+            Log.d(TAG, "Error saving calculation", e);
         }
     }
 

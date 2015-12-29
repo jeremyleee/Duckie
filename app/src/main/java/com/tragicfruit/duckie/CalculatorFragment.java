@@ -237,7 +237,7 @@ public class CalculatorFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        CalculationLab.get(getActivity()).saveCalculations();
+        CalculationLab.get(getActivity()).saveCalculation();
     }
 
 }
