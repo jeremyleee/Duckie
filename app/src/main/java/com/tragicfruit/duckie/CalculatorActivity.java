@@ -17,7 +17,7 @@ public class CalculatorActivity extends SingleFragmentActivity implements Inning
     @Override
     public void nextPage() {
         CalculatorFragment calculatorFragment  = (CalculatorFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.fragmentContainer);
+                .findFragmentById(R.id.fragment_container);
         calculatorFragment.nextPage();
     }
 }

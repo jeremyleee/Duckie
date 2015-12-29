@@ -37,21 +37,20 @@
     <string name="amateur_g50_label">%s (ICC associate member nations, Under-19, Under-15, Women\'s ODIs)</string>
     <string name="custom_g50_label">Custom G50</string>
     <string name="invalid_g50_toast">Invalid G50</string>
-    <string name="about_page_first_paragraph">Target scores for weather affected
-        cricket matches are calculated using the Duckworth-Lewis method. It uses the Standard Edition which was
-        used for all matches prior to 2003. The current method used for all international matches
-        is the Professional Edition, however using this method requires software which is not publicly
-        available. The results using the Standard Edition are generally similar to those from the
+    <string name="about_page_first_paragraph">Duckie is a Duckworth-Lewis calculator for target scores
+        in weather affected cricket matches.</string>
+    <string name="about_page_second_paragraph">The app uses the Standard Edition of the Duckworth-Lewis
+        which was used for all matches prior to 2003, whereas the current method used for all international matches
+        is the Professional Edition.</string>
+    <string name="about_page_third_paragraph">The Professional Edition requires software which is not publicly
+        available.</string>
+    <string name="about_page_fourth_paragraph">The results using the Standard Edition are generally similar to those from the
         Professional Edition, but the results start to diverge for very high first innings totals
-        (around 350 runs and more). Results are calculated using the over-by-over tables
-        provided in the ICC Playing Handbook 2013-2014.</string>
-    <string name="about_page_second_paragraph">The number of overs lost is calculated based on
-        the over rates provided in the ICC Playing Handbook 2013-2014. The default over rate of the
-        calculator is 14.28 overs per hour which is the rate for standard One Day International
-        matches, but this rate can be changed in the menu.</string>
+        (around 350 runs and more). The app uses the over-by-over tables
+        provided in the ICC Playing Handbook 2014-2015.</string>
+    <string name="faq_button">Frequently Asked Questions</string>
     <string name="rate_app_button">Rate App</string>
     <string name="send_feedback_button">Send Feedback</string>
-    <string name="app_version_label">Version %s</string>
     <string name="feedback_email_subject">Duckie Feedback (%s)</string>
     <string name="feedback_email_address">support@tragicfruit.com</string>
 
