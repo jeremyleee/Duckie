@@ -99,37 +99,14 @@ public class InterruptionFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (isValidInput()) {
-                            setResult(Activity.RESULT_OK);
-                        } else {
-                            setResult(Activity.RESULT_CANCELED);
-                            Toast.makeText(getActivity(),
-                                    R.string.invalid_interruption_toast,
-                                    Toast.LENGTH_SHORT)
-                                    .show();
-                        }
+                        mInputRuns = Integer.parseInt(mRunsField.getText().toString());
+                        mInputWickets = Integer.parseInt(mWicketsField.getText().toString());
+                        mInputOversCompleted = Integer.parseInt(mOversField.getText().toString());
+                        mInputNewTotalOvers = Integer.parseInt(mNewTotalOversField.getText().toString());
+                        setResult(Activity.RESULT_OK);
                     }
                 })
                 .create();
-    }
-
-    // checks that input values are within the bounds
-    private boolean isValidInput() {
-        try {
-            mInputRuns = Integer.parseInt(mRunsField.getText().toString());
-            mInputWickets = Integer.parseInt(mWicketsField.getText().toString());
-            if (mInputWickets > 10)
-                throw new Exception();
-            mInputOversCompleted = Integer.parseInt(mOversField.getText().toString());
-            if (mInputOversCompleted > mMatch.getMatchType())
-                throw new Exception();
-            mInputNewTotalOvers = Integer.parseInt(mNewTotalOversField.getText().toString());
-            if (mInputNewTotalOvers > mMatch.getMatchType())
-                throw new Exception();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     private void setResult(int result) {

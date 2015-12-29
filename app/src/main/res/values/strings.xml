@@ -27,7 +27,6 @@
     <string name="interruption_overs_completed_label">Overs completed</string>
     <string name="interruption_new_total_overs">Total available overs\n(reduced figure)</string>
     <string name="interruption_title">Interruption at %1$s/%2$s after %3$s overs</string>
-    <string name="invalid_interruption_toast">Invalid interruption</string>
     <string name="delete_interruption_message">Delete interruption?</string>
     <string name="delete_interruption_positive_button">Delete</string>
     <string name="continue_button">Continue</string>
