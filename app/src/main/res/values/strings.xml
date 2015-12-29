@@ -19,6 +19,7 @@
     <string name="target_score">Target score:</string>
     <string name="calculation_error_label">Error</string>
     <string name="calculation_error_detail">Unable to calculate target score.\nPlease check input values.</string>
+    <string name="result">(%s runs to tie)</string>
     <string name="no_result_label">No result</string>
     <string name="no_result_detail">(minimum of %s overs\nrequired per side)</string>
     <string name="interruptions_label">Interruptions</string>

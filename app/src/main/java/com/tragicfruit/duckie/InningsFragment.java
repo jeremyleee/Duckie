@@ -195,13 +195,13 @@ public class InningsFragment extends Fragment {
     // displays data from model
     public void update() {
         if (mInnings.getRuns() >= 0)
-            mRunsField.setText("" + mInnings.getRuns());
+            mRunsField.setText(Integer.toString(mInnings.getRuns()));
 
         if (mInnings.getWickets() >= 0)
-            mWicketsField.setText("" + mInnings.getWickets());
+            mWicketsField.setText(Integer.toString(mInnings.getWickets()));
 
         if (mInnings.getMaxOvers() >= 0)
-            mOversField.setText("" + mInnings.getMaxOvers());
+            mOversField.setText(Integer.toString(mInnings.getMaxOvers()));
 
         updateInterruptionList();
     }

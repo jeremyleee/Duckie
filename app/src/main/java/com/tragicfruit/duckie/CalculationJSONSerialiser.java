@@ -2,10 +2,8 @@ package com.tragicfruit.duckie;
 
 import android.content.Context;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,8 +13,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Jeremy on 6/02/2015.

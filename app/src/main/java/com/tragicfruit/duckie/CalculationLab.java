@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Jeremy on 7/03/2015.

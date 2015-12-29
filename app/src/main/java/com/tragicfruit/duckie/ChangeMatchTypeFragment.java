@@ -17,7 +17,7 @@ import android.widget.RadioGroup;
  * Allows changing match type to either 50 over match or 20 over match
  */
 public class ChangeMatchTypeFragment extends DialogFragment {
-    public static final String EXTRA_MATCH_TYPE = "com.tragicfruit.duckie.match_type";
+    private static final String EXTRA_MATCH_TYPE = "com.tragicfruit.duckie.match_type";
 
     private Calculation mMatch;
 

@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 
 /**
  * Created by Jeremy on 30/12/2015.
+ * Asks user if they want to reset the calculation
  */
 public class ResetFragment extends DialogFragment {
 

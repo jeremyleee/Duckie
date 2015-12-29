@@ -4,14 +4,6 @@
                 android:layout_height="wrap_content"
                 xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:textColor="@android:color/white"
-        android:id="@+id/interruption_desc_textView"
-        tools:text="Interruption after 00 overs"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"/>
-
     <ImageView
         android:src="@drawable/ic_delete"
         android:id="@+id/interruption_delete_button"
@@ -30,6 +22,15 @@
         android:layout_toStartOf="@id/interruption_delete_button"
         android:contentDescription="@string/edit_interruption"
         android:layout_width="wrap_content"
+        android:layout_height="48dp"/>
+
+    <TextView
+        android:layout_toLeftOf="@id/interruption_edit_button"
+        android:textColor="@android:color/white"
+        android:id="@+id/interruption_desc_textView"
+        tools:text="Interruption after 00 overs"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
         android:layout_height="48dp"/>
 
 </RelativeLayout>

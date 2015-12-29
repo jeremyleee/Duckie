@@ -76,7 +76,7 @@ public class ChangeG50Fragment extends DialogFragment {
         } else {
             customG50RadioButton.setChecked(true);
             mCustomG50Field.setVisibility(View.VISIBLE);
-            mCustomG50Field.setText("" + currentG50);
+            mCustomG50Field.setText(Integer.toString(currentG50));
         }
 
         return new AlertDialog.Builder(getActivity())

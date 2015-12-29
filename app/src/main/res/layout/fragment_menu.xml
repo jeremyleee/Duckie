@@ -20,6 +20,7 @@
 
             <Button
                 android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:id="@+id/dl_calculator_button"
                 android:text="@string/open_calculator_button"
                 android:layout_width="0dp"
@@ -28,6 +29,7 @@
 
             <Button
                 android:background="@drawable/transparent_button_yellow"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/about_button"
                 android:text="@string/about_label"

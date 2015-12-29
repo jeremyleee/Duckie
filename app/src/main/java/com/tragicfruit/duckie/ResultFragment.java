@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,8 +95,8 @@ public class ResultFragment extends Fragment {
                 if (targetScore >= 0) {
                     mTargetScoreTextView.setVisibility(View.VISIBLE);
 
-                    mResultTextView.setText("" + targetScore);
-                    mResultDetailTextView.setText("(" + (targetScore - 1) + " runs to tie)");
+                    mResultTextView.setText(Integer.toString(targetScore));
+                    mResultDetailTextView.setText(getString(R.string.result, Integer.toString(targetScore - 1)));
                 } else {
                     // No result (not reached minimum required overs)
                     mTargetScoreTextView.setVisibility(View.GONE);

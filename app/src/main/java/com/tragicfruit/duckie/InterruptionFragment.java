@@ -10,24 +10,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 /**
  * Created by Jeremy on 1/02/2015.
  * Displays details of an interruption
  */
 public class InterruptionFragment extends DialogFragment {
-    public static final String ARG_RUNS = "runs";
-    public static final String ARG_WICKETS = "wickets";
-    public static final String ARG_OVERS_COMPLETED = "overs_completed";
-    public static final String ARG_NEW_TOTAL_OVERS = "total_overs";
+    private static final String ARG_RUNS = "runs";
+    private static final String ARG_WICKETS = "wickets";
+    private static final String ARG_OVERS_COMPLETED = "overs_completed";
+    private static final String ARG_NEW_TOTAL_OVERS = "total_overs";
 
-    public static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckie.input_runs";
-    public static final String EXTRA_INPUT_WICKETS = "com.tragicfruit.duckie.input_wickets";
-    public static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
-    public static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckie.input_new_total_overs";
-
-    private Calculation mMatch;
+    private static final String EXTRA_INPUT_RUNS = "com.tragicfruit.duckie.input_runs";
+    private static final String EXTRA_INPUT_WICKETS = "com.tragicfruit.duckie.input_wickets";
+    private static final String EXTRA_INPUT_OVERS_COMPLETED = "com.tragicfruit.duckie.input_overs_completed";
+    private static final String EXTRA_INPUT_NEW_TOTAL_OVERS = "com.tragicfruit.duckie.input_new_total_overs";
 
     private int mInputRuns;
     private int mInputWickets;
@@ -57,17 +54,6 @@ public class InterruptionFragment extends DialogFragment {
         fragment.setArguments(args);
 
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        try {
-            mMatch = ((InningsFragment) getTargetFragment()).getMatch();
-        } catch (Exception e) {
-            mMatch = null;
-        }
     }
 
     @NonNull
