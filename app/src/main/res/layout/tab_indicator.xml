@@ -5,37 +5,40 @@
               android:layout_height="wrap_content"
               android:gravity="center_horizontal"
               android:background="@color/gradientStart"
-              android:paddingTop="24dp">
+              android:paddingTop="20dp">
 
     <ImageView
+        android:padding="10dp"
         android:id="@+id/first_innings_indicator"
         android:src="@drawable/indicator_on"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <View
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:layout_gravity="center"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="1dip"
         android:background="@color/indicatorOff"/>
 
     <ImageView
+        android:padding="10dp"
         android:id="@+id/second_innings_indicator"
         android:src="@drawable/indicator_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <View
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:layout_gravity="center"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="1dip"
         android:background="@color/indicatorOff"/>
 
     <ImageView
+        android:padding="10dp"
         android:id="@+id/result_indicator"
         android:src="@drawable/indicator_off"
         android:layout_width="wrap_content"
