@@ -5,7 +5,7 @@
     <color name="primaryDark">#B57C00</color>
     <color name="gradientStart">#DE9F4B</color>
     <color name="gradientEnd">#675334</color>
-    <color name="horizontalRule">#6FFF</color>
+    <color name="horizontalRule">#AFFF</color>
     <color name="textColor">#FFF</color>
     <color name="editTextColor">#FFF</color>
     <color name="buttonTextColor">#FFF</color>

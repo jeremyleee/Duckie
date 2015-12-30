@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 /**
  * Created by Jeremy on 15/02/2015.
@@ -79,33 +79,44 @@ public class ChangeG50Fragment extends DialogFragment {
             mCustomG50Field.setText(Integer.toString(currentG50));
         }
 
-        return new AlertDialog.Builder(getActivity())
+        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle(R.string.change_g50_label)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, null)
+                .create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         int checkedItem = mRadioGroup.getCheckedRadioButtonId();
                         if (checkedItem == R.id.pro_g50_radioButton) {
                             mG50 = Calculation.proG50;
                             setResult(Activity.RESULT_OK);
+                            dismiss();
                         } else if (checkedItem == R.id.amateur_g50_radioButton) {
                             mG50 = Calculation.amateurG50;
                             setResult(Activity.RESULT_OK);
+                            dismiss();
                         } else if (checkedItem == R.id.custom_g50_radioButton) {
                             if (isValidInput()) {
                                 setResult(Activity.RESULT_OK);
+                                dismiss();
                             } else {
-                                Toast.makeText(getActivity(),
-                                        R.string.invalid_g50_toast,
-                                        Toast.LENGTH_SHORT)
-                                        .show();
+                                int warningField = R.drawable.edit_text_small_warning;
+                                mCustomG50Field.setBackgroundResource(warningField);
                             }
                         }
                     }
-                })
-                .create();
+                });
+            }
+        });
+
+        return alertDialog;
     }
 
     // checks that field isn't empty
