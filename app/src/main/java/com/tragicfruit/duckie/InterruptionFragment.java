@@ -5,10 +5,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -78,21 +81,75 @@ public class InterruptionFragment extends DialogFragment {
             mNewTotalOversField.setText(Integer.toString(getArguments().getInt(ARG_NEW_TOTAL_OVERS, -1)));
         }
 
-        return new AlertDialog.Builder(getActivity())
+        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle("Interruption details")
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mInputRuns = Integer.parseInt(mRunsField.getText().toString());
-                        mInputWickets = Integer.parseInt(mWicketsField.getText().toString());
-                        mInputOversCompleted = Integer.parseInt(mOversField.getText().toString());
-                        mInputNewTotalOvers = Integer.parseInt(mNewTotalOversField.getText().toString());
-                        setResult(Activity.RESULT_OK);
-                    }
-                })
+                .setPositiveButton(android.R.string.ok, null)
                 .create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!hasEmptyFields()) {
+                            setResult(Activity.RESULT_OK);
+                            alertDialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
+        return alertDialog;
+    }
+
+    private boolean hasEmptyFields() {
+        boolean emptyFields = false;
+
+        int warningField = R.drawable.edit_text_small_warning;
+        int normalField = R.drawable.edit_text_small;
+
+        String runs = mRunsField.getText().toString();
+        if (runs.isEmpty()) {
+            emptyFields = true;
+            mRunsField.setBackgroundResource(warningField);
+        } else {
+            mRunsField.setBackgroundResource(normalField);
+            mInputRuns = Integer.parseInt(runs);
+        }
+
+        String wickets = mWicketsField.getText().toString();
+        if (wickets.isEmpty()) {
+            emptyFields = true;
+            mWicketsField.setBackgroundResource(warningField);
+        } else {
+            mWicketsField.setBackgroundResource(normalField);
+            mInputWickets = Integer.parseInt(wickets);
+        }
+
+        String overs = mOversField.getText().toString();
+        if (overs.isEmpty()) {
+            emptyFields = true;
+            mOversField.setBackgroundResource(warningField);
+        } else {
+            mOversField.setBackgroundResource(normalField);
+            mInputOversCompleted = Integer.parseInt(overs);
+        }
+
+        String newOvers = mNewTotalOversField.getText().toString();
+        if (newOvers.isEmpty()) {
+            emptyFields = true;
+            mNewTotalOversField.setBackgroundResource(warningField);
+        } else {
+            mNewTotalOversField.setBackgroundResource(normalField);
+            mInputNewTotalOvers = Integer.parseInt(newOvers);
+        }
+
+        return emptyFields;
     }
 
     private void setResult(int result) {
