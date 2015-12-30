@@ -9,7 +9,7 @@
         android:bottom="7dp" />
     <stroke
         android:width="2dip"
-        android:color="#B57C00" />
+        android:color="@color/primaryDark" />
     <corners
         android:radius= "24dp" />
     <size

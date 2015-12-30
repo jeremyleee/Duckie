@@ -26,7 +26,6 @@
 
     <TextView
         android:layout_toLeftOf="@id/interruption_edit_button"
-        android:textColor="@android:color/white"
         android:id="@+id/interruption_desc_textView"
         tools:text="Interruption after 00 overs"
         android:gravity="center_vertical"

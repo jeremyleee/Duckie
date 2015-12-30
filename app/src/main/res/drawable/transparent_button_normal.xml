@@ -9,7 +9,7 @@
         android:bottom="7dp" />
     <stroke
         android:width="2dip"
-        android:color="#9AFFFFFF" />
+        android:color="@color/transparentButtonNormal" />
     <corners
         android:radius= "24dp" />
     <size

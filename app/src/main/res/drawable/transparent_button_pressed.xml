@@ -9,7 +9,7 @@
         android:bottom="7dp" />
     <stroke
         android:width="2dip"
-        android:color="#FFFFFFFF" />
+        android:color="@color/transparentButtonPressed" />
     <corners
         android:radius= "24dp" />
     <size

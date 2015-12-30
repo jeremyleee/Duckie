@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center_horizontal"
-              android:background="#DE9F4B"
+              android:background="@color/gradientStart"
               android:paddingTop="24dp">
 
     <ImageView
@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_width="80dp"
         android:layout_height="1dip"
-        android:background="#6FFF"/>
+        android:background="@color/indicatorOff"/>
 
     <ImageView
         android:id="@+id/second_innings_indicator"
@@ -33,7 +33,7 @@
         android:layout_gravity="center"
         android:layout_width="80dp"
         android:layout_height="1dip"
-        android:background="#6FFF"/>
+        android:background="@color/indicatorOff"/>
 
     <ImageView
         android:id="@+id/result_indicator"
