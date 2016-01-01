@@ -12,8 +12,8 @@
     <color name="colorControl">#FFF</color>
     <color name="highlight">#666</color>
     <color name="editTextBgColor">#3FFF</color>
-    <color name="indicatorOn">#FFF</color>
-    <color name="indicatorOff">#6FFF</color>
+    <color name="indicatorBright">#FFF</color>
+    <color name="indicatorDim">#6FFF</color>
     <color name="transparentButtonNormal">#9AFFFFFF</color>
     <color name="transparentButtonPressed">#FFF</color>
 

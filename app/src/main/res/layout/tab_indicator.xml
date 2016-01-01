@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center_horizontal"
-              android:background="@color/gradientStart"
-              android:paddingTop="20dp">
+              android:layout_height="60dp"
+              android:paddingTop="8dp"
+              android:gravity="center_horizontal">
 
     <ImageView
         android:padding="10dp"
@@ -20,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_width="60dp"
         android:layout_height="1dip"
-        android:background="@color/indicatorOff"/>
+        android:background="@color/indicatorDim"/>
 
     <ImageView
         android:padding="10dp"
@@ -35,7 +34,7 @@
         android:layout_gravity="center"
         android:layout_width="60dp"
         android:layout_height="1dip"
-        android:background="@color/indicatorOff"/>
+        android:background="@color/indicatorDim"/>
 
     <ImageView
         android:padding="10dp"

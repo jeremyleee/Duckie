@@ -5,13 +5,13 @@
                android:shape="oval">
 
             <stroke
-                android:width="15dp"
+                android:width="20dp"
                 android:color="@android:color/transparent"/>
             <solid
-                android:color="@color/indicatorOn"/>
+                android:color="@color/indicatorBright"/>
             <size
-                android:width="20dp"
-                android:height="20dp"/>
+                android:width="25dp"
+                android:height="25dp"/>
 
         </shape>
     </item>
@@ -22,10 +22,10 @@
 
             <stroke
                 android:width="1dp"
-                android:color="@color/indicatorOff"/>
+                android:color="@color/indicatorDim"/>
             <size
-                android:width="20dp"
-                android:height="20dp"/>
+                android:width="25dp"
+                android:height="25dp"/>
 
         </shape>
     </item>
