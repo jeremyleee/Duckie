@@ -63,5 +63,6 @@
     <string name="send_feedback_button">Send Feedback</string>
     <string name="feedback_email_subject">Duckie Feedback (%s)</string>
     <string name="feedback_email_address">support@tragicfruit.com</string>
+    <string name="no_email_app_error">Email app not found.</string>
 
 </resources>

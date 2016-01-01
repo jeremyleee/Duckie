@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Jeremy on 6/02/2015.
@@ -77,6 +78,7 @@ public class AboutFragment extends Fragment {
                     break;
                 // send feedback button opens email app ready to end email
                 case 2:
+                    // Get version number
                     String version;
                     try {
                         version = getActivity().getPackageManager()
@@ -84,12 +86,19 @@ public class AboutFragment extends Fragment {
                     } catch (Exception e) {
                         version = "no version";
                     }
-                    String uriString = "mailto:"
-                            + getString(R.string.feedback_email_address)
-                            + "?subject=" + getString(R.string.feedback_email_subject, version);
-                    Intent i = new Intent(Intent.ACTION_SENDTO);
-                    i.setData(Uri.parse(uriString));
-                    startActivity(i);
+
+                    // Open email app with email address and subject
+                    try {
+                        String uriString = "mailto:"
+                                + getString(R.string.feedback_email_address)
+                                + "?subject=" + getString(R.string.feedback_email_subject, version);
+                        Intent i = new Intent(Intent.ACTION_SENDTO);
+                        i.setData(Uri.parse(uriString));
+                        startActivity(i);
+                    } catch (android.content.ActivityNotFoundException e) { // Email app not found
+                        Toast.makeText(getActivity(), R.string.no_email_app_error, Toast.LENGTH_SHORT)
+                                .show();
+                    }
                     break;
             }
         }
