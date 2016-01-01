@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,8 +96,25 @@ public class InterruptionFragment extends DialogFragment {
                     public void onClick(View v) {
                         if (!hasEmptyFields()) {
                             setResult(Activity.RESULT_OK);
-                            alertDialog.dismiss();
+                            dismiss();
                         }
+                    }
+                });
+
+                Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setResult(Activity.RESULT_CANCELED);
+                        dismiss();
+                    }
+                });
+
+                alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        setResult(Activity.RESULT_CANCELED);
+                        dismiss();
                     }
                 });
             }

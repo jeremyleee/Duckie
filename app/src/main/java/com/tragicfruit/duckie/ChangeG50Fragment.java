@@ -113,6 +113,23 @@ public class ChangeG50Fragment extends DialogFragment {
                         }
                     }
                 });
+
+                Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setResult(Activity.RESULT_CANCELED);
+                        dismiss();
+                    }
+                });
+
+                alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        setResult(Activity.RESULT_CANCELED);
+                        dismiss();
+                    }
+                });
             }
         });
 

@@ -257,10 +257,6 @@ public class InningsFragment extends Fragment {
         }
     }
 
-    public Calculation getMatch() {
-        return mMatch;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
