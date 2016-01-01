@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="60dp"
-              android:paddingTop="8dp"
+              android:layout_height="64dp"
+              android:paddingTop="10dp"
               android:gravity="center_horizontal">
 
     <ImageView
@@ -11,7 +11,7 @@
         android:id="@+id/first_innings_indicator"
         android:src="@drawable/indicator_on"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
     <View
         android:layout_marginLeft="4dp"
@@ -26,7 +26,7 @@
         android:id="@+id/second_innings_indicator"
         android:src="@drawable/indicator_off"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
     <View
         android:layout_marginLeft="4dp"
@@ -41,6 +41,6 @@
         android:id="@+id/result_indicator"
         android:src="@drawable/indicator_off"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
