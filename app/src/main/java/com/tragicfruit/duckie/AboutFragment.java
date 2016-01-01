@@ -120,19 +120,19 @@ public class AboutFragment extends Fragment {
                 case 0:
                     holder.mLabel.setText(R.string.faq_button);
                     holder.mIcon.setImageDrawable(
-                            getResources().getDrawable(R.drawable.ic_faq)
+                            getResources().getDrawable(R.drawable.ic_question_answer_white_36dp)
                     );
                     break;
                 case 1:
                     holder.mLabel.setText(R.string.rate_app_button);
                     holder.mIcon.setImageDrawable(
-                            getResources().getDrawable(R.drawable.ic_rate)
+                            getResources().getDrawable(R.drawable.ic_thumb_up_white_36dp)
                     );
                     break;
                 case 2:
                     holder.mLabel.setText(R.string.send_feedback_button);
                     holder.mIcon.setImageDrawable(
-                            getResources().getDrawable(R.drawable.ic_feedback)
+                            getResources().getDrawable(R.drawable.ic_send_white_36dp)
                     );
                     break;
             }
