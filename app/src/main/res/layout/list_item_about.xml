@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?android:attr/selectableItemBackground"
-    android:paddingLeft="8dp"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp"
-    android:paddingRight="8dp">
+              android:paddingLeft="8dp"
+              android:paddingTop="4dp"
+              android:paddingBottom="4dp"
+              android:paddingRight="8dp">
 
     <ImageView
         android:id="@+id/list_item_about_icon"
@@ -16,10 +17,11 @@
         android:layout_height="36dp"/>
 
     <TextView
+        tools:text="About"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:id="@+id/list_item_about_text"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:gravity="center_vertical"
         android:layout_weight="1"
         android:layout_width="0dp"
