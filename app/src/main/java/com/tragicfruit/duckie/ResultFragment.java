@@ -26,6 +26,7 @@ public class ResultFragment extends Fragment {
     private TextView mResultTextView;
     private TextView mResultDetailTextView;
     private Button mResetButton;
+    private Button mMainMenuButton;
     private Callbacks mCallbacks;
 
     public interface Callbacks {
@@ -76,6 +77,14 @@ public class ResultFragment extends Fragment {
                 ResetFragment dialog = ResetFragment.newInstance();
                 dialog.setTargetFragment(ResultFragment.this, REQUEST_RESET);
                 dialog.show(getFragmentManager(), DIALOG_RESET);
+            }
+        });
+
+        mMainMenuButton = (Button) v.findViewById(R.id.back_main_menu_button);
+        mMainMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
             }
         });
 

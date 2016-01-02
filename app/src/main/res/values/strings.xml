@@ -31,8 +31,9 @@
     <string name="delete_interruption_message">Delete interruption?</string>
     <string name="delete_interruption_positive_button">Delete</string>
     <string name="continue_button">Continue</string>
-    <string name="reset_button">Reset</string>
-    <string name="reset_warning">Reset calculation?</string>
+    <string name="reset_button">New Calculation</string>
+    <string name="reset_warning">Start new calculation?</string>
+    <string name="back_main_menu">Back to Main Menu</string>
     <string name="change_match_type_50_overs">One day (50 overs)</string>
     <string name="change_match_type_20_overs">Twenty20 (20 overs)</string>
     <string name="g50_info">G50 is the average score expected from the team batting first in an uninterrupted 50 over match.</string>

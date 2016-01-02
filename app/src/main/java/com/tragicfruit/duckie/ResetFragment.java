@@ -24,7 +24,7 @@ public class ResetFragment extends DialogFragment {
         return new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.reset_warning)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.reset_button,
+                .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
