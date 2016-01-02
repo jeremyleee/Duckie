@@ -7,6 +7,8 @@
         android:top="7dp"
         android:right="7dp"
         android:bottom="7dp" />
+    <solid
+        android:color="@android:color/transparent"/>
     <stroke
         android:width="2dip"
         android:color="@color/transparentButtonNormal" />
