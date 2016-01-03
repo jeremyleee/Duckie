@@ -13,7 +13,7 @@
     <TextView
         android:textSize="16sp"
         android:text="@string/faq_first_question"
-        android:textStyle="bold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -28,7 +28,7 @@
     <TextView
         android:textSize="16sp"
         android:text="@string/faq_second_question"
-        android:textStyle="bold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -43,7 +43,7 @@
     <TextView
         android:textSize="16sp"
         android:text="@string/faq_third_question"
-        android:textStyle="bold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -58,7 +58,7 @@
     <TextView
         android:textSize="16sp"
         android:text="@string/faq_fourth_question"
-        android:textStyle="bold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -70,19 +70,19 @@
         android:layout_marginBottom="16dp"
         android:text="@string/faq_fourth_answer"/>
 
-        <TextView
-            android:textSize="16sp"
-            android:text="@string/faq_fifth_question"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"/>
+    <TextView
+        android:textSize="16sp"
+        android:text="@string/faq_fifth_question"
+        style="@style/TextView.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/faq_fifth_answer"/>
+    <TextView
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faq_fifth_answer"/>
 
     </LinearLayout>
 

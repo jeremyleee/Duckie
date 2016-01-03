@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="TextView.Result">
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+</resources>

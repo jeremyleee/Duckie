@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/interruptions_label"
-                android:textStyle="bold"
+                style="@style/TextView.Bold"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:visibility="gone"/>
