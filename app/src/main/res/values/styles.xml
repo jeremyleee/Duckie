@@ -36,7 +36,7 @@
         <item name="android:background">@drawable/edit_text</item>
         <item name="android:textColor">@color/editTextColor</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="EditText.Small">

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/focus_here"/>
@@ -45,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="4"
+                    tools:text="50"
                     android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
@@ -110,6 +112,7 @@
 
                     <EditText
                         android:gravity="center"
+                        tools:text="234"
                         style="@style/EditText"
                         android:id="@+id/first_innings_runs_editText"
                         android:layout_width="wrap_content"
@@ -125,6 +128,7 @@
                         android:text="@string/runs_wickets_separator"/>
 
                     <EditText
+                        tools:text="6"
                         android:gravity="center"
                         style="@style/EditText"
                         android:id="@+id/first_innings_wickets_editText"

@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <FrameLayout
         android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
 
                     <EditText
                         style="@style/EditText.Small"
+                        tools:text="123"
                         android:gravity="center"
                         android:id="@+id/interruption_runs_editText"
                         android:layout_width="wrap_content"
@@ -55,6 +57,7 @@
 
                     <EditText
                         style="@style/EditText.Small"
+                        tools:text="4"
                         android:gravity="center"
                         android:id="@+id/interruption_wickets_editText"
                         android:layout_width="wrap_content"
@@ -88,6 +91,7 @@
 
                 <EditText
                     style="@style/EditText.Small"
+                    tools:text="12"
                     android:gravity="center"
                     android:id="@+id/interruption_overs_completed"
                     android:layout_width="wrap_content"
@@ -119,6 +123,7 @@
 
                 <EditText
                     style="@style/EditText.Small"
+                    tools:text="34"
                     android:gravity="center"
                     android:id="@+id/interruption_new_total_overs"
                     android:layout_width="wrap_content"
