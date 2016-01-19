@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -175,7 +176,7 @@ public class CalculatorFragment extends Fragment {
 
     private void updateIndicator(int position) {
         resetIndicators();
-        Drawable onIndicator = getResources().getDrawable(R.drawable.indicator_on);
+        Drawable onIndicator = ContextCompat.getDrawable(getActivity(), R.drawable.indicator_on);
         switch (position) {
             case 0:
                 mFirstInningsIndicator.setImageDrawable(onIndicator);
@@ -190,7 +191,7 @@ public class CalculatorFragment extends Fragment {
     }
 
     private void resetIndicators() {
-        Drawable offIndicator = getResources().getDrawable(R.drawable.indicator_off);
+        Drawable offIndicator = ContextCompat.getDrawable(getActivity(), R.drawable.indicator_off);
         mFirstInningsIndicator.setImageDrawable(offIndicator);
         mSecondInningsIndicator.setImageDrawable(offIndicator);
         mResultIndicator.setImageDrawable(offIndicator);
