@@ -1,6 +1,7 @@
 package com.tragicfruit.duckie;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,12 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 /**
@@ -119,8 +123,18 @@ public class CalculatorFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
+                // Hides keyboard
+                try {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    Log.e("CalculatorFragment", "Can't hide keyboard", e);
+                }
+
                 getActivity().setTitle(mViewPager.getAdapter().getPageTitle(position));
                 updateIndicator(position);
+
                 // updates result when result tab selected
                 if (position == 2) {
                     mResultFragment.update();

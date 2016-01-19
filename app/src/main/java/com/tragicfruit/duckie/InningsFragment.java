@@ -96,11 +96,6 @@ public class InningsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_innings, container, false);
 
-        // Initially hides virtual keyboard
-        getActivity().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-
         // Prevents focus on EditText when opening fragment
         View focusHere = v.findViewById(R.id.focus_here);
         focusHere.requestFocus();
